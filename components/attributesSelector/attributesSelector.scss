@@ -1,0 +1,19 @@
+.false{
+	height: 0px;
+	overflow: hidden;
+}
+.attribute-cont{
+	transition: all 0.25s ease-in;
+	width: 80%;
+}
+.attribute-cont .check-box-cont{
+	font-size: 13px;
+}
+.attribute-cont input[type="checkbox"] + label{
+	width: 90px;
+	height: 22px;
+	line-height: 22px;
+}
+.attribute-list{
+	margin-bottom: 10px;
+}
