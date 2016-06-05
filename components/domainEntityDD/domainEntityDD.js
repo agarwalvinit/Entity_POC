@@ -25,25 +25,6 @@ DomainEntityDD = React.createClass({
 			console.log('parsing failed', ex)
 		})
 	},
-    /*render: function(){
-        var self = this, 
-            options = this.state.domainEntity.map(function(entity){
-                return {label: entity.name, value: entity.type, type: entity.type, attributes: entity.attributes}
-            });
-        return (
-        	<div className="spacer">
-        		<SimpleSelect className=""
-            	options = {options}
-            	defaultValue = {this.props.type ? {label: this.props.label, value: this.props.type} : ""}
-            	placeholder = "Select an entity"
-            	
-            	transitionEnter = {true} 
-            	onValueChange = {function(entity){
-                    self.props.onSelect(entity);
-                }} />
-            </div>
-        )
-    }  */
     render: function(){
 			var self = this, 
             	options = this.state.domainEntity.map(function(entity){

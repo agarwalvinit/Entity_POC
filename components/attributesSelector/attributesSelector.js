@@ -45,7 +45,9 @@ var AttributesSelector = React.createClass({
 		this.setState({
 			refAttributes: newAttributes,
 			modalIsOpen: true
-		});
+		}, function() {
+			console.log(this.state);
+		}.bind(this));
 		function processAttribues(attributes){
 			var newAttributes = [];
 			_(attributes).forEach(function(attribute){
@@ -60,7 +62,7 @@ var AttributesSelector = React.createClass({
 			return newAttributes;
 		}
 	},
-	updateAttributesInModal: function(attributes){
+	updateAttributesInModal: function(refAttributes){
 	//this.props.updateAttributes({"key":"attributes", "value":attribute, "index":this.props.index});
 	var labelObj = new Object(),
 		attributesObj = new Object(),
