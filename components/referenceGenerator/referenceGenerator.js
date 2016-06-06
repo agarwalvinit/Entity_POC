@@ -29,7 +29,7 @@ var ReferenceGenerator = React.createClass({
   },
 
   render: function() {
-    console.log("Modal state", this.state)
+    //console.log("Modal state", this.state)
     return (
       <div>
         <Modal
@@ -38,8 +38,6 @@ var ReferenceGenerator = React.createClass({
           onRequestClose={this.closeModal}
           style={customStyles} >
           <button onClick={this.closeModal}>close</button>
-          {/*<AttributesSelector isAttributeVisible={this.state.isAttributeVisible} 
-              attributes={this.state.attributes} updateAttributes={this.props.updateAttributes} parentIndex={this.props.index}/>*/}
           <AttributesSelector attributes={this.props.attributes} updateAttributes={this.props.updateAttributes}/>
         </Modal>
       </div>

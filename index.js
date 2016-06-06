@@ -39,9 +39,9 @@ var Entity =  React.createClass({
 		});
 		this.setState({
        		selectedEntities: newState
-       	},console.log(this.state.selectedEntities));
-       	console.log(newState);
-       	console.log(this.state.selectedEntities);
+       	});
+       	//console.log(newState);
+       	//console.log(this.state.selectedEntities);
 	},
 	updateAttributes: function(obj){
 		/*newState = update(newState, {
@@ -56,7 +56,7 @@ var Entity =  React.createClass({
 		});*/
 	},
 	processRender: function(){
-		//console.log(this.state.selectedEntities);
+		console.log(this.state.selectedEntities);
 		var html = this.state.selectedEntities.map(function(entity, index){
 			return (
 				<EntityGenerator key={index} entity={entity} updateEntity={this.updateEntity} index={index} />
@@ -72,7 +72,7 @@ var Entity =  React.createClass({
 		console.log(JSON.stringify(obj));
 	},
 	render: function(){
-		console.log('initial state', this.state.selectedEntities);
+		//console.log('initial state', this.state.selectedEntities);
 		var html = this.processRender();
 		return (
 			<div className="app-ctr">
