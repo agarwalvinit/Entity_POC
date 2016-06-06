@@ -82,51 +82,22 @@
 			console.log('Add Entities state: ', this.state.selectedEntities);
 		},
 		updateEntity: function updateEntity(objArray) {
-			/*var newState = update(this.state.selectedEntities, {
-	                       		[obj.index]: {
-	                       		[obj.key]: {$set: obj.value}
-	                     	}
-	                   	});
-	  this.setState({
-	  	selectedEntities: newState
-	  });*/
 			_(objArray).forEach(function (obj) {
 				newState = update(newState, _defineProperty({}, obj.index, _defineProperty({}, obj.key, { $set: obj.value })));
 			});
 			this.setState({
 				selectedEntities: newState
-			}, console.log(this.state.selectedEntities));
-			console.log(newState);
-			console.log(this.state.selectedEntities);
-		},
-		updateAttributes: function updateAttributes(obj) {
-			/*newState = update(newState, {
-	        				[obj.index]: {[obj.key]: {[obj.value.index]: {[obj.value.key]: {$set: obj.value.value}}}}
-	                   	});
-	  console.log(newState);*/
-			/*var newState = update(this.state.selectedEntities, {
-	                       		[obj.index]: {[obj.key]: {[obj.value.index]: {[obj.value.key]: {$set: obj.value.value}}}}
-	                   		});
-	  this.setState({
-	  	selectedEntities: newState
-	  });*/
+			});
 		},
 		processRender: function processRender() {
-			//console.log(this.state.selectedEntities);
+			console.log('initial state: ', this.state.selectedEntities);
 			var html = this.state.selectedEntities.map(function (entity, index) {
 				return React.createElement(_entityGenerator2.default, { key: index, entity: entity, updateEntity: this.updateEntity, index: index });
 			}.bind(this));
 			return html;
 		},
-		showResult: function showResult() {
-			var obj = new Object();
-			obj.ownerId = 1001;
-			obj.ownerType = "BUSINESS_SERVICE";
-			obj.entities = this.state.selectedEntities;
-			console.log(JSON.stringify(obj));
-		},
 		render: function render() {
-			console.log('initial state', this.state.selectedEntities);
+			//console.log('initial state', this.state.selectedEntities);
 			var html = this.processRender();
 			return React.createElement(
 				"div",
@@ -271,7 +242,7 @@
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
 	__webpack_require__(3);
 	var React = __webpack_require__(7),
@@ -280,64 +251,45 @@
 	    DomainEntityDD;
 	
 	DomainEntityDD = React.createClass({
-	  displayName: "DomainEntityDD",
+		displayName: "DomainEntityDD",
 	
-	  getInitialState: function getInitialState() {
-	    return {
-	      domainEntity: []
-	    };
-	  },
-	  componentDidMount: function componentDidMount() {
-	    var that = this;
-	    fetch('data/entities.json', {
-	      method: 'get'
-	    }).then(function (response) {
-	      response.json().then(function (data) {
-	        that.setState({
-	          domainEntity: data.entities
-	        });
-	        //console.log(data);
-	      });
-	    }).catch(function (ex) {
-	      console.log('parsing failed', ex);
-	    });
-	  },
-	  /*render: function(){
-	      var self = this, 
-	          options = this.state.domainEntity.map(function(entity){
-	              return {label: entity.name, value: entity.type, type: entity.type, attributes: entity.attributes}
-	          });
-	      return (
-	      	<div className="spacer">
-	      		<SimpleSelect className=""
-	          	options = {options}
-	          	defaultValue = {this.props.type ? {label: this.props.label, value: this.props.type} : ""}
-	          	placeholder = "Select an entity"
-	          	
-	          	transitionEnter = {true} 
-	          	onValueChange = {function(entity){
-	                  self.props.onSelect(entity);
-	              }} />
-	          </div>
-	      )
-	  }  */
-	  render: function render() {
-	    var self = this,
-	        options = this.state.domainEntity.map(function (entity) {
-	      return { label: entity.name, value: entity.type, type: entity.type, attributes: entity.attributes };
-	    });
-	    return React.createElement(
-	      "div",
-	      { className: "spacer entityDD" },
-	      React.createElement(SimpleSelect, {
-	        options: options,
-	        placeholder: "Select an entity",
-	        defaultValue: this.props.type ? { label: this.props.label, value: this.props.type } : "",
-	        onValueChange: function onValueChange(entity) {
-	          self.props.onSelect(entity);
-	        } })
-	    );
-	  }
+		getInitialState: function getInitialState() {
+			return {
+				domainEntity: []
+			};
+		},
+		componentDidMount: function componentDidMount() {
+			var that = this;
+			fetch('data/entities.json', {
+				method: 'get'
+			}).then(function (response) {
+				response.json().then(function (data) {
+					that.setState({
+						domainEntity: data.entities
+					});
+					//console.log(data);
+				});
+			}).catch(function (ex) {
+				console.log('parsing failed', ex);
+			});
+		},
+		render: function render() {
+			var self = this,
+			    options = this.state.domainEntity.map(function (entity) {
+				return { label: entity.name, value: entity.type, type: entity.type, attributes: entity.attributes };
+			});
+			return React.createElement(
+				"div",
+				{ className: "spacer entityDD" },
+				React.createElement(SimpleSelect, {
+					options: options,
+					placeholder: "Select an entity",
+					defaultValue: this.props.type ? { label: this.props.label, value: this.props.type } : "",
+					onValueChange: function onValueChange(entity) {
+						self.props.onSelect(entity);
+					} })
+			);
+		}
 	});
 	exports.default = DomainEntityDD;
 
@@ -654,7 +606,6 @@
 	function applyToTag(styleElement, obj) {
 		var css = obj.css;
 		var media = obj.media;
-		var sourceMap = obj.sourceMap;
 	
 		if(media) {
 			styleElement.setAttribute("media", media)
@@ -672,7 +623,6 @@
 	
 	function updateLink(linkElement, obj) {
 		var css = obj.css;
-		var media = obj.media;
 		var sourceMap = obj.sourceMap;
 	
 		if(sourceMap) {
@@ -41330,7 +41280,6 @@
 			this.setState({
 				key: ReactDOM.findDOMNode(this.refs.key).value
 			});
-			//this.props.updateEntity({"key":"key", "value":ReactDOM.findDOMNode(this.refs.key).value, "index":this.props.index});
 		},
 		setValidateEntity: function setValidateEntity(selectedEntity, e) {
 			var newAttributes = processAttribues(selectedEntity.attributes);
@@ -41473,8 +41422,9 @@
 		getInitialState: function getInitialState() {
 			return {
 				attributes: this.props.attributes,
-				modalIsOpen: false,
-				refAttributes: null
+				modalAttributes: {
+					modalIsOpen: false
+				}
 			};
 		},
 		componentWillReceiveProps: function componentWillReceiveProps(props) {
@@ -41483,6 +41433,7 @@
 			});
 		},
 		componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
+			console.log(this.state);
 			//console.log(this.state.attributes);
 			if (!_.isEqual(prevState, this.state)) {
 				this.props.updateAttributes(this.state.attributes);
@@ -41500,13 +41451,11 @@
 			this.setState({
 				attributes: newAttributes
 			});
+			console.log(this.state);
 		},
-		showModal: function showModal(attr) {
-			var newAttributes = processAttribues(attr.referenceType.attributes);
-			this.setState({
-				refAttributes: newAttributes,
-				modalIsOpen: true
-			});
+		showModal: function showModal(attr, e) {
+			var attrKey = attr.key;
+			var processedAttr = [];
 			function processAttribues(attributes) {
 				var newAttributes = [];
 				_(attributes).forEach(function (attribute) {
@@ -41520,28 +41469,51 @@
 				});
 				return newAttributes;
 			}
+			function getObject(theObject) {
+				var result = null;
+				if (theObject instanceof Array) {
+					for (var i = 0; i < theObject.length; i++) {
+						result = getObject(theObject[i]);
+						if (result) {
+							break;
+						}
+					}
+				} else {
+					for (var prop in theObject) {
+						if (theObject[prop] == attrKey) {
+							processedAttr = processAttribues(theObject.referenceType.attributes);
+							theObject.attributes = processedAttr;
+							theObject.modalIsOpen = true;
+							return theObject;
+						}
+						if (theObject[prop] instanceof Object || theObject[prop] instanceof Array) {
+							result = getObject(theObject[prop]);
+							if (result) {
+								break;
+							}
+						}
+					}
+				}
+				return result;
+			}
+			getObject(this.state);
+			this.setState({
+				attributes: processedAttr,
+				modalAttributes: {
+					modalIsOpen: true
+				}
+			});
+			console.log('state: ', this.state);
 		},
-		updateAttributesInModal: function updateAttributesInModal(attributes) {
-			//this.props.updateAttributes({"key":"attributes", "value":attribute, "index":this.props.index});
-			var labelObj = new Object(),
-			    attributesObj = new Object(),
-			    typeObj = new Object(),
-			    objArray = [];
-			labelObj.key = "label";
-			labelObj.value = this.state.label;
-			labelObj.index = this.props.index;
-			attributesObj.key = "attributes";
-			attributesObj.value = attributes ? attributes : this.state.attributes;
-			attributesObj.index = this.props.index;
-			typeObj.key = "type";
-			typeObj.value = this.state.type;
-			typeObj.index = this.props.index;
-			objArray = objArray.concat(labelObj, attributesObj, typeObj);
+		closeModal: function closeModal() {
+			this.setState({
+				modalAttributes: {
+					modalIsOpen: false
+				}
+			});
 		},
 		getAttributesList: function getAttributesList() {
 			var html = this.state.attributes.map(function (attribute, index) {
-				var _this = this;
-	
 				return React.createElement(
 					"tr",
 					{ className: "attribute-list", key: index },
@@ -41567,9 +41539,7 @@
 						{ className: "spacer" },
 						React.createElement(
 							"button",
-							{ onClick: function onClick() {
-									return _this.showModal(attribute);
-								}, id: "compositeAttr_" + index },
+							{ onClick: this.showModal.bind(this, attribute), id: "compositeAttr_" + index },
 							"view more"
 						)
 					),
@@ -41641,7 +41611,7 @@
 						attributesHtml
 					)
 				),
-				React.createElement(_referenceGenerator2.default, { isOpen: this.state.modalIsOpen, attributes: this.state.refAttributes, updateAttributes: this.updateAttributesInModal })
+				React.createElement(_referenceGenerator2.default, { closeModal: this.closeModal, isOpen: this.state.modalAttributes.modalIsOpen, attributes: this.state.attributes })
 			);
 		}
 	});
@@ -41668,42 +41638,52 @@
 	var React = __webpack_require__(7);
 	var ReactDOM = __webpack_require__(175);
 	var Modal = __webpack_require__(204);
-	var customStyles = {
-	  // content : {
-	  //   top                   : '50%',
-	  //   left                  : '50%',
-	  //   right                 : 'auto',
-	  //   bottom                : 'auto',
-	  //   marginRight           : '-50%',
-	  //   transform             : 'translate(-50%, -50%)'
-	  // }
-	};
+	var customStyles = {};
 	var ReferenceGenerator = React.createClass({
 	  displayName: "ReferenceGenerator",
 	
 	  getInitialState: function getInitialState() {
-	    return { modalIsOpen: false };
+	    return {
+	      modalIsOpen: false,
+	      attributes: this.props.attributes
+	    };
 	  },
 	  componentWillReceiveProps: function componentWillReceiveProps(props) {
 	    this.setState({
 	      modalIsOpen: props.isOpen
 	    });
 	  },
-	  openModal: function openModal() {
-	    this.setState({ modalIsOpen: true });
+	  componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
+	    console.log(this.state);
 	  },
-	
-	  // afterOpenModal: function() {
-	  //   // references are now sync'd and can be accessed.
-	  //   this.refs.subtitle.style.color = '#f00';
+	  // openModal: function() {
+	  //   this.setState({modalIsOpen: true});
 	  // },
 	
 	  closeModal: function closeModal() {
-	    this.setState({ modalIsOpen: false });
+	    this.props.closeModal();
 	  },
-	
+	  updateAttributes: function updateAttributes(attributes) {
+	    //this.props.updateAttributes({"key":"attributes", "value":attribute, "index":this.props.index});
+	    console.log('this state in ref', this.state);
+	    var labelObj = new Object(),
+	        attributesObj = new Object(),
+	        typeObj = new Object(),
+	        objArray = [];
+	    labelObj.key = "label";
+	    labelObj.value = this.state.label;
+	    labelObj.index = this.props.index;
+	    attributesObj.key = "attributes";
+	    attributesObj.value = attributes ? attributes : this.state.attributes;
+	    attributesObj.index = this.props.index;
+	    typeObj.key = "type";
+	    typeObj.value = this.state.type;
+	    typeObj.index = this.props.index;
+	    objArray = objArray.concat(labelObj, attributesObj, typeObj);
+	    //this.props.updateEntity(objArray);
+	  },
 	  render: function render() {
-	    console.log("Modal state", this.state);
+	    //console.log("Modal state", this.state)
 	    return React.createElement(
 	      "div",
 	      null,
@@ -41711,7 +41691,6 @@
 	        Modal,
 	        {
 	          isOpen: this.state.modalIsOpen,
-	          onAfterOpen: this.afterOpenModal,
 	          onRequestClose: this.closeModal,
 	          style: customStyles },
 	        React.createElement(
@@ -41719,7 +41698,7 @@
 	          { onClick: this.closeModal },
 	          "close"
 	        ),
-	        React.createElement(_attributesSelector2.default, { attributes: this.props.attributes, updateAttributes: this.props.updateAttributes })
+	        React.createElement(_attributesSelector2.default, { attributes: this.props.attributes, updateAttributes: this.updateAttributes })
 	      )
 	    );
 	  }

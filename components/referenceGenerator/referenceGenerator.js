@@ -8,37 +8,55 @@ var customStyles = {
 }
 var ReferenceGenerator = React.createClass({
   getInitialState: function() {
-    return { modalIsOpen: false };
+    return { 
+      modalIsOpen: false, 
+      attributes: this.props.attributes
+    };
   },
   componentWillReceiveProps: function(props){
     this.setState({
       modalIsOpen: props.isOpen
     });
   },
-  openModal: function() {
-    this.setState({modalIsOpen: true});
+    componentDidUpdate: function(prevProps,prevState){
+      console.log(this.state);
   },
-
-  // afterOpenModal: function() {
-  //   // references are now sync'd and can be accessed.
-  //   this.refs.subtitle.style.color = '#f00';
+  // openModal: function() {
+  //   this.setState({modalIsOpen: true});
   // },
 
   closeModal: function() {
-    this.setState({modalIsOpen: false});
+    this.props.closeModal();
   },
-
+  updateAttributes: function(attributes){
+    //this.props.updateAttributes({"key":"attributes", "value":attribute, "index":this.props.index});
+    console.log('this state in ref', this.state)
+    var labelObj = new Object(),
+      attributesObj = new Object(),
+      typeObj = new Object(),
+      objArray = [];
+    labelObj.key = "label";
+    labelObj.value = this.state.label;
+    labelObj.index = this.props.index;
+    attributesObj.key = "attributes";
+    attributesObj.value = attributes ? attributes : this.state.attributes;
+    attributesObj.index = this.props.index;
+    typeObj.key = "type";
+    typeObj.value = this.state.type;
+    typeObj.index = this.props.index;
+    objArray = objArray.concat(labelObj,attributesObj,typeObj);
+    //this.props.updateEntity(objArray);
+  },
   render: function() {
     //console.log("Modal state", this.state)
     return (
       <div>
         <Modal
           isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal}
           style={customStyles} >
           <button onClick={this.closeModal}>close</button>
-          <AttributesSelector attributes={this.props.attributes} updateAttributes={this.props.updateAttributes}/>
+          <AttributesSelector attributes={this.props.attributes} updateAttributes={this.updateAttributes}/>
         </Modal>
       </div>
     );

@@ -45,7 +45,6 @@ var EntityGenerator = React.createClass({
 		this.setState({
 			key: ReactDOM.findDOMNode(this.refs.key).value
 		});
-		//this.props.updateEntity({"key":"key", "value":ReactDOM.findDOMNode(this.refs.key).value, "index":this.props.index});
 	},
 	setValidateEntity: function(selectedEntity, e){
 		var newAttributes = processAttribues(selectedEntity.attributes);

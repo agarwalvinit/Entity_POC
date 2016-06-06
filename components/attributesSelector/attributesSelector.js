@@ -7,7 +7,10 @@ var update = require('react-addons-update');
 var AttributesSelector = React.createClass({
 	getInitialState: function(){
 		return{
-			attributes: this.props.attributes
+			attributes: this.props.attributes,
+			modalAttributes: {
+				modalIsOpen: false
+			}		
 		}
 	},
 	componentWillReceiveProps: function(props){
@@ -42,6 +45,7 @@ var AttributesSelector = React.createClass({
 	},
 	showModal: function(attr,e){
 		var attrKey = attr.key;
+		let processedAttr = [];
 		function processAttribues(attributes){
 			let newAttributes = [];
 			_(attributes).forEach(function(attribute){
@@ -55,7 +59,6 @@ var AttributesSelector = React.createClass({
 			});
 			return newAttributes;
 		}
-		var finalAttr = getObject(this.state);
 		function getObject(theObject) {
 		    var result = null;
 		    if(theObject instanceof Array) {
@@ -70,8 +73,8 @@ var AttributesSelector = React.createClass({
 		    {
 		        for(var prop in theObject) {
 		            if(theObject[prop] == attrKey) {
-		            	let newAttributes = processAttribues(theObject.referenceType.attributes);
-		            	theObject.attributes = newAttributes;
+		            	processedAttr = processAttribues(theObject.referenceType.attributes);
+		            	theObject.attributes = processedAttr;
 		            	theObject.modalIsOpen = true;
 		                return theObject;
 		            }
@@ -85,32 +88,22 @@ var AttributesSelector = React.createClass({
 		    }
 		    return result;
 		}
+		getObject(this.state);
+		this.setState({
+			attributes : processedAttr,
+			modalAttributes: {
+			modalIsOpen: true
+		}
+	});
 		console.log('state: ', this.state);
-		// this.setState({
-		// 	refAttributes: newAttributes,
-		// 	modalIsOpen: true
-		// }, function() {
-		// 	console.log(this.state);
-		// }.bind(this));
-
 	},
-	updateAttributesInModal: function(refAttributes){
-	//this.props.updateAttributes({"key":"attributes", "value":attribute, "index":this.props.index});
-	var labelObj = new Object(),
-		attributesObj = new Object(),
-		typeObj = new Object(),
-		objArray = [];
-	labelObj.key = "label";
-	labelObj.value = this.state.label;
-	labelObj.index = this.props.index;
-	attributesObj.key = "attributes";
-	attributesObj.value = attributes ? attributes : this.state.attributes;
-	attributesObj.index = this.props.index;
-	typeObj.key = "type";
-	typeObj.value = this.state.type;
-	typeObj.index = this.props.index;
-	objArray = objArray.concat(labelObj,attributesObj,typeObj);
-},
+	closeModal: function (){
+		this.setState({
+		modalAttributes: {
+			modalIsOpen: false
+		}
+	})
+	},
 	getAttributesList: function(){
 		var html = this.state.attributes.map(function(attribute, index){
 			return (
@@ -153,7 +146,7 @@ var AttributesSelector = React.createClass({
 						{attributesHtml}
 					</tbody>
 				</table>
-				<ReferenceGenerator isOpen={this.state.modalIsOpen} attributes={this.state.refAttributes} updateAttributes={this.updateAttributesInModal}/>
+				<ReferenceGenerator closeModal={this.closeModal} isOpen={this.state.modalAttributes.modalIsOpen} attributes={this.state.attributes} />
 			</div>
 		)
 	}
