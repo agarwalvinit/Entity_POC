@@ -66,23 +66,16 @@ var EntityGenerator = React.createClass({
 			});
 			return newAttributes;
 		}
-		//console.log(this.state.attributes);
-		//this.props.updateEntity("entityType", this.state.entityType, this.props.index);
-		//this.props.updateEntity({"key":"type", "value":selectedEntity.type, "index":this.props.index});
-		//this.props.updateEntity({"key":"attributes", "value":newAttributes, "index":this.props.index});
 	},
 	setUpdatable: function(e){
 		this.setState({
 			updatable: ReactDOM.findDOMNode(this.refs.updatable).checked
 		});
-		//this.props.updateEntity("isUpdatable", this.state.isUpdatable, this.props.index);
-		//this.props.updateEntity({"key":"updatable", "value":ReactDOM.findDOMNode(this.refs.updatable).checked, "index":this.props.index});
 	},
 	setOptional: function(){
 		this.setState({
 			optional: ReactDOM.findDOMNode(this.refs.optional).checked
 		});
-		//this.props.updateEntity({"key":"optional", "value":ReactDOM.findDOMNode(this.refs.optional).checked, "index":this.props.index});
 	},
 	showAttr: function(evt){
 		this.setState({

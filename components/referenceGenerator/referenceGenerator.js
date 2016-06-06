@@ -1,16 +1,18 @@
 require("./referenceGenerator.scss")
 import AttributesSelector from "../attributesSelector/attributesSelector";
+var _ = require('lodash');
 var React = require("react");
 var ReactDOM = require("react-dom");
 var Modal = require("react-modal");
 var customStyles = {
   
 }
+
 var ReferenceGenerator = React.createClass({
   getInitialState: function() {
     return { 
       modalIsOpen: false, 
-      attributes: this.props.attributes
+      /*attributes: this.props.attributes*/
     };
   },
   componentWillReceiveProps: function(props){
@@ -29,8 +31,9 @@ var ReferenceGenerator = React.createClass({
     this.props.closeModal();
   },
   updateAttributes: function(attributes){
+    this.props.updateAttributes(attributes);
     //this.props.updateAttributes({"key":"attributes", "value":attribute, "index":this.props.index});
-    console.log('this state in ref', this.state)
+    /*console.log('this state in ref', this.state)
     var labelObj = new Object(),
       attributesObj = new Object(),
       typeObj = new Object(),
@@ -45,7 +48,7 @@ var ReferenceGenerator = React.createClass({
     typeObj.value = this.state.type;
     typeObj.index = this.props.index;
     objArray = objArray.concat(labelObj,attributesObj,typeObj);
-    //this.props.updateEntity(objArray);
+    //this.props.updateEntity(objArray);*/
   },
   render: function() {
     //console.log("Modal state", this.state)
@@ -56,7 +59,7 @@ var ReferenceGenerator = React.createClass({
           onRequestClose={this.closeModal}
           style={customStyles} >
           <button onClick={this.closeModal}>close</button>
-          <AttributesSelector attributes={this.props.attributes} updateAttributes={this.updateAttributes}/>
+          <AttributesSelector parentIndex={this.props.parentIndex} attributes={this.props.attributes} updateAttributes={this.props.updateAttributes}/>
         </Modal>
       </div>
     );
