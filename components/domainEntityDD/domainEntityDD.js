@@ -1,7 +1,7 @@
-require("./domainEntityDD.scss");
-var React = require('react'),
-	ReactSelectize = require("react-selectize"),
-	SimpleSelect = ReactSelectize.SimpleSelect,
+require("./domainEntityDD.scss")
+import React from "react"
+import	ReactSelectize from "react-selectize"
+var	SimpleSelect = ReactSelectize.SimpleSelect, 
 	DomainEntityDD;
 
 DomainEntityDD = React.createClass({

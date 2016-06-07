@@ -1,9 +1,10 @@
-require("./attributesSelector.scss");
+import "./attributesSelector.scss"
 import ReferenceGenerator from "../referenceGenerator/referenceGenerator"
-var React = require("react");
-var _ = require('lodash');
-var ReactDOM = require("react-dom");
-var update = require('react-addons-update');
+import React from "react"
+import _ from 'lodash'
+import ReactDOM from "react-dom"
+import update from "react-addons-update"
+var refComponent = false;
 var AttributesSelector = React.createClass({
 	getInitialState: function(){
 		return{
@@ -30,7 +31,6 @@ var AttributesSelector = React.createClass({
 		obj.key = evt.target.id.split("_")[0];
 		obj.index = evt.target.id.split("_")[2];
 		obj.value = evt.target.checked;
-		//this.props.updateAttributes(obj);
 
 		newAttributes = _.cloneDeep(this.state.attributes);
 		newAttributes[obj.index][obj.key] = obj.value;
@@ -38,46 +38,42 @@ var AttributesSelector = React.createClass({
 		this.setState({
 			attributes: newAttributes
 		});
-		//console.log(this.state);
 	},
 	setAttributes: function (attrs, index) {
-		if(index) {
-			var theObject = _.cloneDeep(this.state.attributes)
-			console.log("my index", index, theObject)
-			theObject[index].attributes = attrs;
-			return theObject;
-		}
+		var theObject = _.cloneDeep(this.state.attributes)
+		console.log("my index", index, theObject)
+		theObject[index].attributes = attrs;
+		return theObject;
 	},
-	updateParentAttributes: function (attrs) {
-		var index = this.state.modalAttributes.index;
-		if(index) {
-			var theObject = _.cloneDeep(this.state.attributes)
-			console.log("my index", index, theObject)
-			theObject[index].attributes = attrs;
-			return theObject;
-		}
+	processAttribues: function (attributes){
+		let newAttributes = [];
+		_(attributes).forEach(function(attribute){
+			newAttributes.push({
+				"key": attribute.name,
+				"type": attribute.type,
+				"optional": false,
+				"updatable": false,
+				"referenceType": attribute.referenceType
+			});
+		});
+		return newAttributes;
 	},
 	showModal: function(attr,index){
-		console.log("My Index", index)
+		refComponent = true;
 		var attrKey = attr.key;
 		let processedAttr = [];
-		function processAttribues(attributes){
-			let newAttributes = [];
-			_(attributes).forEach(function(attribute){
-				newAttributes.push({
-					"key": attribute.name,
-					"type": attribute.type,
-					"optional": false,
-					"updatable": false,
-					"referenceType": attribute.referenceType
-				});
-			});
-			return newAttributes;
+
+		if(this.state.attributes[index].attributes) {
+			let newObj = _.cloneDeep(this.state.attributes[index]);
+			processedAttr = newObj.attributes;
+		} else {
+			processedAttr = this.processAttribues(attr.referenceType.attributes);
 		}
-		processedAttr = processAttribues(attr.referenceType.attributes)
+
+		let updatedAttr = this.setAttributes(processedAttr, index);
 
 		this.setState({
-			attributes : this.setAttributes(processedAttr, index),
+			attributes : updatedAttr,
 			modalAttributes: {
 				attributes: processedAttr,
 				index: index,
@@ -85,12 +81,13 @@ var AttributesSelector = React.createClass({
 			}
 		});
 	},
-	closeModal: function (){
+	closeModal: function (attrs){
 		this.setState({
 			modalAttributes: {
 				modalIsOpen: false
 			}
-		})
+		});
+		this.props.updateAttributes(this.state.attributes, attrs, this.state.modalAttributes.index);
 	},
 	getAttributesList: function(){
 		console.log('getAttributesList: ',this.state.attributes);
@@ -104,15 +101,14 @@ var AttributesSelector = React.createClass({
 						<button onClick={this.showModal.bind(this, attribute, index)} id={"compositeAttr_"+index}>view more</button></td>}
 					<td className="check-box-cont spacer">
 						<input type="checkbox" id={"updatable_"+this.props.parentIndex+"_"+index}
-							   onClick={this.updateAttributes} ref="updatable"/>
+							   onChange={this.updateAttributes} ref="updatable" checked={attribute.updatable}/>
 						<label htmlFor={"updatable_"+this.props.parentIndex+"_"+index}>Is Updatable</label>
 					</td>
 					<td className="check-box-cont spacer">
 						<input type="checkbox" id={"optional_"+this.props.parentIndex+"_"+index}
-							   onChange={this.updateAttributes} ref="optional"/>
+							   onChange={this.updateAttributes} ref="optional" checked={attribute.optional}/>
 						<label htmlFor={"optional_"+this.props.parentIndex+"_"+index}>Is Optional</label>
 					</td>
-					{/*attribute.type === "REF" ? <span className="spacer"><span>Show Attribute</span></span> : ""*/}
 				</tr>
 			)
 		}.bind(this));
@@ -135,7 +131,8 @@ var AttributesSelector = React.createClass({
 					{attributesHtml}
 					</tbody>
 				</table>
-				<ReferenceGenerator updateAttributes={this.updateParentAttributes} parentIndex={this.state.modalAttributes.index} closeModal={this.closeModal} isOpen={this.state.modalAttributes.modalIsOpen} attributes={this.state.modalAttributes.attributes} />
+				{refComponent === true ?  <ReferenceGenerator parentIndex={this.state.modalAttributes.index} closeModal={this.closeModal} 
+				 isOpen={this.state.modalAttributes.modalIsOpen} attributes={this.state.modalAttributes.attributes} /> : <br />}
 			</div>
 		)
 	}

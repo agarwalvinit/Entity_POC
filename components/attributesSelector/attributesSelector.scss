@@ -3,8 +3,12 @@
 	overflow: hidden;
 }
 .attribute-cont{
+    border-bottom: 1px solid #808080;
+    margin-bottom: 35px;
 	transition: all 0.25s ease-in;
-	width: 80%;
+	width: 95%;
+	margin-left: 30px;
+    background: #eee;
 }
 .attribute-cont .check-box-cont{
 	font-size: 13px;

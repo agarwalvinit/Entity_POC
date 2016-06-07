@@ -1,8 +1,7 @@
-//var DomainEntityDD = require("../domainEntityDD/DomainEntityDD.js");
 import DomainEntityDD from "../domainEntityDD/domainEntityDD";
-var React = require("react");
-var ReactDOM = require("react-dom");
-var _ = require('lodash');
+import React from "react"
+import ReactDOM from "react-dom"
+import _ from 'lodash'
 var EntitySelector = React.createClass({
 	getInitialState: function(){
 		return {
@@ -52,8 +51,20 @@ var EntitySelector = React.createClass({
 			optional: ReactDOM.findDOMNode(this.refs.optional).checked
 		});	
 	},
+	resetAttributes: function() {
+		this.refs.entityKey.value = "";
+		this.refs.updatable.checked = false;
+		this.refs.optional.checked = false;
+		this.setState({
+			key: "",
+			type: "",
+			updatable: false,
+			optional: false,
+			attributes: {},
+			label: ""
+		})
+	},
 	addEntity: function(evt){
-		//console.log(this.state.entityType);
 		var newEntity = new Object();
 		newEntity.key = this.state.key;
 		newEntity.type = this.state.type;
@@ -62,8 +73,8 @@ var EntitySelector = React.createClass({
 		newEntity.attributes = this.state.attributes;
 		newEntity.isAttributeVisible = true;
 		newEntity.label = this.state.label;
-
 		this.props.addEntity(newEntity);
+		this.resetAttributes();
 	},
 	render: function(){
 		return(
@@ -71,7 +82,7 @@ var EntitySelector = React.createClass({
 				<span className="spacer">
 					<input onChange={this.setKey} ref="entityKey" type="text" placeholder="Enter key"/>
 				</span>
-				<DomainEntityDD ref="entityType" onSelect={this.setTypeAndAttr}/>
+				<DomainEntityDD onSelect={this.setTypeAndAttr} />
 				<span className="check-box-cont spacer">
 					<input type="checkbox" id="isUpdatable" onChange={this.setUpdatable} ref="updatable"/>
 					<label htmlFor="isUpdatable">Is Updatable</label>
@@ -80,11 +91,10 @@ var EntitySelector = React.createClass({
 					<input type="checkbox" id="isOptional" onChange={this.setOptional} ref="optional"/>
 					<label htmlFor="isOptional">Is Optional</label>
 				</span>
-				<span onClick={this.addEntity} className={this.state.key && this.state.type ? 'spacer show-attribute' : 'no-display spacer show-attribute'}>Show Attribute</span>
+				<button onClick={this.addEntity} className={this.state.key && this.state.type ? 'btn btn-sm btn-success' : 'no-display spacer show-attribute'}>Add Entity</button>
 			</div>
 		)
 	}
 });
 
-//module.exports = EntitySelector;
 export default EntitySelector;

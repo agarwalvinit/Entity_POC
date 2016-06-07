@@ -1,25 +1,29 @@
-// require("./style.css");
 import EntitySelector from "./components/entitySelector/entitySelector";
 import EntityGenerator from "./components/entityGenerator/entityGenerator";
-var _ = require('lodash');
-var React = require("react");
-var ReactDOM = require("react-dom");
-var update = require('react-addons-update');
-var newState = [];
+import _ from "lodash"
+import React from "react"
+import ReactDOM from "react-dom"
+import update from "react-addons-update"
 
+var newState = [];
 var Entity =  React.createClass({
 	getInitialState: function(){
 		return {
 			selectedEntities: []
 		}
 	},
-
 	addEntity: function(entity) {
-		newState = newState.concat(entity);
+		newState.push(entity);
 		this.setState({
-			selectedEntities: this.state.selectedEntities.concat(entity)
+			selectedEntities: newState
 		});
 		console.log('Add Entities state: ',this.state.selectedEntities);
+	},
+	deleteEntity: function(index) {
+		newState.splice(index, 1);
+		this.setState({
+			selectedEntities: newState
+		}, console.log('deleteEntity: ', this.state.selectedEntities));
 	},
 	updateEntity: function(objArray){
 		_(objArray).forEach((obj) => {
@@ -37,13 +41,12 @@ var Entity =  React.createClass({
 		console.log('initial state: ',this.state.selectedEntities);
 		var html = this.state.selectedEntities.map(function(entity, index){
 			return (
-				<EntityGenerator key={index} entity={entity} updateEntity={this.updateEntity} index={index} />
+				<EntityGenerator key={index} entity={entity} updateEntity={this.updateEntity} deleteEntity={this.deleteEntity} index={index} />
 			)
 		}.bind(this));
 		return html;
 	},
 	render: function(){
-		//console.log('initial state', this.state.selectedEntities);
 		var html = this.processRender();
 		return (
 			<div className="app-ctr">

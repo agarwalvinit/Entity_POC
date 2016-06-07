@@ -1,8 +1,7 @@
-//var DomainEntityDD = require("../domainEntityDD/DomainEntityDD.js");
 import DomainEntityDD from "../domainEntityDD/domainEntityDD";
 import AttributesSelector from "../attributesSelector/attributesSelector";
-var React = require("react");
-var ReactDOM = require("react-dom");
+import React from "react"
+import ReactDOM from "react-dom"
 var EntityGenerator = React.createClass({
 	getInitialState: function(){
 		return {
@@ -77,18 +76,14 @@ var EntityGenerator = React.createClass({
 			optional: ReactDOM.findDOMNode(this.refs.optional).checked
 		});
 	},
-	showAttr: function(evt){
-		this.setState({
-			isAttributeVisible: !this.state.isAttributeVisible
-		}, function(){console.log(this.state)});
-		console.log(this.state);
-	},
-	updateAttributes: function(attributes){
-		//this.props.updateAttributes({"key":"attributes", "value":attribute, "index":this.props.index});
+	updateAttributes: function(attributes, attrs, index){
 		var labelObj = new Object(),
 			attributesObj = new Object(),
 			typeObj = new Object(),
 			objArray = [];
+		if(attrs) {
+			attributes[index].attributes = attrs;
+		}
 		labelObj.key = "label";
 		labelObj.value = this.state.label;
 		labelObj.index = this.props.index;
@@ -100,6 +95,10 @@ var EntityGenerator = React.createClass({
 		typeObj.index = this.props.index;
 		objArray = objArray.concat(labelObj,attributesObj,typeObj);
 		this.props.updateEntity(objArray);
+	},
+	deleteEntity: function() {
+		console.log(this.props);
+		this.props.deleteEntity(this.props.index);
 	},
 	render: function(){
 		return(
@@ -119,14 +118,13 @@ var EntityGenerator = React.createClass({
 					onChange={this.setOptional} ref="optional" checked={this.state.optional}/>
 					<label htmlFor={"optionalEntity_"+this.props.index}>Is Optional</label>
 				</span>
-				<span onClick={this.showAttr} className={this.state.key && this.state.type ? 
-					'spacer show-attribute' : 'no-display spacer show-attribute'}>Show Attribute</span>
+				<button onClick={this.deleteEntity} className="btn btn-sm btn-danger">Delete Entity</button>
 				<AttributesSelector isAttributeVisible={this.state.isAttributeVisible} 
-				attributes={this.state.attributes} updateAttributes={this.updateAttributes} parentIndex={this.props.index}/>
+				attributes={this.state.attributes} updateAttributes={this.updateAttributes} 
+				parentIndex={this.props.index}/>
 			</div>
 		)
 	}
 });
 
-//module.exports = EntitySelector;
 export default EntityGenerator;
