@@ -23,15 +23,12 @@ var ReferenceGenerator = React.createClass({
     componentDidUpdate: function(prevProps,prevState){
       console.log(this.state);
   },
-  // openModal: function() {
-  //   this.setState({modalIsOpen: true});
-  // },
 
   closeModal: function() {
     this.props.closeModal();
   },
   updateAttributes: function(attributes){
-    this.props.updateAttributes(attributes);
+    this.props.updateAttributes(attributes, this.props.parentIndex);
     //this.props.updateAttributes({"key":"attributes", "value":attribute, "index":this.props.index});
     /*console.log('this state in ref', this.state)
     var labelObj = new Object(),

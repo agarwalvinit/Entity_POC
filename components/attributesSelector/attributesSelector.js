@@ -41,10 +41,21 @@ var AttributesSelector = React.createClass({
 		//console.log(this.state);
 	},
 	setAttributes: function (attrs, index) {
-		var theObject = _.cloneDeep(this.state.attributes)
-		console.log("my index", index, theObject)
-		theObject[index].attributes = attrs;
-		return theObject;
+		if(index) {
+			var theObject = _.cloneDeep(this.state.attributes)
+			console.log("my index", index, theObject)
+			theObject[index].attributes = attrs;
+			return theObject;
+		}
+	},
+	updateParentAttributes: function (attrs) {
+		var index = this.state.modalAttributes.index;
+		if(index) {
+			var theObject = _.cloneDeep(this.state.attributes)
+			console.log("my index", index, theObject)
+			theObject[index].attributes = attrs;
+			return theObject;
+		}
 	},
 	showModal: function(attr,index){
 		console.log("My Index", index)
@@ -82,7 +93,7 @@ var AttributesSelector = React.createClass({
 		})
 	},
 	getAttributesList: function(){
-		console.log('fuck off: ',this.state.attributes);
+		console.log('getAttributesList: ',this.state.attributes);
 		var html = this.state.attributes.map(function(attribute, index){
 			return (
 				<tr className="attribute-list" key={index}>
@@ -124,9 +135,10 @@ var AttributesSelector = React.createClass({
 					{attributesHtml}
 					</tbody>
 				</table>
-				<ReferenceGenerator updateAttributes={this.setAttributes} parentIndex={this.state.modalAttributes.index} closeModal={this.closeModal} isOpen={this.state.modalAttributes.modalIsOpen} attributes={this.state.modalAttributes.attributes} />
+				<ReferenceGenerator updateAttributes={this.updateParentAttributes} parentIndex={this.state.modalAttributes.index} closeModal={this.closeModal} isOpen={this.state.modalAttributes.modalIsOpen} attributes={this.state.modalAttributes.attributes} />
 			</div>
 		)
 	}
 });
 export default AttributesSelector;
+	
