@@ -76,12 +76,11 @@ var EntityGenerator = React.createClass({
 			optional: ReactDOM.findDOMNode(this.refs.optional).checked
 		});
 	},
-	updateAttributes: function(stateObj, attrs, index){
+	updateAttributes: function(attributes, attrs, index){
 		var labelObj = new Object(),
 			attributesObj = new Object(),
 			typeObj = new Object(),
 			objArray = [];
-		var attributes = stateObj.attributes;
 		if(attrs) {
 			attributes[index].referenceType.attributes = attrs;
 		}

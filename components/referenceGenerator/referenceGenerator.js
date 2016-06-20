@@ -9,20 +9,20 @@ var ReferenceGenerator = React.createClass({
   getInitialState: function() {
     return { 
       attributes: _.cloneDeep(this.props.attributes),
-      key: this.props.keys,
-      type: this.props.type,
-      optional: this.props.optional,
-      updatable: this.props.updatable,
+      // key: this.props.keys,
+      // type: this.props.type,
+      // optional: this.props.optional,
+      // updatable: this.props.updatable,
       modalIsOpen: false
     };
   },
   componentWillReceiveProps: function(props){
     this.setState({
       attributes: props.attributes,
-      key: props.keys,
-      type: props.type,
-      optional: props.optional,
-      updatable: props.updatable,      
+      // key: props.keys,
+      // type: props.type,
+      // optional: props.optional,
+      // updatable: props.updatable,      
       modalIsOpen: props.isOpen
     });
   },
@@ -30,17 +30,13 @@ var ReferenceGenerator = React.createClass({
     let attr = _.cloneDeep(this.state.attributes);
     this.props.closeModal(attr);
   },
-  updateAttributes: function(stateObj, attrs, index){
+  updateAttributes: function(attributes, attrs, index){
     if(!attrs) {
       this.setState({
-        attributes: stateObj.attributes,
-        key: stateObj.key,
-        type: stateObj.type,
-        optional: stateObj.optional,
-        updatable: stateObj.updatable
+      attributes: attributes
       })
     } else {
-      let newAttributes = stateObj.attributes[index].referenceType.attributes = attrs;
+      let newAttributes = attributes[index].referenceType.attributes = attrs;
       this.setState({
         attributes: newAttributes
       })
@@ -56,10 +52,6 @@ var ReferenceGenerator = React.createClass({
           <button onClick={this.closeModal}>close</button>
           <AttributesSelector 
             parentIndex={this.props.parentIndex} 
-            keys={this.state.key} 
-            type={this.state.type} 
-            optional={this.state.optional} 
-            updatable={this.state.updatable} 
             attributes={this.state.attributes} 
             updateAttributes={this.updateAttributes} />
         </Modal>

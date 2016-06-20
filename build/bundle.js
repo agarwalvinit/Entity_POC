@@ -41359,12 +41359,11 @@
 				optional: _reactDom2.default.findDOMNode(this.refs.optional).checked
 			});
 		},
-		updateAttributes: function updateAttributes(stateObj, attrs, index) {
+		updateAttributes: function updateAttributes(attributes, attrs, index) {
 			var labelObj = new Object(),
 			    attributesObj = new Object(),
 			    typeObj = new Object(),
 			    objArray = [];
-			var attributes = stateObj.attributes;
 			if (attrs) {
 				attributes[index].referenceType.attributes = attrs;
 			}
@@ -41476,31 +41475,24 @@
 					modalIsOpen: false
 				}
 			};
-			if (this.props.keys) {
-				obj["key"] = this.props.keys;
-				obj["type"] = this.props.type;
-				obj["updatable"] = this.props.updatable;
-				obj["optional"] = this.props.optional;
-			}
+			// if(this.props.keys) {
+			// 	obj["key"] = this.props.keys;
+			// 	obj["type"] = this.props.type;
+			// 	obj["updatable"] = this.props.updatable;
+			// 	obj["optional"] = this.props.optional;
+			// }
 			return obj;
 		},
 		componentWillReceiveProps: function componentWillReceiveProps(props) {
 			var obj = {
 				attributes: props.attributes
 			};
-			if (props.keys) {
-				obj["key"] = props.keys;
-				obj["type"] = props.type;
-				obj["updatable"] = props.updatable;
-				obj["optional"] = props.optional;
-			}
 			this.setState(obj);
 		},
 		componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
 			if (!_lodash2.default.isEqual(prevState, this.state)) {
 				console.log("Updated");
-				var thisObj = _lodash2.default.cloneDeep(this.state);
-				this.props.updateAttributes(thisObj, this.props.parentIdex);
+				this.props.updateAttributes(this.state.attributes, this.props.parentIdex);
 			}
 		},
 		updateAttributes: function updateAttributes(evt) {
@@ -41521,11 +41513,11 @@
 			var theObject = _lodash2.default.cloneDeep(this.state.attributes);
 			console.log("my index", index, theObject);
 			theObject[index].referenceType = {
-				"attributes": attrs,
-				"key": theObject[index].referenceType.key || theObject[index].referenceType.name,
-				"optional": theObject[index].referenceType.optional || false,
-				"updatable": theObject[index].referenceType.updatable || false,
-				"type": theObject[index].referenceType.type
+				"attributes": attrs
+				// "key": theObject[index].referenceType.name,
+				// "optional": theObject[index].referenceType.optional || false,
+				// "updatable": theObject[index].referenceType.updatable || false,
+				// "type": theObject[index].referenceType.type
 			};
 			return theObject;
 		},
@@ -41558,12 +41550,12 @@
 	
 			this.setState({
 				attributes: updatedAttr,
+				// key: attr.referenceType.name,
+				// type: attr.referenceType.type,
+				// optional: attr.referenceType.optional || false,
+				// updatable: attr.referenceType.updatable || false,
 				modalAttributes: {
 					attributes: processedAttr,
-					key: attr.referenceType.key || attr.referenceType.name,
-					type: attr.referenceType.type,
-					optional: attr.referenceType.optional || false,
-					updatable: attr.referenceType.updatable || false,
 					index: index,
 					modalIsOpen: true
 				}
@@ -41577,18 +41569,16 @@
 			});
 			this.props.updateAttributes(this.state.attributes, attrs, this.state.modalAttributes.index);
 		},
-		setUpdatable: function setUpdatable() {
-			console.log('attribute generator updatable');
-			this.setState({
-				updatable: _reactDom2.default.findDOMNode(this.refs.refUpdatable).checked
-			});
-		},
-		setOptional: function setOptional() {
-			console.log('attribute generator optional');
-			this.setState({
-				optional: _reactDom2.default.findDOMNode(this.refs.refOptional).checked
-			});
-		},
+		// setUpdatable: function(){
+		// 	this.setState({
+		// 		updatable: ReactDOM.findDOMNode(this.refs.updatable).checked
+		// 	});
+		// },
+		// setOptional: function(){
+		// 	this.setState({
+		// 		optional: ReactDOM.findDOMNode(this.refs.optional).checked
+		// 	});
+		// },
 		getAttributesList: function getAttributesList() {
 			var html = this.state.attributes.map(function (attribute, index) {
 				return _react2.default.createElement(
@@ -41623,11 +41613,8 @@
 					_react2.default.createElement(
 						"td",
 						{ className: "check-box-cont spacer" },
-						_react2.default.createElement("input", {
-							type: "checkbox",
-							id: "updatable_" + this.props.parentIndex + "_" + index,
-							onChange: this.updateAttributes,
-							checked: attribute.updatable }),
+						_react2.default.createElement("input", { type: "checkbox", id: "updatable_" + this.props.parentIndex + "_" + index,
+							onChange: this.updateAttributes, ref: "updatable", checked: attribute.updatable }),
 						_react2.default.createElement(
 							"label",
 							{ htmlFor: "updatable_" + this.props.parentIndex + "_" + index },
@@ -41637,11 +41624,8 @@
 					_react2.default.createElement(
 						"td",
 						{ className: "check-box-cont spacer" },
-						_react2.default.createElement("input", {
-							type: "checkbox",
-							id: "optional_" + this.props.parentIndex + "_" + index,
-							onChange: this.updateAttributes,
-							checked: attribute.optional }),
+						_react2.default.createElement("input", { type: "checkbox", id: "optional_" + this.props.parentIndex + "_" + index,
+							onChange: this.updateAttributes, ref: "optional", checked: attribute.optional }),
 						_react2.default.createElement(
 							"label",
 							{ htmlFor: "optional_" + this.props.parentIndex + "_" + index },
@@ -41652,74 +41636,43 @@
 			}.bind(this));
 			return html;
 		},
-		getReferenceHTML: function getReferenceHTML() {
-			console.log('getReferenceHTML: ', this.state);
-			return _react2.default.createElement(
-				"div",
-				null,
-				_react2.default.createElement(
-					"span",
-					{ className: "spacer" },
-					_react2.default.createElement(
-						"span",
-						null,
-						this.state.key
-					)
-				),
-				_react2.default.createElement(
-					"span",
-					{ className: "spacer" },
-					_react2.default.createElement(
-						"span",
-						null,
-						this.state.type
-					)
-				),
-				_react2.default.createElement(
-					"span",
-					{ className: "check-box-cont spacer" },
-					_react2.default.createElement("input", {
-						type: "checkbox",
-						id: "isRefUpdatable",
-						onChange: this.setUpdatable,
-						ref: "refUpdatable",
-						checked: this.state.updatable }),
-					_react2.default.createElement(
-						"label",
-						{ htmlFor: "isRefUpdatable" },
-						"Is Updatable"
-					)
-				),
-				_react2.default.createElement(
-					"span",
-					{ className: "check-box-cont spacer" },
-					_react2.default.createElement("input", {
-						type: "checkbox",
-						id: "isRefOptional",
-						onChange: this.setOptional,
-						ref: "refOptional",
-						checked: this.state.optional }),
-					_react2.default.createElement(
-						"label",
-						{ htmlFor: "isRefOptional" },
-						"Is Optional"
-					)
-				)
-			);
-		},
+		// getReferenceHTML: function() {
+		// 	console.log('getReferenceHTML: ',this.state);
+		// 	return (
+		// 		<table>
+		// 			<tbody>
+		// 				<tr className="attribute-list">
+		// 					<td className="spacer">
+		// 						<span>{this.state.key}</span>
+		// 					</td>
+		// 					<td className="spacer"><span>{this.state.type}</span></td>
+		// 					<td className="check-box-cont spacer">
+		// 						<input type="checkbox" id="isUpdatable"
+		// 							   onChange={this.updateAttributes} ref="updatable" checked={this.state.updatable}/>
+		// 						<label htmlFor={"isUpdatable"}>Is Updatable</label>
+		// 					</td>
+		// 					<td className="check-box-cont spacer">
+		// 						<input type="checkbox" id={"isOptional"}
+		// 							   onChange={this.updateAttributes} ref="optional" checked={this.state.optional}/>
+		// 						<label htmlFor={"isOptional"}>Is Optional</label>
+		// 					</td>
+		// 				</tr>
+		// 			</tbody>
+		// 		</table>
+		// 	)
+		// },
 		render: function render() {
-			var referenceHTML = null;
-			if (this.props.keys) {
-				referenceHTML = this.getReferenceHTML();
-			}
 			var attributesHtml = this.getAttributesList();
+			// var referenceHTML = null;
+			// if(this.props.keys) {
+			// 	referenceHTML = this.getReferenceHTML();
+			// }
 			return _react2.default.createElement(
 				"div",
-				null,
-				referenceHTML,
+				{ className: "attribute-cont " + this.props.isAttributeVisible },
 				_react2.default.createElement(
 					"table",
-					{ className: "table table-sm table-hover attribute-cont" },
+					{ className: "table table-sm table-hover" },
 					_react2.default.createElement(
 						"thead",
 						null,
@@ -41758,10 +41711,10 @@
 					parentIndex: this.state.modalAttributes.index,
 					closeModal: this.closeModal,
 					isOpen: this.state.modalAttributes.modalIsOpen,
-					keys: this.state.modalAttributes.key,
-					type: this.state.modalAttributes.type,
-					optional: this.state.modalAttributes.optional,
-					updatable: this.state.modalAttributes.updatable,
+					keys: this.state.key,
+					type: this.state.type,
+					optional: this.state.optional,
+					updatable: this.state.updatable,
 					attributes: this.state.modalAttributes.attributes }) : _react2.default.createElement("br", null)
 			);
 		}
@@ -41837,20 +41790,20 @@
 	  getInitialState: function getInitialState() {
 	    return {
 	      attributes: _.cloneDeep(this.props.attributes),
-	      key: this.props.keys,
-	      type: this.props.type,
-	      optional: this.props.optional,
-	      updatable: this.props.updatable,
+	      // key: this.props.keys,
+	      // type: this.props.type,
+	      // optional: this.props.optional,
+	      // updatable: this.props.updatable,
 	      modalIsOpen: false
 	    };
 	  },
 	  componentWillReceiveProps: function componentWillReceiveProps(props) {
 	    this.setState({
 	      attributes: props.attributes,
-	      key: props.keys,
-	      type: props.type,
-	      optional: props.optional,
-	      updatable: props.updatable,
+	      // key: props.keys,
+	      // type: props.type,
+	      // optional: props.optional,
+	      // updatable: props.updatable,     
 	      modalIsOpen: props.isOpen
 	    });
 	  },
@@ -41858,17 +41811,13 @@
 	    var attr = _.cloneDeep(this.state.attributes);
 	    this.props.closeModal(attr);
 	  },
-	  updateAttributes: function updateAttributes(stateObj, attrs, index) {
+	  updateAttributes: function updateAttributes(attributes, attrs, index) {
 	    if (!attrs) {
 	      this.setState({
-	        attributes: stateObj.attributes,
-	        key: stateObj.key,
-	        type: stateObj.type,
-	        optional: stateObj.optional,
-	        updatable: stateObj.updatable
+	        attributes: attributes
 	      });
 	    } else {
-	      var newAttributes = stateObj.attributes[index].referenceType.attributes = attrs;
+	      var newAttributes = attributes[index].referenceType.attributes = attrs;
 	      this.setState({
 	        attributes: newAttributes
 	      });
@@ -41891,10 +41840,6 @@
 	        ),
 	        React.createElement(_attributesSelector2.default, {
 	          parentIndex: this.props.parentIndex,
-	          keys: this.state.key,
-	          type: this.state.type,
-	          optional: this.state.optional,
-	          updatable: this.state.updatable,
 	          attributes: this.state.attributes,
 	          updateAttributes: this.updateAttributes })
 	      )
