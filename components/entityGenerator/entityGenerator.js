@@ -40,30 +40,47 @@ var EntityGenerator = React.createClass({
 			this.updateAttributes();
 		}
 	},
-	setValidateName: function(name, e){
-		this.setState({
-			key: ReactDOM.findDOMNode(this.refs.key).value
-		});
+	getObject: function(theObject) {
+	    var self = this;
+	    var result = {
+	        "key": theObject.name,
+	        "type": theObject.type,
+	        "updatable": false,
+	        "optional": false
+	    };
+	    if(theObject.attributes instanceof Array) {
+	        result.attributes = self.processAttribues(theObject.attributes); 
+	    }
+	    return result;
+	},
+	processAttribues: function(attributes){
+		var self = this;
+	    var newAttributes = [];
+	    _(attributes).forEach(function(attribute){
+	        var obj = {
+	            "key": attribute.name,
+	            "type": attribute.type,
+	            "optional": false,
+	            "updatable": false
+	        }
+	        if(attribute.referenceType){
+	            obj.referenceType = self.getObject(attribute.referenceType)
+	        } else {
+	        	obj.referenceType = null;
+	        }
+	        newAttributes.push(obj);
+	    });
+	    return newAttributes;
 	},
 	setValidateEntity: function(selectedEntity, e){
-		var newAttributes = processAttribues(selectedEntity.attributes);
-		this.setState({
-			label: selectedEntity.label,
-			type: selectedEntity.type,
-			attributes: newAttributes
-		});
-		function processAttribues(attributes){
-			var newAttributes = [];
-			_(attributes).forEach(function(attribute){
-				newAttributes.push({
-					"key": attribute.name,
-					"type": attribute.type,
-					"optional": false,
-					"updatable": false,
-					"referenceType": attribute.referenceType
-				});
+		if(selectedEntity) {
+			var newSelectedEntity = this.getObject(selectedEntity);
+			this.setState({
+				type: newSelectedEntity.type,
+				attributes: newSelectedEntity.attributes,
+				label: selectedEntity.label,
+				key: newSelectedEntity.key
 			});
-			return newAttributes;
 		}
 	},
 	setUpdatable: function(e){
@@ -76,7 +93,7 @@ var EntityGenerator = React.createClass({
 			optional: ReactDOM.findDOMNode(this.refs.optional).checked
 		});
 	},
-	updateAttributes: function(attributes, attrs, index){
+	updateAttributes: function(attributes, index, attrs){
 		var labelObj = new Object(),
 			attributesObj = new Object(),
 			typeObj = new Object(),
@@ -103,9 +120,6 @@ var EntityGenerator = React.createClass({
 	render: function(){
 		return(
 			<div>
-				<span className="spacer">
-					<input onChange={this.setValidateName} ref="key" type="text" placeholder="Enter key" value={this.state.key}/>
-				</span>
 				<DomainEntityDD ref="entityType" onSelect={this.setValidateEntity} 
 				type={this.state.type} label={this.state.label}/>
 				<span className="check-box-cont spacer">

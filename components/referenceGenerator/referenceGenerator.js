@@ -9,20 +9,12 @@ var ReferenceGenerator = React.createClass({
   getInitialState: function() {
     return { 
       attributes: _.cloneDeep(this.props.attributes),
-      // key: this.props.keys,
-      // type: this.props.type,
-      // optional: this.props.optional,
-      // updatable: this.props.updatable,
       modalIsOpen: false
     };
   },
   componentWillReceiveProps: function(props){
     this.setState({
-      attributes: props.attributes,
-      // key: props.keys,
-      // type: props.type,
-      // optional: props.optional,
-      // updatable: props.updatable,      
+      attributes: props.attributes,    
       modalIsOpen: props.isOpen
     });
   },
@@ -30,7 +22,7 @@ var ReferenceGenerator = React.createClass({
     let attr = _.cloneDeep(this.state.attributes);
     this.props.closeModal(attr);
   },
-  updateAttributes: function(attributes, attrs, index){
+  updateAttributes: function(attributes, index, attrs){
     if(!attrs) {
       this.setState({
       attributes: attributes

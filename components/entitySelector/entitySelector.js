@@ -13,33 +13,48 @@ var EntitySelector = React.createClass({
 			label: ""
 		}
 	},
-	setKey: function(){
-		this.setState({
-			key: ReactDOM.findDOMNode(this.refs.entityKey).value
-		});
+	getObject: function(theObject) {
+	    var self = this;
+	    var result = {
+	        "key": theObject.name,
+	        "type": theObject.type,
+	        "updatable": false,
+	        "optional": false
+	    };
+	    if(theObject.attributes instanceof Array) {
+	        result.attributes = self.processAttribues(theObject.attributes); 
+	    }
+	    return result;
+	},
+	processAttribues: function(attributes){
+		var self = this;
+	    var newAttributes = [];
+	    _(attributes).forEach(function(attribute){
+	        var obj = {
+	            "key": attribute.name,
+	            "type": attribute.type,
+	            "optional": false,
+	            "updatable": false
+	        }
+	        if(attribute.referenceType){
+	            obj.referenceType = self.getObject(attribute.referenceType)
+	        } else {
+	        	obj.referenceType = null;
+	        }
+	        newAttributes.push(obj);
+	    });
+	    return newAttributes;
 	},
 	setTypeAndAttr: function(selectedEntity){
 		if(selectedEntity) {
-			var newAttributes = this.processAttribues(selectedEntity.attributes);
+			var newSelectedEntity = this.getObject(selectedEntity);
 			this.setState({
-			type: selectedEntity.type,
-			attributes: newAttributes,
-			label: selectedEntity.label
-		});
+				type: newSelectedEntity.type,
+				attributes: newSelectedEntity.attributes,
+				label: selectedEntity.label,
+				key: newSelectedEntity.key
+			});
 		}
-	},
-	processAttribues: function(attributes){
-		var newAttributes = [];
-		_(attributes).forEach(function(attribute){
-			newAttributes.push({
-				"key": attribute.name,
-				"type": attribute.type,
-				"optional": false,
-				"updatable": false,
-				"referenceType": attribute.referenceType
-			})
-		});
-		return newAttributes;
 	},
 	setUpdatable: function(){
 		this.setState({
@@ -52,7 +67,6 @@ var EntitySelector = React.createClass({
 		});	
 	},
 	resetAttributes: function() {
-		this.refs.entityKey.value = "";
 		this.refs.updatable.checked = false;
 		this.refs.optional.checked = false;
 		this.setState({
@@ -79,9 +93,6 @@ var EntitySelector = React.createClass({
 	render: function(){
 		return(
 			<div>
-				<span className="spacer">
-					<input onChange={this.setKey} ref="entityKey" type="text" placeholder="Enter key"/>
-				</span>
 				<DomainEntityDD onSelect={this.setTypeAndAttr} />
 				<span className="check-box-cont spacer">
 					<input type="checkbox" id="isUpdatable" onChange={this.setUpdatable} ref="updatable"/>
