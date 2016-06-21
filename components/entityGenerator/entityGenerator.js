@@ -78,11 +78,15 @@ var EntityGenerator = React.createClass({
 			this.setState({
 				type: newSelectedEntity.type,
 				attributes: newSelectedEntity.attributes,
-				label: selectedEntity.label,
-				key: newSelectedEntity.key
+				label: selectedEntity.label
 			});
 		}
 	},
+	setValidateName: function(name, e){
+		this.setState({
+			key: ReactDOM.findDOMNode(this.refs.key).value
+		});
+	},	
 	setUpdatable: function(e){
 		this.setState({
 			updatable: ReactDOM.findDOMNode(this.refs.updatable).checked
@@ -120,6 +124,9 @@ var EntityGenerator = React.createClass({
 	render: function(){
 		return(
 			<div>
+				<span className="spacer">
+					<input onChange={this.setValidateName} ref="key" type="text" placeholder="Enter key" value={this.state.key}/>
+				</span>			
 				<DomainEntityDD ref="entityType" onSelect={this.setValidateEntity} 
 				type={this.state.type} label={this.state.label}/>
 				<span className="check-box-cont spacer">

@@ -18,8 +18,7 @@ DomainEntityDD = React.createClass({
 			response.json().then(function(data) {
 				that.setState({
 					domainEntity : data.entities
-				})
-	        	//console.log(data);  
+				});
 	      	}) 
 		}).catch(function(ex) {
 			console.log('parsing failed', ex)
@@ -28,7 +27,7 @@ DomainEntityDD = React.createClass({
     render: function(){
 			var self = this, 
             	options = this.state.domainEntity.map(function(entity){
-                	return {label: entity.name, value: entity.type, type: entity.type, name: entity.name, attributes: entity.attributes}
+                	return {label: entity.displayName, value: entity.type, type: entity.type, attributes: entity.attributes}
             });
         return <div className="spacer entityDD">
         			<SimpleSelect 
