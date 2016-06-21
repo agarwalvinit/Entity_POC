@@ -167,7 +167,7 @@
 		getObject: function getObject(theObject) {
 			var self = this;
 			var result = {
-				"key": theObject.displayName,
+				"key": theObject.name,
 				"type": theObject.type,
 				"updatable": false,
 				"optional": false
@@ -184,10 +184,6 @@
 				var obj = {
 					"key": attribute.name,
 					"type": attribute.type,
-					"minLength": 0,
-					"maxLength": attribute.maxLength,
-					"format": null,
-					"multiplicityType": attribute.multiplicityType,
 					"optional": false,
 					"updatable": false
 				};
@@ -340,7 +336,7 @@
 		render: function render() {
 			var self = this,
 			    options = this.state.domainEntity.map(function (entity) {
-				return { label: entity.displayName, value: entity.type, type: entity.type, attributes: entity.attributes };
+				return { label: entity.name, value: entity.type, type: entity.type, attributes: entity.attributes };
 			});
 			return _react2.default.createElement(
 				"div",
@@ -41531,16 +41527,20 @@
 				this.props.updateAttributes(this.state.attributes, this.props.parentIndex);
 			}
 		},
+		componentDidMount: function componentDidMount() {
+			this.setState({
+				attributes: this.state.attributes
+			});
+		},
 		updateAndOptional: function updateAndOptional(evt) {
 			console.log('update and optional', this.state);
 			var obj = {},
 			    newAttributes;
 			obj.key = evt.target.id.split("_")[0];
 			obj.index = evt.target.id.split("_")[2];
-			obj.value = evt.target.checked;
 	
 			newAttributes = _lodash2.default.cloneDeep(this.state.attributes);
-			newAttributes[obj.index][obj.key] = obj.value;
+			newAttributes[obj.index][obj.key] = newAttributes[obj.index][obj.key] ? false : true;
 	
 			this.setState({
 				attributes: newAttributes
@@ -41612,23 +41612,25 @@
 					_react2.default.createElement(
 						"td",
 						{ className: "check-box-cont spacer" },
-						_react2.default.createElement("input", { type: "checkbox", id: "updatable_" + (this.props.parentIndex + 1) + "_" + index,
-							onChange: this.updateAndOptional, ref: "updatable", checked: attribute.updatable }),
 						_react2.default.createElement(
-							"label",
-							{ htmlFor: "updatable_" + (this.props.parentIndex + 1) + "_" + index },
-							"Is Updatable"
+							"button",
+							{
+								className: attribute.updatable ? 'btn btn-sm btn-success no-outline' : 'btn btn-sm btn-not-selected no-outline',
+								id: "updatable_" + this.props.parentIndex + "_" + index,
+								onClick: this.updateAndOptional },
+							"isUpdatable"
 						)
 					),
 					_react2.default.createElement(
 						"td",
 						{ className: "check-box-cont spacer" },
-						_react2.default.createElement("input", { type: "checkbox", id: "optional_" + (this.props.parentIndex + 1) + "_" + index,
-							onChange: this.updateAndOptional, ref: "optional", checked: attribute.optional }),
 						_react2.default.createElement(
-							"label",
-							{ htmlFor: "optional_" + (this.props.parentIndex + 1) + "_" + index },
-							"Is Optional"
+							"button",
+							{
+								className: attribute.optional ? 'btn btn-sm btn-success no-outline' : 'btn btn-sm btn-not-selected no-outline',
+								id: "optional_" + this.props.parentIndex + "_" + index,
+								onClick: this.updateAndOptional },
+							"isOptional"
 						)
 					)
 				);
@@ -41722,7 +41724,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".false {\n  height: 0px;\n  overflow: hidden; }\n\n.attribute-cont {\n  border-bottom: 1px solid #808080;\n  margin-bottom: 35px;\n  transition: all 0.25s ease-in;\n  width: 95%;\n  margin-left: 30px;\n  background: #eee; }\n\n.attribute-cont .check-box-cont {\n  font-size: 13px; }\n\n.attribute-cont input[type=\"checkbox\"] + label {\n  width: 90px;\n  height: 22px;\n  line-height: 22px; }\n\n.attribute-list {\n  margin-bottom: 10px; }\n", "", {"version":3,"sources":["/./components/components/attributesSelector/attributesSelector.scss"],"names":[],"mappings":"AAAA;EACC,YAAY;EACZ,iBAAiB,EACjB;;AACD;EACI,iCAAiC;EACjC,oBAAoB;EACvB,8BAA8B;EAC9B,WAAW;EACX,kBAAkB;EACf,iBAAiB,EACpB;;AACD;EACC,gBAAgB,EAChB;;AACD;EACC,YAAY;EACZ,aAAa;EACb,kBAAkB,EAClB;;AACD;EACC,oBAAoB,EACpB","file":"attributesSelector.scss","sourcesContent":[".false{\n\theight: 0px;\n\toverflow: hidden;\n}\n.attribute-cont{\n    border-bottom: 1px solid #808080;\n    margin-bottom: 35px;\n\ttransition: all 0.25s ease-in;\n\twidth: 95%;\n\tmargin-left: 30px;\n    background: #eee;\n}\n.attribute-cont .check-box-cont{\n\tfont-size: 13px;\n}\n.attribute-cont input[type=\"checkbox\"] + label{\n\twidth: 90px;\n\theight: 22px;\n\tline-height: 22px;\n}\n.attribute-list{\n\tmargin-bottom: 10px;\n}"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, ".false {\n  height: 0px;\n  overflow: hidden; }\n\n.attribute-cont {\n  border-bottom: 1px solid #808080;\n  margin-bottom: 35px;\n  transition: all 0.25s ease-in;\n  width: 95%;\n  margin-left: 30px;\n  background: #eee; }\n\n.attribute-cont .check-box-cont {\n  font-size: 13px; }\n\n.attribute-cont input[type=\"checkbox\"] + label {\n  width: 90px;\n  height: 22px;\n  line-height: 22px; }\n\n.attribute-list {\n  margin-bottom: 10px; }\n\n.btn-not-selected {\n  background-color: #414141;\n  color: #fff; }\n\n.btn.focus, .btn:focus, .btn:hover {\n  color: #fff; }\n\n.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {\n  outline: none;\n  outline-offset: 0; }\n", "", {"version":3,"sources":["/./components/components/attributesSelector/attributesSelector.scss"],"names":[],"mappings":"AAAA;EACC,YAAY;EACZ,iBAAiB,EACjB;;AACD;EACI,iCAAiC;EACjC,oBAAoB;EACvB,8BAA8B;EAC9B,WAAW;EACX,kBAAkB;EACf,iBAAiB,EACpB;;AACD;EACC,gBAAgB,EAChB;;AACD;EACC,YAAY;EACZ,aAAa;EACb,kBAAkB,EAClB;;AACD;EACC,oBAAoB,EACpB;;AACD;EACC,0BAA0B;EACvB,YAAY,EACf;;AACD;EACI,YAAY,EACf;;AACD;EACC,cAAa;EACb,kBAAkB,EAClB","file":"attributesSelector.scss","sourcesContent":[".false{\n\theight: 0px;\n\toverflow: hidden;\n}\n.attribute-cont{\n    border-bottom: 1px solid #808080;\n    margin-bottom: 35px;\n\ttransition: all 0.25s ease-in;\n\twidth: 95%;\n\tmargin-left: 30px;\n    background: #eee;\n}\n.attribute-cont .check-box-cont{\n\tfont-size: 13px;\n}\n.attribute-cont input[type=\"checkbox\"] + label{\n\twidth: 90px;\n\theight: 22px;\n\tline-height: 22px;\n}\n.attribute-list{\n\tmargin-bottom: 10px;\n}\n.btn-not-selected {\n\tbackground-color: #414141;\n    color: #fff;\n}\n.btn.focus, .btn:focus, .btn:hover {\n    color: #fff;\n}\n.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {\n\toutline:none;\n\toutline-offset: 0;\n}"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 

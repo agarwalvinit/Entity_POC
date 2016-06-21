@@ -1,2448 +1,2888 @@
 {
+    "id": null,
+    "versionNumber": 1,
     "name": "SAL",
-    "description": "SAL",
+    "description": "",
     "entities": [{
-        "name": "com.ekart.domain.model.entity.PaymentMode",
-        "type": "com.ekart.domain.model.entity.PaymentMode",
-        "displayName": "PaymentMode",
-        "exposable": true,
-        "required": false,
-        "description": null,
-        "attributes": [{
-            "name": "minAmount",
-            "displayName": "Minimum Amount",
-            "type": "OBJECT",
-            "required": false,
-            "description": "Minimum amount to be allowed on this mode",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": {
-                "name": "com.ekart.domain.model.entity.Measure",
-                "type": "com.ekart.domain.model.entity.Measure",
-                "displayName": "Measure",
-                "exposable": true,
-                "required": false,
-                "description": null,
-                "attributes": [],
-                "identity": 2
-            },
-            "identity": 4
-        }, {
-            "name": "type",
-            "displayName": "Payment Mode Type",
-            "type": "ENUM",
-            "required": false,
-            "description": "Mode of payment",
-            "example": "cash",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 5
-        }, {
-            "name": "maxAmount",
-            "displayName": "Maximum Amount",
-            "type": "OBJECT",
-            "required": false,
-            "description": "Maximum amount to be allowed on this mode",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": {
-                "name": "com.ekart.domain.model.entity.Measure",
-                "type": "com.ekart.domain.model.entity.Measure",
-                "displayName": "Measure",
-                "exposable": true,
-                "required": false,
-                "description": null,
-                "attributes": [],
-                "identity": 2
-            },
-            "identity": 6
-        }],
-        "identity": 1
-    }, {
-        "name": "com.ekart.domain.model.entity.SalesChannel",
-        "type": "com.ekart.domain.model.entity.SalesChannel",
-        "displayName": "SalesChannel",
-        "exposable": true,
-        "required": false,
-        "description": null,
-        "attributes": [{
-            "name": "saleChannelId",
-            "displayName": "Sales Channel Identifier",
-            "type": "STRING",
-            "required": false,
-            "description": "Unique ID to identify vendor in MDM",
-            "example": "flipkart",
-            "maxLength": 64,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 107
-        }, {
-            "name": "saleChannelName",
-            "displayName": "Sales Channel name",
-            "type": "STRING",
-            "required": false,
-            "description": "Name of the sales channel",
-            "example": "Flipkart Internet Pvt Ltd.",
-            "maxLength": 255,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 108
-        }],
-        "identity": 22
-    }, {
-        "name": "com.ekart.domain.model.entity.Attribute",
-        "type": "com.ekart.domain.model.entity.Attribute",
-        "displayName": "Attribute",
-        "exposable": true,
-        "required": false,
-        "description": null,
-        "attributes": [{
-            "name": "type",
-            "displayName": "Type",
-            "type": "STRING",
-            "required": false,
-            "description": "Type of Value (Image URL)",
-            "example": "string",
-            "maxLength": 120,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 9
-        }, {
-            "name": "value",
-            "displayName": "Value",
-            "type": "STRING",
-            "required": false,
-            "description": "Attribute Value",
-            "example": "FK01234958382782",
-            "maxLength": 120,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 8
-        }, {
-            "name": "name",
-            "displayName": "Name",
-            "type": "STRING",
-            "required": false,
-            "description": "Attribute name",
-            "example": "OrderId",
-            "maxLength": 120,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 7
-        }],
-        "identity": 3
-    }, {
-        "name": "com.ekart.domain.model.entity.Discount",
-        "type": "com.ekart.domain.model.entity.Discount",
-        "displayName": "Discount",
-        "exposable": true,
-        "required": false,
-        "description": null,
-        "attributes": [],
-        "identity": 24
-    }, {
-        "name": "com.ekart.domain.model.entity.ServiceRequestTrackData",
-        "type": "com.ekart.domain.model.entity.ServiceRequestTrackData",
-        "displayName": "ServiceRequestTrackData",
-        "exposable": false,
-        "required": false,
-        "description": null,
-        "attributes": [{
-            "name": "user",
-            "displayName": "User",
-            "type": "STRING",
-            "required": false,
-            "description": "FE name",
-            "example": "Abhay",
-            "maxLength": 120,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 93
-        }, {
-            "name": "originSystem",
-            "displayName": "Origin system",
-            "type": "STRING",
-            "required": false,
-            "description": "System from where the event was originated",
-            "example": "Warehouse",
-            "maxLength": 120,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 88
-        }, {
-            "name": "status",
-            "displayName": "Status",
-            "type": "STRING",
-            "required": false,
-            "description": "Status of the event",
-            "example": "Picked",
-            "maxLength": 30,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 91
-        }, {
-            "name": "note",
-            "displayName": "Note",
-            "type": "STRING",
-            "required": false,
-            "description": "Note/Reason for the event",
-            "example": "Picked from warehouse",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 87
-        }, {
-            "name": "time",
-            "displayName": "Time",
-            "type": "DATE",
-            "required": false,
-            "description": "Time at which this event occurred",
-            "example": "2015-07-19T01:20:00+02:00",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 89
-        }, {
-            "name": "location",
-            "displayName": "Location",
-            "type": "STRING",
-            "required": false,
-            "description": "Location from where the event was sent",
-            "example": "Bangalore WH shipping area",
-            "maxLength": 255,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 90
-        }, {
-            "name": "orchestratorTaskId",
-            "displayName": "Orchestrator Task Id",
-            "type": "STRING",
-            "required": false,
-            "description": "Task identifier kept in the orchestrator",
-            "example": "123456789",
-            "maxLength": 120,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 92
-        }],
-        "identity": 19
-    }, {
-        "name": "com.ekart.domain.model.entity.Document",
-        "type": "com.ekart.domain.model.entity.Document",
-        "displayName": "Document",
-        "exposable": true,
-        "required": false,
-        "description": null,
-        "attributes": [{
-            "name": "documentData",
-            "displayName": "Document Data",
-            "type": "LIST",
-            "required": false,
-            "description": "Key value pair of template variables",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 63
-        }, {
-            "name": "documentType",
-            "displayName": "Document Type",
-            "type": "ENUM",
-            "required": false,
-            "description": "Type of document",
-            "example": "label",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 65
-        }, {
-            "name": "documentTemplateId",
-            "displayName": "Document Template Id",
-            "type": "STRING",
-            "required": false,
-            "description": "ID of the document template which needs to be printed",
-            "example": "ekart-template-1234",
-            "maxLength": 120,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 64
-        }],
-        "identity": 13
-    }, {
-        "name": "com.ekart.domain.model.entity.Address",
-        "type": "com.ekart.domain.model.entity.Address",
-        "displayName": "Address",
-        "exposable": true,
-        "required": false,
-        "description": null,
-        "attributes": [{
-            "name": "longitude",
-            "displayName": "Longitude",
-            "type": "STRING",
-            "required": false,
-            "description": "Longitude",
-            "example": "-074.0447",
-            "maxLength": 8,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 40
-        }, {
-            "name": "pincode",
-            "displayName": "PIN Code",
-            "type": "STRING",
-            "required": false,
-            "description": "Pin code for the address",
-            "example": "560060",
-            "maxLength": 30,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 32
-        }, {
-            "name": "addressType",
-            "displayName": "Address Type",
-            "type": "ENUM",
-            "required": false,
-            "description": "Type of Address",
-            "example": "residence",
-            "maxLength": 255,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 35
-        }, {
-            "name": "city",
-            "displayName": "City",
-            "type": "STRING",
-            "required": false,
-            "description": "Name of city where this address is located",
-            "example": "Bengaluru",
-            "maxLength": 64,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 36
-        }, {
-            "name": "state",
-            "displayName": "State",
-            "type": "STRING",
-            "required": false,
-            "description": "Name of state where this address is located",
-            "example": "Karnataka",
-            "maxLength": 64,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 37
-        }, {
-            "name": "addressLine1",
-            "displayName": "Address Line 1",
-            "type": "STRING",
-            "required": false,
-            "description": "Address Line 1, defining the address",
-            "example": "#4, mrudula residency, kormangala industrial area",
-            "maxLength": 255,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 39
-        }, {
-            "name": "latitude",
-            "displayName": "Latitude",
-            "type": "STRING",
-            "required": false,
-            "description": "Latitudes",
-            "example": "+40.6894",
-            "maxLength": 8,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 34
-        }, {
-            "name": "country",
-            "displayName": "Country",
-            "type": "STRING",
-            "required": false,
-            "description": "Name of country where this address is located",
-            "example": "India",
-            "maxLength": 64,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 33
-        }, {
-            "name": "addressLine2",
-            "displayName": "Address Line 2",
-            "type": "STRING",
-            "required": false,
-            "description": "Address Line 2, defining the address",
-            "example": "Kormangala, Bengaluru, Karnataka",
-            "maxLength": 255,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 38
-        }, {
-            "name": "landmark",
-            "displayName": "Landmark",
-            "type": "STRING",
-            "required": false,
-            "description": "Landmark describing vicinity of address",
-            "example": "Vagdevi Vilas School",
-            "maxLength": 255,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 41
-        }],
-        "identity": 8
-    }, {
-        "name": "com.ekart.domain.model.entity.ItemUnit",
-        "type": "com.ekart.domain.model.entity.ItemUnit",
-        "displayName": "ItemUnit",
-        "exposable": true,
-        "required": false,
-        "description": null,
-        "attributes": [{
-            "name": "data",
-            "displayName": "data",
-            "type": "LIST",
-            "required": false,
-            "description": "Data related to item unit",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 60
-        }, {
-            "name": "itemUnitId",
-            "displayName": "Item unit Identifier",
-            "type": "STRING",
-            "required": false,
-            "description": "Item unit identifier",
-            "example": "FF-1234566",
-            "maxLength": 40,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 61
-        }, {
-            "name": "status",
-            "displayName": "Status of the item unit",
-            "type": "ENUM",
-            "required": false,
-            "description": "Status of the item unit",
-            "example": "reservation-succeeded",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 62
-        }],
-        "identity": 12
-    }, {
-        "name": "com.ekart.domain.model.entity.ItemIdentifier",
-        "type": "com.ekart.domain.model.entity.ItemIdentifier",
-        "displayName": "ItemIdentifier",
-        "exposable": true,
-        "required": false,
-        "description": null,
-        "attributes": [{
-            "name": "ownerID",
-            "displayName": "Owner Id",
-            "type": "STRING",
-            "required": false,
-            "description": "Owner of item",
-            "example": "NIKE",
-            "maxLength": 64,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 15
-        }, {
-            "name": "groupID",
-            "displayName": "Group Id",
-            "type": "STRING",
-            "required": false,
-            "description": "Group ID. Can hold lotID for FA inventory",
-            "example": "FBE-123456",
-            "maxLength": 64,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 16
-        }, {
-            "name": "tenantId",
-            "displayName": "Tenant Id",
-            "type": "STRING",
-            "required": false,
-            "description": "Tenant Id who manages inventory for various sellers",
-            "example": "BrownTape",
-            "maxLength": 64,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 13
-        }, {
-            "name": "universalID",
-            "displayName": "Universla Id",
-            "type": "STRING",
-            "required": false,
-            "description": "Global identifier for item",
-            "example": "IMEI-1233444565",
-            "maxLength": 64,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 17
-        }, {
-            "name": "uniqueID",
-            "displayName": "Unique Id",
-            "type": "STRING",
-            "required": false,
-            "description": "Unique identifier for a item in specific context",
-            "example": "PD-1234678954",
-            "maxLength": 64,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 14
-        }],
-        "identity": 6
-    }, {
-        "name": "com.ekart.domain.model.entity.Item",
-        "type": "com.ekart.domain.model.entity.Item",
-        "displayName": "Item",
-        "exposable": true,
-        "required": false,
-        "description": null,
-        "attributes": [{
-            "name": "itemIdentifier",
-            "displayName": "Item Identifier",
-            "type": "OBJECT",
-            "required": false,
-            "description": "Identifies the item based on defined hierarchy",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": {
-                "name": "com.ekart.domain.model.entity.ItemIdentifier",
-                "type": "com.ekart.domain.model.entity.ItemIdentifier",
-                "displayName": "ItemIdentifier",
-                "exposable": true,
-                "required": false,
-                "description": null,
-                "attributes": [{
-                    "name": "ownerID",
-                    "displayName": "Owner Id",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Owner of item",
-                    "example": "NIKE",
-                    "maxLength": 64,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 15
-                }, {
-                    "name": "groupID",
-                    "displayName": "Group Id",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Group ID. Can hold lotID for FA inventory",
-                    "example": "FBE-123456",
-                    "maxLength": 64,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 16
-                }, {
-                    "name": "tenantId",
-                    "displayName": "Tenant Id",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Tenant Id who manages inventory for various sellers",
-                    "example": "BrownTape",
-                    "maxLength": 64,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 13
-                }, {
-                    "name": "universalID",
-                    "displayName": "Universla Id",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Global identifier for item",
-                    "example": "IMEI-1233444565",
-                    "maxLength": 64,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 17
-                }, {
-                    "name": "uniqueID",
-                    "displayName": "Unique Id",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Unique identifier for a item in specific context",
-                    "example": "PD-1234678954",
-                    "maxLength": 64,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 14
-                }],
-                "identity": 6
-            },
-            "identity": 131
-        }, {
-            "name": "itemWeight",
-            "displayName": "Item Weight",
-            "type": "OBJECT",
-            "required": false,
-            "description": "Item Weight",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": {
-                "name": "com.ekart.domain.model.entity.Measure",
-                "type": "com.ekart.domain.model.entity.Measure",
-                "displayName": "Measure",
-                "exposable": true,
-                "required": false,
-                "description": null,
-                "attributes": [],
-                "identity": 2
-            },
-            "identity": 135
-        }, {
-            "name": "unitValue",
-            "displayName": "Unit Value",
-            "type": "OBJECT",
-            "required": false,
-            "description": "MRP of single item inclusive of all taxes",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": {
-                "name": "com.ekart.domain.model.entity.Measure",
-                "type": "com.ekart.domain.model.entity.Measure",
-                "displayName": "Measure",
-                "exposable": true,
-                "required": false,
-                "description": null,
-                "attributes": [],
-                "identity": 2
-            },
-            "identity": 148
-        }, {
-            "name": "itemDescription",
-            "displayName": "Item Description",
-            "type": "STRING",
-            "required": false,
-            "description": "Item Description",
-            "example": "Mobile phone",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 132
-        }, {
-            "name": "invoiceId",
-            "displayName": "Invoice Id",
-            "type": "STRING",
-            "required": false,
-            "description": "Invoice Id for the item",
-            "example": "FK12345673",
-            "maxLength": 255,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 133
-        }, {
-            "name": "unitSellingPrice",
-            "displayName": "Unit Selling Price",
-            "type": "OBJECT",
-            "required": false,
-            "description": "Selling price of item. Some documents need to print selling price also apart from MRP",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": {
-                "name": "com.ekart.domain.model.entity.Measure",
-                "type": "com.ekart.domain.model.entity.Measure",
-                "displayName": "Measure",
-                "exposable": true,
-                "required": false,
-                "description": null,
-                "attributes": [],
-                "identity": 2
-            },
-            "identity": 150
-        }, {
-            "name": "quantity",
-            "displayName": "Quantity",
-            "type": "INT",
-            "required": false,
-            "description": "count of products as part of this service request",
-            "example": "2",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 141
-        }, {
-            "name": "itemName",
-            "displayName": "Item Name",
-            "type": "STRING",
-            "required": false,
-            "description": "Item Name",
-            "example": "Asus Zenfone",
-            "maxLength": 255,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 136
-        }, {
-            "name": "itemContent",
-            "displayName": "Item Content",
-            "type": "LIST",
-            "required": false,
-            "description": "Set of item content",
-            "example": "[\"mobile charger\", \"battery\"]",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 142
-        }, {
-            "name": "itemUnits",
-            "displayName": "Item Units",
-            "type": "LIST",
-            "required": false,
-            "description": "details of each quantity in item",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 140
-        }, {
-            "name": "discounts",
-            "displayName": "Discounts",
-            "type": "LIST",
-            "required": false,
-            "description": "Discounts on unit item",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 138
-        }, {
-            "name": "itemCategory",
-            "displayName": "Item Category",
-            "type": "LIST",
-            "required": false,
-            "description": "Set of category to which a particular item belongs to",
-            "example": "[\"books\", \"electronics\"]",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 147
-        }, {
-            "name": "handlingAttributes",
-            "displayName": "Handling Attributes",
-            "type": "LIST",
-            "required": false,
-            "description": "list of handling attributes(key value pair) is Fragile, isDangerous, isMetalic, isLiquid",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 137
-        }, {
-            "name": "taxes",
-            "displayName": "Taxes",
-            "type": "LIST",
-            "required": false,
-            "description": "Taxes imposed on unit item. May come as % or amount",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 149
-        }],
-        "identity": 26
-    }, {
-        "name": "com.ekart.domain.model.entity.Shipment",
-        "type": "com.ekart.domain.model.entity.Shipment",
-        "displayName": "Shipment",
-        "exposable": true,
-        "required": false,
-        "description": null,
-        "attributes": [{
-            "name": "shipmentDimension",
-            "displayName": "Shipment Dimension",
-            "type": "OBJECT",
-            "required": false,
-            "description": "Dimensions of shipment",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": {
-                "name": "com.ekart.domain.model.entity.Dimension",
-                "type": "com.ekart.domain.model.entity.Dimension",
-                "displayName": "Dimension",
-                "exposable": true,
-                "required": false,
-                "description": null,
-                "attributes": [{
-                    "name": "breadth",
-                    "displayName": "Breadth",
-                    "type": "OBJECT",
-                    "required": false,
-                    "description": "breadth of the shipment",
-                    "example": "",
-                    "maxLength": 0,
-                    "multiplicityType": "ONE",
-                    "referenceType": {
-                        "name": "com.ekart.domain.model.entity.Measure",
-                        "type": "com.ekart.domain.model.entity.Measure",
-                        "displayName": "Measure",
-                        "exposable": true,
-                        "required": false,
-                        "description": null,
-                        "attributes": [],
-                        "identity": 2
-                    },
-                    "identity": 51
-                }, {
-                    "name": "shape",
-                    "displayName": "Shape",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Shape of any entity",
-                    "example": "Sphere",
-                    "maxLength": 50,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 52
-                }, {
-                    "name": "volumetricWeight",
-                    "displayName": "Volumetric Weight",
-                    "type": "OBJECT",
-                    "required": false,
-                    "description": "Volumetric weight of the shipment",
-                    "example": "",
-                    "maxLength": 0,
-                    "multiplicityType": "ONE",
-                    "referenceType": {
-                        "name": "com.ekart.domain.model.entity.Measure",
-                        "type": "com.ekart.domain.model.entity.Measure",
-                        "displayName": "Measure",
-                        "exposable": true,
-                        "required": false,
-                        "description": null,
-                        "attributes": [],
-                        "identity": 2
-                    },
-                    "identity": 50
-                }, {
-                    "name": "length",
-                    "displayName": "Length",
-                    "type": "OBJECT",
-                    "required": false,
-                    "description": "Length of the shipment",
-                    "example": "",
-                    "maxLength": 0,
-                    "multiplicityType": "ONE",
-                    "referenceType": {
-                        "name": "com.ekart.domain.model.entity.Measure",
-                        "type": "com.ekart.domain.model.entity.Measure",
-                        "displayName": "Measure",
-                        "exposable": true,
-                        "required": false,
-                        "description": null,
-                        "attributes": [],
-                        "identity": 2
-                    },
-                    "identity": 53
-                }, {
-                    "name": "height",
-                    "displayName": "Height",
-                    "type": "OBJECT",
-                    "required": false,
-                    "description": "height of the shipment",
-                    "example": "",
-                    "maxLength": 0,
-                    "multiplicityType": "ONE",
-                    "referenceType": {
-                        "name": "com.ekart.domain.model.entity.Measure",
-                        "type": "com.ekart.domain.model.entity.Measure",
-                        "displayName": "Measure",
-                        "exposable": true,
-                        "required": false,
-                        "description": null,
-                        "attributes": [],
-                        "identity": 2
-                    },
-                    "identity": 54
-                }],
-                "identity": 9
-            },
-            "identity": 66
-        }, {
-            "name": "shipmentWeight",
-            "displayName": "Shipment Weight",
-            "type": "OBJECT",
-            "required": false,
-            "description": "Weight of shipment",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": {
-                "name": "com.ekart.domain.model.entity.Measure",
-                "type": "com.ekart.domain.model.entity.Measure",
-                "displayName": "Measure",
-                "exposable": true,
-                "required": false,
-                "description": null,
-                "attributes": [],
-                "identity": 2
-            },
-            "identity": 68
-        }, {
-            "name": "shipmentItems",
-            "displayName": "Shipment Items",
-            "type": "LIST",
-            "required": false,
-            "description": "Items which are included in this shipment",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 67
-        }],
-        "identity": 14
-    }, {
-        "name": "com.ekart.domain.model.entity.ServiceRequestGroup",
-        "type": "com.ekart.domain.model.entity.ServiceRequestGroup",
-        "displayName": "ServiceRequestGroup",
-        "exposable": true,
-        "required": false,
-        "description": null,
-        "attributes": [{
-            "name": "groupType",
-            "displayName": "Group Type",
-            "type": "ENUM",
-            "required": false,
-            "description": "Type of service request group",
-            "example": "bag",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 84
-        }, {
-            "name": "groupId",
-            "displayName": "Group ID",
-            "type": "STRING",
-            "required": false,
-            "description": "Identifier for the SR group",
-            "example": "FKMP-123445",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 85
-        }, {
-            "name": "status",
-            "displayName": "Status",
-            "type": "ENUM",
-            "required": false,
-            "description": "Status of the SR group",
-            "example": "active",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 86
-        }],
-        "identity": 18
-    }, {
-        "name": "com.ekart.domain.model.entity.Measure",
+        "id": null,
+        "versionNumber": 1,
+        "name": "Measure",
         "type": "com.ekart.domain.model.entity.Measure",
-        "displayName": "Measure",
-        "exposable": true,
-        "required": false,
-        "description": null,
-        "attributes": [],
-        "identity": 2
-    }, {
-        "name": "com.ekart.domain.model.entity.Payment",
-        "type": "com.ekart.domain.model.entity.Payment",
-        "displayName": "Payment",
-        "exposable": true,
-        "required": false,
-        "description": null,
         "attributes": [{
-            "name": "paymentModes",
-            "displayName": "Payment Modes",
-            "type": "LIST",
-            "required": false,
-            "description": "Preferred modes of payment for amountToCollect",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
+            "id": null,
+            "versionNumber": 1,
+            "name": "unit",
+            "type": "STRING",
             "referenceType": null,
-            "identity": 12
+            "entity": null,
+            "multiplicity": "ONE"
         }, {
-            "name": "totalAmount",
-            "displayName": "Total Amount",
-            "type": "OBJECT",
-            "required": false,
-            "description": "Entire value of payment",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": {
-                "name": "com.ekart.domain.model.entity.Measure",
-                "type": "com.ekart.domain.model.entity.Measure",
-                "displayName": "Measure",
-                "exposable": true,
-                "required": false,
-                "description": null,
-                "attributes": [],
-                "identity": 2
-            },
-            "identity": 11
+            "id": null,
+            "versionNumber": 1,
+            "name": "value",
+            "type": "REF",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
         }, {
-            "name": "amountToCollect",
-            "displayName": "Amount to Collect",
-            "type": "OBJECT",
-            "required": false,
-            "description": "Amount to be collected",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": {
-                "name": "com.ekart.domain.model.entity.Measure",
-                "type": "com.ekart.domain.model.entity.Measure",
-                "displayName": "Measure",
-                "exposable": true,
-                "required": false,
-                "description": null,
-                "attributes": [],
-                "identity": 2
-            },
-            "identity": 10
+            "id": null,
+            "versionNumber": 1,
+            "name": "type",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
         }],
-        "identity": 4
+        "namespace": null
     }, {
-        "name": "com.ekart.domain.model.entity.Location",
-        "type": "com.ekart.domain.model.entity.Location",
-        "displayName": "Location",
-        "exposable": true,
-        "required": false,
-        "description": null,
+        "id": null,
+        "versionNumber": 1,
+        "name": "Shipment",
+        "type": "com.ekart.domain.model.entity.Shipment",
         "attributes": [{
-            "name": "emailId",
-            "displayName": "Email",
+            "id": null,
+            "versionNumber": 1,
+            "name": "shipmentWeight",
             "type": "STRING",
-            "required": false,
-            "description": "Email id of attendee at location",
-            "example": "vaibhavi@gmail.com",
-            "maxLength": 64,
-            "multiplicityType": "ONE",
             "referenceType": null,
-            "identity": 113
+            "entity": null,
+            "multiplicity": "ONE"
         }, {
-            "name": "attendeeName",
-            "displayName": "Attendee Name",
+            "id": null,
+            "versionNumber": 1,
+            "name": "shipmentDimension",
             "type": "STRING",
-            "required": false,
-            "description": "Name of attendee at location",
-            "example": "Vaibhavi Tiwari",
-            "maxLength": 120,
-            "multiplicityType": "ONE",
             "referenceType": null,
-            "identity": 109
+            "entity": null,
+            "multiplicity": "ONE"
         }, {
-            "name": "contactNo",
-            "displayName": "Contact No",
+            "id": null,
+            "versionNumber": 1,
+            "name": "shipementType",
             "type": "STRING",
-            "required": false,
-            "description": "Mobile number of attendee at location",
-            "example": "934593589080",
-            "maxLength": 21,
-            "multiplicityType": "ONE",
             "referenceType": null,
-            "identity": 114
+            "entity": null,
+            "multiplicity": "ONE"
         }, {
-            "name": "address",
-            "displayName": "Address",
-            "type": "OBJECT",
-            "required": false,
-            "description": "Address of location",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
+            "id": null,
+            "versionNumber": 1,
+            "name": "shipmentItems",
+            "type": "REF",
             "referenceType": {
-                "name": "com.ekart.domain.model.entity.Address",
-                "type": "com.ekart.domain.model.entity.Address",
-                "displayName": "Address",
-                "exposable": true,
-                "required": false,
-                "description": null,
+                "id": null,
+                "versionNumber": 1,
+                "name": "Item",
+                "type": "com.ekart.domain.model.entity.Item",
                 "attributes": [{
-                    "name": "longitude",
-                    "displayName": "Longitude",
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "itemContent",
                     "type": "STRING",
-                    "required": false,
-                    "description": "Longitude",
-                    "example": "-074.0447",
-                    "maxLength": 8,
-                    "multiplicityType": "ONE",
                     "referenceType": null,
-                    "identity": 40
+                    "entity": null,
+                    "multiplicity": "MANY"
                 }, {
-                    "name": "pincode",
-                    "displayName": "PIN Code",
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "quantity",
+                    "type": "INT",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "unitSellingPrice",
+                    "type": "REF",
+                    "referenceType": {
+                        "id": null,
+                        "versionNumber": 1,
+                        "name": "Measure",
+                        "type": "com.ekart.domain.model.entity.Measure",
+                        "attributes": [{
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "unit",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "value",
+                            "type": "REF",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "type",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }],
+                        "namespace": null
+                    },
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "itemCategory",
                     "type": "STRING",
-                    "required": false,
-                    "description": "Pin code for the address",
-                    "example": "560060",
-                    "maxLength": 30,
-                    "multiplicityType": "ONE",
                     "referenceType": null,
-                    "identity": 32
+                    "entity": null,
+                    "multiplicity": "MANY"
                 }, {
-                    "name": "addressType",
-                    "displayName": "Address Type",
-                    "type": "ENUM",
-                    "required": false,
-                    "description": "Type of Address",
-                    "example": "residence",
-                    "maxLength": 255,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 35
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "taxes",
+                    "type": "REF",
+                    "referenceType": {
+                        "id": null,
+                        "versionNumber": 1,
+                        "name": "Tax",
+                        "type": "com.ekart.domain.model.entity.Tax",
+                        "attributes": [{
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "taxValue",
+                            "type": "REF",
+                            "referenceType": {
+                                "id": null,
+                                "versionNumber": 1,
+                                "name": "Measure",
+                                "type": "com.ekart.domain.model.entity.Measure",
+                                "attributes": [{
+                                    "id": null,
+                                    "versionNumber": 1,
+                                    "name": "unit",
+                                    "type": "STRING",
+                                    "referenceType": null,
+                                    "entity": null,
+                                    "multiplicity": "ONE"
+                                }, {
+                                    "id": null,
+                                    "versionNumber": 1,
+                                    "name": "value",
+                                    "type": "REF",
+                                    "referenceType": null,
+                                    "entity": null,
+                                    "multiplicity": "ONE"
+                                }, {
+                                    "id": null,
+                                    "versionNumber": 1,
+                                    "name": "type",
+                                    "type": "STRING",
+                                    "referenceType": null,
+                                    "entity": null,
+                                    "multiplicity": "ONE"
+                                }],
+                                "namespace": null
+                            },
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "applicableOn",
+                            "type": "REF",
+                            "referenceType": {
+                                "id": null,
+                                "versionNumber": 1,
+                                "name": "Measure",
+                                "type": "com.ekart.domain.model.entity.Measure",
+                                "attributes": [{
+                                    "id": null,
+                                    "versionNumber": 1,
+                                    "name": "unit",
+                                    "type": "STRING",
+                                    "referenceType": null,
+                                    "entity": null,
+                                    "multiplicity": "ONE"
+                                }, {
+                                    "id": null,
+                                    "versionNumber": 1,
+                                    "name": "value",
+                                    "type": "REF",
+                                    "referenceType": null,
+                                    "entity": null,
+                                    "multiplicity": "ONE"
+                                }, {
+                                    "id": null,
+                                    "versionNumber": 1,
+                                    "name": "type",
+                                    "type": "STRING",
+                                    "referenceType": null,
+                                    "entity": null,
+                                    "multiplicity": "ONE"
+                                }],
+                                "namespace": null
+                            },
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "type",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }],
+                        "namespace": null
+                    },
+                    "entity": null,
+                    "multiplicity": "MANY"
                 }, {
-                    "name": "city",
-                    "displayName": "City",
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "itemName",
                     "type": "STRING",
-                    "required": false,
-                    "description": "Name of city where this address is located",
-                    "example": "Bengaluru",
-                    "maxLength": 64,
-                    "multiplicityType": "ONE",
                     "referenceType": null,
-                    "identity": 36
+                    "entity": null,
+                    "multiplicity": "ONE"
                 }, {
-                    "name": "state",
-                    "displayName": "State",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Name of state where this address is located",
-                    "example": "Karnataka",
-                    "maxLength": 64,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 37
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "handlingAttributes",
+                    "type": "REF",
+                    "referenceType": {
+                        "id": null,
+                        "versionNumber": 1,
+                        "name": "Attribute",
+                        "type": "com.ekart.domain.model.entity.Attribute",
+                        "attributes": [{
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "name",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "value",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "type",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }],
+                        "namespace": null
+                    },
+                    "entity": null,
+                    "multiplicity": "MANY"
                 }, {
-                    "name": "addressLine1",
-                    "displayName": "Address Line 1",
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "invoiceId",
                     "type": "STRING",
-                    "required": false,
-                    "description": "Address Line 1, defining the address",
-                    "example": "#4, mrudula residency, kormangala industrial area",
-                    "maxLength": 255,
-                    "multiplicityType": "ONE",
                     "referenceType": null,
-                    "identity": 39
+                    "entity": null,
+                    "multiplicity": "ONE"
                 }, {
-                    "name": "latitude",
-                    "displayName": "Latitude",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Latitudes",
-                    "example": "+40.6894",
-                    "maxLength": 8,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 34
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "discounts",
+                    "type": "REF",
+                    "referenceType": {
+                        "id": null,
+                        "versionNumber": 1,
+                        "name": "Discount",
+                        "type": "com.ekart.domain.model.entity.Discount",
+                        "attributes": [{
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "value",
+                            "type": "REF",
+                            "referenceType": {
+                                "id": null,
+                                "versionNumber": 1,
+                                "name": "Measure",
+                                "type": "com.ekart.domain.model.entity.Measure",
+                                "attributes": [{
+                                    "id": null,
+                                    "versionNumber": 1,
+                                    "name": "unit",
+                                    "type": "STRING",
+                                    "referenceType": null,
+                                    "entity": null,
+                                    "multiplicity": "ONE"
+                                }, {
+                                    "id": null,
+                                    "versionNumber": 1,
+                                    "name": "value",
+                                    "type": "REF",
+                                    "referenceType": null,
+                                    "entity": null,
+                                    "multiplicity": "ONE"
+                                }, {
+                                    "id": null,
+                                    "versionNumber": 1,
+                                    "name": "type",
+                                    "type": "STRING",
+                                    "referenceType": null,
+                                    "entity": null,
+                                    "multiplicity": "ONE"
+                                }],
+                                "namespace": null
+                            },
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "type",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }],
+                        "namespace": null
+                    },
+                    "entity": null,
+                    "multiplicity": "MANY"
                 }, {
-                    "name": "country",
-                    "displayName": "Country",
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "itemDescription",
                     "type": "STRING",
-                    "required": false,
-                    "description": "Name of country where this address is located",
-                    "example": "India",
-                    "maxLength": 64,
-                    "multiplicityType": "ONE",
                     "referenceType": null,
-                    "identity": 33
+                    "entity": null,
+                    "multiplicity": "ONE"
                 }, {
-                    "name": "addressLine2",
-                    "displayName": "Address Line 2",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Address Line 2, defining the address",
-                    "example": "Kormangala, Bengaluru, Karnataka",
-                    "maxLength": 255,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 38
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "itemIdentifier",
+                    "type": "REF",
+                    "referenceType": {
+                        "id": null,
+                        "versionNumber": 1,
+                        "name": "ItemIdentifier",
+                        "type": "com.ekart.domain.model.entity.ItemIdentifier",
+                        "attributes": [{
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "universalID",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "groupID",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "uniqueID",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "tenantId",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "ownerID",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }],
+                        "namespace": null
+                    },
+                    "entity": null,
+                    "multiplicity": "ONE"
                 }, {
-                    "name": "landmark",
-                    "displayName": "Landmark",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Landmark describing vicinity of address",
-                    "example": "Vagdevi Vilas School",
-                    "maxLength": 255,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 41
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "itemWeight",
+                    "type": "REF",
+                    "referenceType": {
+                        "id": null,
+                        "versionNumber": 1,
+                        "name": "Measure",
+                        "type": "com.ekart.domain.model.entity.Measure",
+                        "attributes": [{
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "unit",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "value",
+                            "type": "REF",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "type",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }],
+                        "namespace": null
+                    },
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "unitValue",
+                    "type": "REF",
+                    "referenceType": {
+                        "id": null,
+                        "versionNumber": 1,
+                        "name": "Measure",
+                        "type": "com.ekart.domain.model.entity.Measure",
+                        "attributes": [{
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "unit",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "value",
+                            "type": "REF",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "type",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }],
+                        "namespace": null
+                    },
+                    "entity": null,
+                    "multiplicity": "ONE"
                 }],
-                "identity": 8
+                "namespace": null
             },
-            "identity": 110
-        }, {
-            "name": "namespace",
-            "displayName": "Namespace",
-            "type": "ENUM",
-            "required": false,
-            "description": "Namespace to identify locationId",
-            "example": "ekart-facility",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 112
-        }, {
-            "name": "locationId",
-            "displayName": "Location Id",
-            "type": "STRING",
-            "required": false,
-            "description": "Location identifier defined in MDM",
-            "example": "blr_wfld",
-            "maxLength": 128,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 111
+            "entity": null,
+            "multiplicity": "MANY"
         }],
-        "identity": 23
+        "namespace": null
     }, {
-        "name": "com.ekart.domain.model.entity.Dimension",
-        "type": "com.ekart.domain.model.entity.Dimension",
-        "displayName": "Dimension",
-        "exposable": true,
-        "required": false,
-        "description": null,
-        "attributes": [{
-            "name": "breadth",
-            "displayName": "Breadth",
-            "type": "OBJECT",
-            "required": false,
-            "description": "breadth of the shipment",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": {
-                "name": "com.ekart.domain.model.entity.Measure",
-                "type": "com.ekart.domain.model.entity.Measure",
-                "displayName": "Measure",
-                "exposable": true,
-                "required": false,
-                "description": null,
-                "attributes": [],
-                "identity": 2
-            },
-            "identity": 51
-        }, {
-            "name": "shape",
-            "displayName": "Shape",
-            "type": "STRING",
-            "required": false,
-            "description": "Shape of any entity",
-            "example": "Sphere",
-            "maxLength": 50,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 52
-        }, {
-            "name": "volumetricWeight",
-            "displayName": "Volumetric Weight",
-            "type": "OBJECT",
-            "required": false,
-            "description": "Volumetric weight of the shipment",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": {
-                "name": "com.ekart.domain.model.entity.Measure",
-                "type": "com.ekart.domain.model.entity.Measure",
-                "displayName": "Measure",
-                "exposable": true,
-                "required": false,
-                "description": null,
-                "attributes": [],
-                "identity": 2
-            },
-            "identity": 50
-        }, {
-            "name": "length",
-            "displayName": "Length",
-            "type": "OBJECT",
-            "required": false,
-            "description": "Length of the shipment",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": {
-                "name": "com.ekart.domain.model.entity.Measure",
-                "type": "com.ekart.domain.model.entity.Measure",
-                "displayName": "Measure",
-                "exposable": true,
-                "required": false,
-                "description": null,
-                "attributes": [],
-                "identity": 2
-            },
-            "identity": 53
-        }, {
-            "name": "height",
-            "displayName": "Height",
-            "type": "OBJECT",
-            "required": false,
-            "description": "height of the shipment",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": {
-                "name": "com.ekart.domain.model.entity.Measure",
-                "type": "com.ekart.domain.model.entity.Measure",
-                "displayName": "Measure",
-                "exposable": true,
-                "required": false,
-                "description": null,
-                "attributes": [],
-                "identity": 2
-            },
-            "identity": 54
-        }],
-        "identity": 9
-    }, {
-        "name": "com.ekart.domain.model.entity.ServiceRequestVersion",
-        "type": "com.ekart.domain.model.entity.ServiceRequestVersion",
-        "displayName": "ServiceRequestVersion",
-        "exposable": true,
-        "required": false,
-        "description": null,
-        "attributes": [{
-            "name": "version",
-            "displayName": "version",
-            "type": "STRING",
-            "required": false,
-            "description": "Version information of the Service Request",
-            "example": "",
-            "maxLength": 60,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 56
-        }, {
-            "name": "isNewSystem",
-            "displayName": "isNewSystem",
-            "type": "BOOLEAN",
-            "required": false,
-            "description": "Signifies whether the service request is for new system or old",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 55
-        }],
-        "identity": 10
-    }, {
-        "name": "com.ekart.domain.model.entity.Slot",
-        "type": "com.ekart.domain.model.entity.Slot",
-        "displayName": "Slot",
-        "exposable": true,
-        "required": false,
-        "description": null,
-        "attributes": [{
-            "name": "start",
-            "displayName": "",
-            "type": "DATE",
-            "required": true,
-            "description": "ISO 8601 formatted date indicating date after which fulfilment should begin.",
-            "example": "2015-07-18T19:18:00+01:00",
-            "maxLength": 255,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 73
-        }, {
-            "name": "end",
-            "displayName": "",
-            "type": "DATE",
-            "required": true,
-            "description": "ISO 8601 formatted date indicating date by which fulfilment should be completed.",
-            "example": "2015-07-19T01:20:00+02:00",
-            "maxLength": 255,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 72
-        }],
-        "identity": 16
-    }, {
-        "name": "com.ekart.domain.model.entity.Seller",
+        "id": null,
+        "versionNumber": 1,
+        "name": "Seller",
         "type": "com.ekart.domain.model.entity.Seller",
-        "displayName": "Seller",
-        "exposable": true,
-        "required": false,
-        "description": null,
         "attributes": [{
-            "name": "sellerCategory",
-            "displayName": "Seller Category",
-            "type": "ENUM",
-            "required": false,
-            "description": "Seller Category",
-            "example": "gold",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 78
-        }, {
-            "name": "sellerName",
-            "displayName": "Seller Name",
-            "type": "STRING",
-            "required": false,
-            "description": "Seller Name",
-            "example": "NIKE",
-            "maxLength": 255,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 74
-        }, {
+            "id": null,
+            "versionNumber": 1,
             "name": "registeredAddress",
-            "displayName": "Registered Address",
-            "type": "OBJECT",
-            "required": false,
-            "description": "Seller Address",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
+            "type": "REF",
             "referenceType": {
-                "name": "com.ekart.domain.model.entity.Address",
+                "id": null,
+                "versionNumber": 1,
+                "name": "Address",
                 "type": "com.ekart.domain.model.entity.Address",
-                "displayName": "Address",
-                "exposable": true,
-                "required": false,
-                "description": null,
                 "attributes": [{
-                    "name": "longitude",
-                    "displayName": "Longitude",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Longitude",
-                    "example": "-074.0447",
-                    "maxLength": 8,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 40
-                }, {
-                    "name": "pincode",
-                    "displayName": "PIN Code",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Pin code for the address",
-                    "example": "560060",
-                    "maxLength": 30,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 32
-                }, {
-                    "name": "addressType",
-                    "displayName": "Address Type",
-                    "type": "ENUM",
-                    "required": false,
-                    "description": "Type of Address",
-                    "example": "residence",
-                    "maxLength": 255,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 35
-                }, {
-                    "name": "city",
-                    "displayName": "City",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Name of city where this address is located",
-                    "example": "Bengaluru",
-                    "maxLength": 64,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 36
-                }, {
-                    "name": "state",
-                    "displayName": "State",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Name of state where this address is located",
-                    "example": "Karnataka",
-                    "maxLength": 64,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 37
-                }, {
-                    "name": "addressLine1",
-                    "displayName": "Address Line 1",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Address Line 1, defining the address",
-                    "example": "#4, mrudula residency, kormangala industrial area",
-                    "maxLength": 255,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 39
-                }, {
-                    "name": "latitude",
-                    "displayName": "Latitude",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Latitudes",
-                    "example": "+40.6894",
-                    "maxLength": 8,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 34
-                }, {
-                    "name": "country",
-                    "displayName": "Country",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Name of country where this address is located",
-                    "example": "India",
-                    "maxLength": 64,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 33
-                }, {
-                    "name": "addressLine2",
-                    "displayName": "Address Line 2",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Address Line 2, defining the address",
-                    "example": "Kormangala, Bengaluru, Karnataka",
-                    "maxLength": 255,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 38
-                }, {
+                    "id": null,
+                    "versionNumber": 1,
                     "name": "landmark",
-                    "displayName": "Landmark",
                     "type": "STRING",
-                    "required": false,
-                    "description": "Landmark describing vicinity of address",
-                    "example": "Vagdevi Vilas School",
-                    "maxLength": 255,
-                    "multiplicityType": "ONE",
                     "referenceType": null,
-                    "identity": 41
-                }],
-                "identity": 8
-            },
-            "identity": 80
-        }, {
-            "name": "complianceCategory",
-            "displayName": "Compliance Category",
-            "type": "STRING",
-            "required": false,
-            "description": "Seller compliance category required for seller related document generation",
-            "example": "Smart Phone",
-            "maxLength": 50,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 77
-        }, {
-            "name": "cstNumber",
-            "displayName": "CST Number",
-            "type": "STRING",
-            "required": false,
-            "description": "Seller CST number used for compliance",
-            "example": "CST-1234552123",
-            "maxLength": 50,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 82
-        }, {
-            "name": "sellerId",
-            "displayName": "Seller Id",
-            "type": "STRING",
-            "required": false,
-            "description": "Seller Identifier",
-            "example": "SLR-123",
-            "maxLength": 64,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 81
-        }, {
-            "name": "vatNumber",
-            "displayName": "VAT Number",
-            "type": "STRING",
-            "required": false,
-            "description": "Seller vat number used for compliance",
-            "example": "VAT-1234552123",
-            "maxLength": 50,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 79
-        }, {
-            "name": "tinNumber",
-            "displayName": "TIN Number",
-            "type": "STRING",
-            "required": false,
-            "description": "seller tin number used for compliance",
-            "example": "TIN-1232343434",
-            "maxLength": 50,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 76
-        }, {
-            "name": "serviceAddress",
-            "displayName": "Service Address",
-            "type": "OBJECT",
-            "required": false,
-            "description": "Seller address at which service request is to be executed",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": {
-                "name": "com.ekart.domain.model.entity.Address",
-                "type": "com.ekart.domain.model.entity.Address",
-                "displayName": "Address",
-                "exposable": true,
-                "required": false,
-                "description": null,
-                "attributes": [{
-                    "name": "longitude",
-                    "displayName": "Longitude",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Longitude",
-                    "example": "-074.0447",
-                    "maxLength": 8,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 40
+                    "entity": null,
+                    "multiplicity": "ONE"
                 }, {
-                    "name": "pincode",
-                    "displayName": "PIN Code",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Pin code for the address",
-                    "example": "560060",
-                    "maxLength": 30,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 32
-                }, {
-                    "name": "addressType",
-                    "displayName": "Address Type",
-                    "type": "ENUM",
-                    "required": false,
-                    "description": "Type of Address",
-                    "example": "residence",
-                    "maxLength": 255,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 35
-                }, {
-                    "name": "city",
-                    "displayName": "City",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Name of city where this address is located",
-                    "example": "Bengaluru",
-                    "maxLength": 64,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 36
-                }, {
-                    "name": "state",
-                    "displayName": "State",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Name of state where this address is located",
-                    "example": "Karnataka",
-                    "maxLength": 64,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 37
-                }, {
-                    "name": "addressLine1",
-                    "displayName": "Address Line 1",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Address Line 1, defining the address",
-                    "example": "#4, mrudula residency, kormangala industrial area",
-                    "maxLength": 255,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 39
-                }, {
-                    "name": "latitude",
-                    "displayName": "Latitude",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Latitudes",
-                    "example": "+40.6894",
-                    "maxLength": 8,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 34
-                }, {
+                    "id": null,
+                    "versionNumber": 1,
                     "name": "country",
-                    "displayName": "Country",
                     "type": "STRING",
-                    "required": false,
-                    "description": "Name of country where this address is located",
-                    "example": "India",
-                    "maxLength": 64,
-                    "multiplicityType": "ONE",
                     "referenceType": null,
-                    "identity": 33
+                    "entity": null,
+                    "multiplicity": "ONE"
                 }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "addressType",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "pincode",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "city",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "latitude",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "addressLine1",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
                     "name": "addressLine2",
-                    "displayName": "Address Line 2",
                     "type": "STRING",
-                    "required": false,
-                    "description": "Address Line 2, defining the address",
-                    "example": "Kormangala, Bengaluru, Karnataka",
-                    "maxLength": 255,
-                    "multiplicityType": "ONE",
                     "referenceType": null,
-                    "identity": 38
+                    "entity": null,
+                    "multiplicity": "ONE"
                 }, {
-                    "name": "landmark",
-                    "displayName": "Landmark",
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "state",
                     "type": "STRING",
-                    "required": false,
-                    "description": "Landmark describing vicinity of address",
-                    "example": "Vagdevi Vilas School",
-                    "maxLength": 255,
-                    "multiplicityType": "ONE",
                     "referenceType": null,
-                    "identity": 41
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "longitude",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
                 }],
-                "identity": 8
+                "namespace": null
             },
-            "identity": 75
+            "entity": null,
+            "multiplicity": "ONE"
         }, {
+            "id": null,
+            "versionNumber": 1,
             "name": "credentials",
-            "displayName": "Credential",
-            "type": "LIST",
-            "required": false,
-            "description": "Seller Credentials for storing username and password",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
+            "type": "REF",
+            "referenceType": {
+                "id": null,
+                "versionNumber": 1,
+                "name": "Credential",
+                "type": "com.ekart.domain.model.entity.Credential",
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "password",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "username",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "type",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
+            },
+            "entity": null,
+            "multiplicity": "MANY"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "cstNumber",
+            "type": "STRING",
             "referenceType": null,
-            "identity": 83
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "tinNumber",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "serviceAddress",
+            "type": "REF",
+            "referenceType": {
+                "id": null,
+                "versionNumber": 1,
+                "name": "Address",
+                "type": "com.ekart.domain.model.entity.Address",
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "landmark",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "country",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "addressType",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "pincode",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "city",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "latitude",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "addressLine1",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "addressLine2",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "state",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "longitude",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
+            },
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "complianceCategory",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "sellerName",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "sellerCategory",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "vatNumber",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
         }],
-        "identity": 17
+        "namespace": null
     }, {
-        "name": "com.ekart.domain.model.entity.Customer",
-        "type": "com.ekart.domain.model.entity.Customer",
-        "displayName": "Customer",
-        "exposable": true,
-        "required": false,
-        "description": null,
+        "id": null,
+        "versionNumber": 1,
+        "name": "Slot",
+        "type": "com.ekart.domain.model.entity.Slot",
         "attributes": [{
-            "name": "billingAddress",
-            "displayName": "Billing Address",
-            "type": "OBJECT",
-            "required": false,
-            "description": "Captures billing address of customer",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": {
-                "name": "com.ekart.domain.model.entity.Address",
-                "type": "com.ekart.domain.model.entity.Address",
-                "displayName": "Address",
-                "exposable": true,
-                "required": false,
-                "description": null,
-                "attributes": [{
-                    "name": "longitude",
-                    "displayName": "Longitude",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Longitude",
-                    "example": "-074.0447",
-                    "maxLength": 8,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 40
-                }, {
-                    "name": "pincode",
-                    "displayName": "PIN Code",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Pin code for the address",
-                    "example": "560060",
-                    "maxLength": 30,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 32
-                }, {
-                    "name": "addressType",
-                    "displayName": "Address Type",
-                    "type": "ENUM",
-                    "required": false,
-                    "description": "Type of Address",
-                    "example": "residence",
-                    "maxLength": 255,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 35
-                }, {
-                    "name": "city",
-                    "displayName": "City",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Name of city where this address is located",
-                    "example": "Bengaluru",
-                    "maxLength": 64,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 36
-                }, {
-                    "name": "state",
-                    "displayName": "State",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Name of state where this address is located",
-                    "example": "Karnataka",
-                    "maxLength": 64,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 37
-                }, {
-                    "name": "addressLine1",
-                    "displayName": "Address Line 1",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Address Line 1, defining the address",
-                    "example": "#4, mrudula residency, kormangala industrial area",
-                    "maxLength": 255,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 39
-                }, {
-                    "name": "latitude",
-                    "displayName": "Latitude",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Latitudes",
-                    "example": "+40.6894",
-                    "maxLength": 8,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 34
-                }, {
-                    "name": "country",
-                    "displayName": "Country",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Name of country where this address is located",
-                    "example": "India",
-                    "maxLength": 64,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 33
-                }, {
-                    "name": "addressLine2",
-                    "displayName": "Address Line 2",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Address Line 2, defining the address",
-                    "example": "Kormangala, Bengaluru, Karnataka",
-                    "maxLength": 255,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 38
-                }, {
-                    "name": "landmark",
-                    "displayName": "Landmark",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Landmark describing vicinity of address",
-                    "example": "Vagdevi Vilas School",
-                    "maxLength": 255,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 41
-                }],
-                "identity": 8
-            },
-            "identity": 46
-        }, {
-            "name": "shippingAddress",
-            "displayName": "Shipping Address",
-            "type": "OBJECT",
-            "required": false,
-            "description": "Captures shipping address of customer",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": {
-                "name": "com.ekart.domain.model.entity.Address",
-                "type": "com.ekart.domain.model.entity.Address",
-                "displayName": "Address",
-                "exposable": true,
-                "required": false,
-                "description": null,
-                "attributes": [{
-                    "name": "longitude",
-                    "displayName": "Longitude",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Longitude",
-                    "example": "-074.0447",
-                    "maxLength": 8,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 40
-                }, {
-                    "name": "pincode",
-                    "displayName": "PIN Code",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Pin code for the address",
-                    "example": "560060",
-                    "maxLength": 30,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 32
-                }, {
-                    "name": "addressType",
-                    "displayName": "Address Type",
-                    "type": "ENUM",
-                    "required": false,
-                    "description": "Type of Address",
-                    "example": "residence",
-                    "maxLength": 255,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 35
-                }, {
-                    "name": "city",
-                    "displayName": "City",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Name of city where this address is located",
-                    "example": "Bengaluru",
-                    "maxLength": 64,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 36
-                }, {
-                    "name": "state",
-                    "displayName": "State",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Name of state where this address is located",
-                    "example": "Karnataka",
-                    "maxLength": 64,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 37
-                }, {
-                    "name": "addressLine1",
-                    "displayName": "Address Line 1",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Address Line 1, defining the address",
-                    "example": "#4, mrudula residency, kormangala industrial area",
-                    "maxLength": 255,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 39
-                }, {
-                    "name": "latitude",
-                    "displayName": "Latitude",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Latitudes",
-                    "example": "+40.6894",
-                    "maxLength": 8,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 34
-                }, {
-                    "name": "country",
-                    "displayName": "Country",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Name of country where this address is located",
-                    "example": "India",
-                    "maxLength": 64,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 33
-                }, {
-                    "name": "addressLine2",
-                    "displayName": "Address Line 2",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Address Line 2, defining the address",
-                    "example": "Kormangala, Bengaluru, Karnataka",
-                    "maxLength": 255,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 38
-                }, {
-                    "name": "landmark",
-                    "displayName": "Landmark",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Landmark describing vicinity of address",
-                    "example": "Vagdevi Vilas School",
-                    "maxLength": 255,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 41
-                }],
-                "identity": 8
-            },
-            "identity": 42
-        }, {
-            "name": "customerId",
-            "displayName": "Customer Identifier",
-            "type": "STRING",
-            "required": false,
-            "description": "Customer identifier",
-            "example": "Vikas S Yaligar",
-            "maxLength": 64,
-            "multiplicityType": "ONE",
+            "id": null,
+            "versionNumber": 1,
+            "name": "start",
+            "type": "DATE",
             "referenceType": null,
-            "identity": 43
+            "entity": null,
+            "multiplicity": "ONE"
         }, {
-            "name": "namespace",
-            "displayName": "Namespace",
-            "type": "STRING",
-            "required": false,
-            "description": "Used to identify what type of customer it is",
-            "example": "flipkart-customer",
-            "maxLength": 50,
-            "multiplicityType": "ONE",
+            "id": null,
+            "versionNumber": 1,
+            "name": "end",
+            "type": "DATE",
             "referenceType": null,
-            "identity": 44
-        }, {
-            "name": "contactNo",
-            "displayName": "Contact No",
-            "type": "STRING",
-            "required": false,
-            "description": "Mobile numbers of consignee",
-            "example": "9948734673",
-            "maxLength": 21,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 49
-        }, {
-            "name": "panNumber",
-            "displayName": "Pan Number",
-            "type": "STRING",
-            "required": false,
-            "description": "Pan number of the customer",
-            "example": "ASPY123456",
-            "maxLength": 20,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 47
-        }, {
-            "name": "name",
-            "displayName": "Name",
-            "type": "STRING",
-            "required": false,
-            "description": "Customer name or consignee name",
-            "example": "Vikas S Yaligar",
-            "maxLength": 120,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 45
-        }, {
-            "name": "emailId",
-            "displayName": "Email Id",
-            "type": "STRING",
-            "required": false,
-            "description": "Email Id of the consignee",
-            "example": "something@gmail.com",
-            "maxLength": 64,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 48
+            "entity": null,
+            "multiplicity": "ONE"
         }],
-        "identity": 7
+        "namespace": null
     }, {
-        "name": "com.ekart.domain.model.entity.Vendor",
+        "id": null,
+        "versionNumber": 1,
+        "name": "Mode",
+        "type": "com.ekart.domain.model.entity.Mode",
+        "attributes": [{
+            "id": null,
+            "versionNumber": 1,
+            "name": "minAmount",
+            "type": "REF",
+            "referenceType": {
+                "id": null,
+                "versionNumber": 1,
+                "name": "Currency",
+                "type": "com.ekart.domain.model.entity.Currency",
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "value",
+                    "type": "REF",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "type",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
+            },
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "paymentMode",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "maxAmount",
+            "type": "REF",
+            "referenceType": {
+                "id": null,
+                "versionNumber": 1,
+                "name": "Currency",
+                "type": "com.ekart.domain.model.entity.Currency",
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "value",
+                    "type": "REF",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "type",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
+            },
+            "entity": null,
+            "multiplicity": "ONE"
+        }],
+        "namespace": null
+    }, {
+        "id": null,
+        "versionNumber": 1,
+        "name": "Vendor",
         "type": "com.ekart.domain.model.entity.Vendor",
-        "displayName": "Vendor",
-        "exposable": true,
-        "required": false,
-        "description": null,
         "attributes": [{
+            "id": null,
+            "versionNumber": 1,
             "name": "vendorName",
-            "displayName": "Vendor Name",
             "type": "STRING",
-            "required": false,
-            "description": "Value of vendor",
-            "example": "BLUEDART",
-            "maxLength": 255,
-            "multiplicityType": "ONE",
             "referenceType": null,
-            "identity": 105
+            "entity": null,
+            "multiplicity": "ONE"
         }, {
-            "name": "address",
-            "displayName": "Address",
-            "type": "OBJECT",
-            "required": false,
-            "description": "Address of the vendor's working location",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": {
-                "name": "com.ekart.domain.model.entity.Address",
-                "type": "com.ekart.domain.model.entity.Address",
-                "displayName": "Address",
-                "exposable": true,
-                "required": false,
-                "description": null,
-                "attributes": [{
-                    "name": "longitude",
-                    "displayName": "Longitude",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Longitude",
-                    "example": "-074.0447",
-                    "maxLength": 8,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 40
-                }, {
-                    "name": "pincode",
-                    "displayName": "PIN Code",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Pin code for the address",
-                    "example": "560060",
-                    "maxLength": 30,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 32
-                }, {
-                    "name": "addressType",
-                    "displayName": "Address Type",
-                    "type": "ENUM",
-                    "required": false,
-                    "description": "Type of Address",
-                    "example": "residence",
-                    "maxLength": 255,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 35
-                }, {
-                    "name": "city",
-                    "displayName": "City",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Name of city where this address is located",
-                    "example": "Bengaluru",
-                    "maxLength": 64,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 36
-                }, {
-                    "name": "state",
-                    "displayName": "State",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Name of state where this address is located",
-                    "example": "Karnataka",
-                    "maxLength": 64,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 37
-                }, {
-                    "name": "addressLine1",
-                    "displayName": "Address Line 1",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Address Line 1, defining the address",
-                    "example": "#4, mrudula residency, kormangala industrial area",
-                    "maxLength": 255,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 39
-                }, {
-                    "name": "latitude",
-                    "displayName": "Latitude",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Latitudes",
-                    "example": "+40.6894",
-                    "maxLength": 8,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 34
-                }, {
-                    "name": "country",
-                    "displayName": "Country",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Name of country where this address is located",
-                    "example": "India",
-                    "maxLength": 64,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 33
-                }, {
-                    "name": "addressLine2",
-                    "displayName": "Address Line 2",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Address Line 2, defining the address",
-                    "example": "Kormangala, Bengaluru, Karnataka",
-                    "maxLength": 255,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 38
-                }, {
-                    "name": "landmark",
-                    "displayName": "Landmark",
-                    "type": "STRING",
-                    "required": false,
-                    "description": "Landmark describing vicinity of address",
-                    "example": "Vagdevi Vilas School",
-                    "maxLength": 255,
-                    "multiplicityType": "ONE",
-                    "referenceType": null,
-                    "identity": 41
-                }],
-                "identity": 8
-            },
-            "identity": 103
-        }, {
+            "id": null,
+            "versionNumber": 1,
             "name": "vendorId",
-            "displayName": "Vendor ID",
             "type": "STRING",
-            "required": false,
-            "description": "Unique ID to identify vendor in MDM",
-            "example": "VEN-12345",
-            "maxLength": 64,
-            "multiplicityType": "ONE",
             "referenceType": null,
-            "identity": 104
+            "entity": null,
+            "multiplicity": "ONE"
         }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "address",
+            "type": "REF",
+            "referenceType": {
+                "id": null,
+                "versionNumber": 1,
+                "name": "Address",
+                "type": "com.ekart.domain.model.entity.Address",
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "landmark",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "country",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "addressType",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "pincode",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "city",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "latitude",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "addressLine1",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "addressLine2",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "state",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "longitude",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
+            },
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
             "name": "trackingIds",
-            "displayName": "Tracking Ids",
-            "type": "LIST",
-            "required": false,
-            "description": "set of external vendor tracking id whose size should be equal to number of items in service request",
-            "example": "[\"AWB-123\", \"AWB-345\"]",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
+            "type": "STRING",
             "referenceType": null,
-            "identity": 106
+            "entity": null,
+            "multiplicity": "MANY"
         }],
-        "identity": 21
+        "namespace": null
     }, {
-        "name": "com.ekart.domain.model.entity.Tax",
+        "id": null,
+        "versionNumber": 1,
+        "name": "Attribute",
+        "type": "com.ekart.domain.model.entity.Attribute",
+        "attributes": [{
+            "id": null,
+            "versionNumber": 1,
+            "name": "name",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "value",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "type",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }],
+        "namespace": null
+    }, {
+        "id": null,
+        "versionNumber": 1,
+        "name": "Tax",
         "type": "com.ekart.domain.model.entity.Tax",
-        "displayName": "Tax",
-        "exposable": true,
-        "required": false,
-        "description": null,
         "attributes": [{
+            "id": null,
+            "versionNumber": 1,
             "name": "taxValue",
-            "displayName": "Value of tax",
-            "type": "OBJECT",
-            "required": false,
-            "description": "Value of tax",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
+            "type": "REF",
             "referenceType": {
-                "name": "com.ekart.domain.model.entity.Measure",
+                "id": null,
+                "versionNumber": 1,
+                "name": "Measure",
                 "type": "com.ekart.domain.model.entity.Measure",
-                "displayName": "Measure",
-                "exposable": true,
-                "required": false,
-                "description": null,
-                "attributes": [],
-                "identity": 2
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "unit",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "value",
+                    "type": "REF",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "type",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
             },
-            "identity": 57
+            "entity": null,
+            "multiplicity": "ONE"
         }, {
+            "id": null,
+            "versionNumber": 1,
             "name": "applicableOn",
-            "displayName": "Applicable On",
-            "type": "OBJECT",
-            "required": false,
-            "description": "Tax is applicable on",
-            "example": "",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
+            "type": "REF",
             "referenceType": {
-                "name": "com.ekart.domain.model.entity.Measure",
+                "id": null,
+                "versionNumber": 1,
+                "name": "Measure",
                 "type": "com.ekart.domain.model.entity.Measure",
-                "displayName": "Measure",
-                "exposable": true,
-                "required": false,
-                "description": null,
-                "attributes": [],
-                "identity": 2
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "unit",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "value",
+                    "type": "REF",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "type",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
             },
-            "identity": 59
+            "entity": null,
+            "multiplicity": "ONE"
         }, {
+            "id": null,
+            "versionNumber": 1,
             "name": "type",
-            "displayName": "Tax Type",
-            "type": "ENUM",
-            "required": false,
-            "description": "Type of tax",
-            "example": "vat",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
+            "type": "STRING",
             "referenceType": null,
-            "identity": 58
+            "entity": null,
+            "multiplicity": "ONE"
         }],
-        "identity": 11
+        "namespace": null
     }, {
-        "name": "com.ekart.domain.model.entity.Credential",
+        "id": null,
+        "versionNumber": 1,
+        "name": "Dimension",
+        "type": "com.ekart.domain.model.entity.Dimension",
+        "attributes": [{
+            "id": null,
+            "versionNumber": 1,
+            "name": "volumetricWeight",
+            "type": "REF",
+            "referenceType": {
+                "id": null,
+                "versionNumber": 1,
+                "name": "Measure",
+                "type": "com.ekart.domain.model.entity.Measure",
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "unit",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "value",
+                    "type": "REF",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "type",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
+            },
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "breadth",
+            "type": "REF",
+            "referenceType": {
+                "id": null,
+                "versionNumber": 1,
+                "name": "Measure",
+                "type": "com.ekart.domain.model.entity.Measure",
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "unit",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "value",
+                    "type": "REF",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "type",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
+            },
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "shape",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "length",
+            "type": "REF",
+            "referenceType": {
+                "id": null,
+                "versionNumber": 1,
+                "name": "Measure",
+                "type": "com.ekart.domain.model.entity.Measure",
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "unit",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "value",
+                    "type": "REF",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "type",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
+            },
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "height",
+            "type": "REF",
+            "referenceType": {
+                "id": null,
+                "versionNumber": 1,
+                "name": "Measure",
+                "type": "com.ekart.domain.model.entity.Measure",
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "unit",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "value",
+                    "type": "REF",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "type",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
+            },
+            "entity": null,
+            "multiplicity": "ONE"
+        }],
+        "namespace": null
+    }, {
+        "id": null,
+        "versionNumber": 1,
+        "name": "Customer",
+        "type": "com.ekart.domain.model.entity.Customer",
+        "attributes": [{
+            "id": null,
+            "versionNumber": 1,
+            "name": "emailId",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "name",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "billingAddress",
+            "type": "REF",
+            "referenceType": {
+                "id": null,
+                "versionNumber": 1,
+                "name": "Address",
+                "type": "com.ekart.domain.model.entity.Address",
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "landmark",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "country",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "addressType",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "pincode",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "city",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "latitude",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "addressLine1",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "addressLine2",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "state",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "longitude",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
+            },
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "shippingAddress",
+            "type": "REF",
+            "referenceType": {
+                "id": null,
+                "versionNumber": 1,
+                "name": "Address",
+                "type": "com.ekart.domain.model.entity.Address",
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "landmark",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "country",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "addressType",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "pincode",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "city",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "latitude",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "addressLine1",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "addressLine2",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "state",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "longitude",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
+            },
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "panNumber",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "contactNo",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }],
+        "namespace": null
+    }, {
+        "id": null,
+        "versionNumber": 1,
+        "name": "Discount",
+        "type": "com.ekart.domain.model.entity.Discount",
+        "attributes": [{
+            "id": null,
+            "versionNumber": 1,
+            "name": "value",
+            "type": "REF",
+            "referenceType": {
+                "id": null,
+                "versionNumber": 1,
+                "name": "Measure",
+                "type": "com.ekart.domain.model.entity.Measure",
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "unit",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "value",
+                    "type": "REF",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "type",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
+            },
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "type",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }],
+        "namespace": null
+    }, {
+        "id": null,
+        "versionNumber": 1,
+        "name": "Currency",
+        "type": "com.ekart.domain.model.entity.Currency",
+        "attributes": [{
+            "id": null,
+            "versionNumber": 1,
+            "name": "value",
+            "type": "REF",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "type",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }],
+        "namespace": null
+    }, {
+        "id": null,
+        "versionNumber": 1,
+        "name": "Credential",
         "type": "com.ekart.domain.model.entity.Credential",
-        "displayName": "Credential",
-        "exposable": true,
-        "required": false,
-        "description": null,
         "attributes": [{
+            "id": null,
+            "versionNumber": 1,
             "name": "password",
-            "displayName": "Password",
             "type": "STRING",
-            "required": false,
-            "description": "password hash stored using a secure 1-way algorithm like bcrypt",
-            "example": "ekr-pass-4567",
-            "maxLength": 50,
-            "multiplicityType": "ONE",
             "referenceType": null,
-            "identity": 71
+            "entity": null,
+            "multiplicity": "ONE"
         }, {
+            "id": null,
+            "versionNumber": 1,
             "name": "username",
-            "displayName": "Username",
             "type": "STRING",
-            "required": false,
-            "description": "Username for this credential",
-            "example": "ekr-1234",
-            "maxLength": 50,
-            "multiplicityType": "ONE",
             "referenceType": null,
-            "identity": 70
+            "entity": null,
+            "multiplicity": "ONE"
         }, {
+            "id": null,
+            "versionNumber": 1,
             "name": "type",
-            "displayName": "Type",
             "type": "STRING",
-            "required": false,
-            "description": "Specific type of credential which signifies where the credentials should be used.",
-            "example": "E-SUGAM",
-            "maxLength": 50,
-            "multiplicityType": "ONE",
             "referenceType": null,
-            "identity": 69
+            "entity": null,
+            "multiplicity": "ONE"
         }],
-        "identity": 15
+        "namespace": null
     }, {
-        "name": "com.ekart.domain.model.entity.DownstreamTaskReference",
-        "type": "com.ekart.domain.model.entity.DownstreamTaskReference",
-        "displayName": "DownstreamTaskReference",
-        "exposable": false,
-        "required": false,
-        "description": null,
+        "id": null,
+        "versionNumber": 1,
+        "name": "Document",
+        "type": "com.ekart.domain.model.entity.Document",
         "attributes": [{
-            "name": "downstreamTaskReferenceId",
-            "displayName": "Downstream Task Reference Id",
+            "id": null,
+            "versionNumber": 1,
+            "name": "documentType",
             "type": "STRING",
-            "required": false,
-            "description": "Identifier for the downstream task",
-            "example": "EXECUTION-TASK-123",
-            "maxLength": 255,
-            "multiplicityType": "ONE",
             "referenceType": null,
-            "identity": 96
+            "entity": null,
+            "multiplicity": "ONE"
         }, {
-            "name": "location",
-            "displayName": "Location",
+            "id": null,
+            "versionNumber": 1,
+            "name": "documentTemplateId",
             "type": "STRING",
-            "required": false,
-            "description": "Location of the downstream task",
-            "example": "LOCATION-123",
-            "maxLength": 255,
-            "multiplicityType": "ONE",
             "referenceType": null,
-            "identity": 100
+            "entity": null,
+            "multiplicity": "ONE"
         }, {
-            "name": "slotEnd",
-            "displayName": "Slot End",
-            "type": "DATE",
-            "required": false,
-            "description": "Slot end date",
-            "example": "2015-07-19T01:50:00+02:00",
-            "maxLength": 255,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 95
-        }, {
-            "name": "destination",
-            "displayName": "Destination",
-            "type": "STRING",
-            "required": false,
-            "description": "Destination of the task",
-            "example": "warehouse",
-            "maxLength": 255,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 97
-        }, {
-            "name": "orchestratorTaskId",
-            "displayName": "Orchestrator Task Id",
-            "type": "LONG",
-            "required": false,
-            "description": "Task identifier kept in the orchestrator",
-            "example": "123456789",
-            "maxLength": 0,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 101
-        }, {
-            "name": "plannerTaskId",
-            "displayName": "Planner Task Id",
-            "type": "STRING",
-            "required": false,
-            "description": "Identifier for the plan made for each task generated by planner",
-            "example": "PICK-PLAN-123",
-            "maxLength": 255,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 94
-        }, {
-            "name": "slotStart",
-            "displayName": "Slot Start",
-            "type": "DATE",
-            "required": false,
-            "description": "Slot start date",
-            "example": "2015-07-19T01:20:00+02:00",
-            "maxLength": 255,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 102
-        }, {
-            "name": "source",
-            "displayName": "Source",
-            "type": "STRING",
-            "required": false,
-            "description": "Source of the task",
-            "example": "warehouse",
-            "maxLength": 255,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 98
-        }, {
-            "name": "planId",
-            "displayName": "Plan Identifier",
-            "type": "STRING",
-            "required": false,
-            "description": "Plan Identifier for the service request",
-            "example": "PLAN-123",
-            "maxLength": 255,
-            "multiplicityType": "ONE",
-            "referenceType": null,
-            "identity": 99
+            "id": null,
+            "versionNumber": 1,
+            "name": "documentdata",
+            "type": "REF",
+            "referenceType": {
+                "id": null,
+                "versionNumber": 1,
+                "name": "Attribute",
+                "type": "com.ekart.domain.model.entity.Attribute",
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "name",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "value",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "type",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
+            },
+            "entity": null,
+            "multiplicity": "MANY"
         }],
-        "identity": 20
+        "namespace": null
+    }, {
+        "id": null,
+        "versionNumber": 1,
+        "name": "SalesChannel",
+        "type": "com.ekart.domain.model.entity.SalesChannel",
+        "attributes": [{
+            "id": null,
+            "versionNumber": 1,
+            "name": "saleChannelId",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }],
+        "namespace": null
+    }, {
+        "id": null,
+        "versionNumber": 1,
+        "name": "Product",
+        "type": "com.ekart.domain.model.entity.Product",
+        "attributes": [{
+            "id": null,
+            "versionNumber": 1,
+            "name": "universalID",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "groupID",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "tenantId",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "referenceID",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "ownerID",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }],
+        "namespace": null
+    }, {
+        "id": null,
+        "versionNumber": 1,
+        "name": "Item",
+        "type": "com.ekart.domain.model.entity.Item",
+        "attributes": [{
+            "id": null,
+            "versionNumber": 1,
+            "name": "itemContent",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "MANY"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "quantity",
+            "type": "INT",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "unitSellingPrice",
+            "type": "REF",
+            "referenceType": {
+                "id": null,
+                "versionNumber": 1,
+                "name": "Measure",
+                "type": "com.ekart.domain.model.entity.Measure",
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "unit",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "value",
+                    "type": "REF",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "type",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
+            },
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "itemCategory",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "MANY"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "taxes",
+            "type": "REF",
+            "referenceType": {
+                "id": null,
+                "versionNumber": 1,
+                "name": "Tax",
+                "type": "com.ekart.domain.model.entity.Tax",
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "taxValue",
+                    "type": "REF",
+                    "referenceType": {
+                        "id": null,
+                        "versionNumber": 1,
+                        "name": "Measure",
+                        "type": "com.ekart.domain.model.entity.Measure",
+                        "attributes": [{
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "unit",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "value",
+                            "type": "REF",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "type",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }],
+                        "namespace": null
+                    },
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "applicableOn",
+                    "type": "REF",
+                    "referenceType": {
+                        "id": null,
+                        "versionNumber": 1,
+                        "name": "Measure",
+                        "type": "com.ekart.domain.model.entity.Measure",
+                        "attributes": [{
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "unit",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "value",
+                            "type": "REF",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "type",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }],
+                        "namespace": null
+                    },
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "type",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
+            },
+            "entity": null,
+            "multiplicity": "MANY"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "itemName",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "handlingAttributes",
+            "type": "REF",
+            "referenceType": {
+                "id": null,
+                "versionNumber": 1,
+                "name": "Attribute",
+                "type": "com.ekart.domain.model.entity.Attribute",
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "name",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "value",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "type",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
+            },
+            "entity": null,
+            "multiplicity": "MANY"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "invoiceId",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "discounts",
+            "type": "REF",
+            "referenceType": {
+                "id": null,
+                "versionNumber": 1,
+                "name": "Discount",
+                "type": "com.ekart.domain.model.entity.Discount",
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "value",
+                    "type": "REF",
+                    "referenceType": {
+                        "id": null,
+                        "versionNumber": 1,
+                        "name": "Measure",
+                        "type": "com.ekart.domain.model.entity.Measure",
+                        "attributes": [{
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "unit",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "value",
+                            "type": "REF",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "type",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }],
+                        "namespace": null
+                    },
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "type",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
+            },
+            "entity": null,
+            "multiplicity": "MANY"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "itemDescription",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "itemIdentifier",
+            "type": "REF",
+            "referenceType": {
+                "id": null,
+                "versionNumber": 1,
+                "name": "ItemIdentifier",
+                "type": "com.ekart.domain.model.entity.ItemIdentifier",
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "universalID",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "groupID",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "uniqueID",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "tenantId",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "ownerID",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
+            },
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "itemWeight",
+            "type": "REF",
+            "referenceType": {
+                "id": null,
+                "versionNumber": 1,
+                "name": "Measure",
+                "type": "com.ekart.domain.model.entity.Measure",
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "unit",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "value",
+                    "type": "REF",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "type",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
+            },
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "unitValue",
+            "type": "REF",
+            "referenceType": {
+                "id": null,
+                "versionNumber": 1,
+                "name": "Measure",
+                "type": "com.ekart.domain.model.entity.Measure",
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "unit",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "value",
+                    "type": "REF",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "type",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
+            },
+            "entity": null,
+            "multiplicity": "ONE"
+        }],
+        "namespace": null
+    }, {
+        "id": null,
+        "versionNumber": 1,
+        "name": "ShipmentItem",
+        "type": "com.ekart.domain.model.entity.ShipmentItem",
+        "attributes": [{
+            "id": null,
+            "versionNumber": 1,
+            "name": "productId",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "taxes",
+            "type": "REF",
+            "referenceType": {
+                "id": null,
+                "versionNumber": 1,
+                "name": "Tax",
+                "type": "com.ekart.domain.model.entity.Tax",
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "taxValue",
+                    "type": "REF",
+                    "referenceType": {
+                        "id": null,
+                        "versionNumber": 1,
+                        "name": "Measure",
+                        "type": "com.ekart.domain.model.entity.Measure",
+                        "attributes": [{
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "unit",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "value",
+                            "type": "REF",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "type",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }],
+                        "namespace": null
+                    },
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "applicableOn",
+                    "type": "REF",
+                    "referenceType": {
+                        "id": null,
+                        "versionNumber": 1,
+                        "name": "Measure",
+                        "type": "com.ekart.domain.model.entity.Measure",
+                        "attributes": [{
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "unit",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "value",
+                            "type": "REF",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "type",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }],
+                        "namespace": null
+                    },
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "type",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
+            },
+            "entity": null,
+            "multiplicity": "MANY"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "sellerReferenceId",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }],
+        "namespace": null
+    }, {
+        "id": null,
+        "versionNumber": 1,
+        "name": "PaymentMode",
+        "type": "com.ekart.domain.model.entity.PaymentMode",
+        "attributes": [{
+            "id": null,
+            "versionNumber": 1,
+            "name": "minAmount",
+            "type": "REF",
+            "referenceType": {
+                "id": null,
+                "versionNumber": 1,
+                "name": "Measure",
+                "type": "com.ekart.domain.model.entity.Measure",
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "unit",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "value",
+                    "type": "REF",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "type",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
+            },
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "maxAmount",
+            "type": "REF",
+            "referenceType": {
+                "id": null,
+                "versionNumber": 1,
+                "name": "Measure",
+                "type": "com.ekart.domain.model.entity.Measure",
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "unit",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "value",
+                    "type": "REF",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "type",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
+            },
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "type",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }],
+        "namespace": null
+    }, {
+        "id": null,
+        "versionNumber": 1,
+        "name": "Location",
+        "type": "com.ekart.domain.model.entity.Location",
+        "attributes": [{
+            "id": null,
+            "versionNumber": 1,
+            "name": "attendeeName",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "locationId",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "emailId",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "namespace",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "address",
+            "type": "REF",
+            "referenceType": {
+                "id": null,
+                "versionNumber": 1,
+                "name": "Address",
+                "type": "com.ekart.domain.model.entity.Address",
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "landmark",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "country",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "addressType",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "pincode",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "city",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "latitude",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "addressLine1",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "addressLine2",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "state",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "longitude",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
+            },
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "contactNo",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }],
+        "namespace": null
+    }, {
+        "id": null,
+        "versionNumber": 1,
+        "name": "Address",
+        "type": "com.ekart.domain.model.entity.Address",
+        "attributes": [{
+            "id": null,
+            "versionNumber": 1,
+            "name": "landmark",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "country",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "addressType",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "pincode",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "city",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "latitude",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "addressLine1",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "addressLine2",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "state",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "longitude",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }],
+        "namespace": null
+    }, {
+        "id": null,
+        "versionNumber": 1,
+        "name": "Payment",
+        "type": "com.ekart.domain.model.entity.Payment",
+        "attributes": [{
+            "id": null,
+            "versionNumber": 1,
+            "name": "amountToCollect",
+            "type": "REF",
+            "referenceType": {
+                "id": null,
+                "versionNumber": 1,
+                "name": "Currency",
+                "type": "com.ekart.domain.model.entity.Currency",
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "value",
+                    "type": "REF",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "type",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
+            },
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "totalAmount",
+            "type": "REF",
+            "referenceType": {
+                "id": null,
+                "versionNumber": 1,
+                "name": "Currency",
+                "type": "com.ekart.domain.model.entity.Currency",
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "value",
+                    "type": "REF",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "type",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
+            },
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "paymentModes",
+            "type": "REF",
+            "referenceType": {
+                "id": null,
+                "versionNumber": 1,
+                "name": "PaymentMode",
+                "type": "com.ekart.domain.model.entity.PaymentMode",
+                "attributes": [{
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "minAmount",
+                    "type": "REF",
+                    "referenceType": {
+                        "id": null,
+                        "versionNumber": 1,
+                        "name": "Measure",
+                        "type": "com.ekart.domain.model.entity.Measure",
+                        "attributes": [{
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "unit",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "value",
+                            "type": "REF",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "type",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }],
+                        "namespace": null
+                    },
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "maxAmount",
+                    "type": "REF",
+                    "referenceType": {
+                        "id": null,
+                        "versionNumber": 1,
+                        "name": "Measure",
+                        "type": "com.ekart.domain.model.entity.Measure",
+                        "attributes": [{
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "unit",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "value",
+                            "type": "REF",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }, {
+                            "id": null,
+                            "versionNumber": 1,
+                            "name": "type",
+                            "type": "STRING",
+                            "referenceType": null,
+                            "entity": null,
+                            "multiplicity": "ONE"
+                        }],
+                        "namespace": null
+                    },
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }, {
+                    "id": null,
+                    "versionNumber": 1,
+                    "name": "type",
+                    "type": "STRING",
+                    "referenceType": null,
+                    "entity": null,
+                    "multiplicity": "ONE"
+                }],
+                "namespace": null
+            },
+            "entity": null,
+            "multiplicity": "MANY"
+        }],
+        "namespace": null
+    }, {
+        "id": null,
+        "versionNumber": 1,
+        "name": "Label",
+        "type": "com.ekart.domain.model.entity.Label",
+        "attributes": [{
+            "id": null,
+            "versionNumber": 1,
+            "name": "templateId",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "templateData",
+            "type": "REF",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }],
+        "namespace": null
+    }, {
+        "id": null,
+        "versionNumber": 1,
+        "name": "ItemIdentifier",
+        "type": "com.ekart.domain.model.entity.ItemIdentifier",
+        "attributes": [{
+            "id": null,
+            "versionNumber": 1,
+            "name": "universalID",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "groupID",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "uniqueID",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "tenantId",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }, {
+            "id": null,
+            "versionNumber": 1,
+            "name": "ownerID",
+            "type": "STRING",
+            "referenceType": null,
+            "entity": null,
+            "multiplicity": "ONE"
+        }],
+        "namespace": null
     }],
-    "version": null,
-    "identity": 1
+    "version": "1.0"
 }
