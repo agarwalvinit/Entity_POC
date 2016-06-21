@@ -27,16 +27,20 @@ var AttributesSelector = React.createClass({
 			this.props.updateAttributes(this.state.attributes, this.props.parentIndex);
 		}
 	},
+	componentDidMount: function() {
+    	this.setState({
+    		attributes: this.state.attributes
+    	})
+	},
 	updateAndOptional: function(evt){
 		console.log('update and optional', this.state);
 		var obj = {},
 			newAttributes;
 		obj.key = evt.target.id.split("_")[0];
 		obj.index = evt.target.id.split("_")[2];
-		obj.value = evt.target.checked;
 
 		newAttributes = _.cloneDeep(this.state.attributes);
-		newAttributes[obj.index][obj.key] = obj.value;
+		newAttributes[obj.index][obj.key] = newAttributes[obj.index][obj.key] ? false : true;
 
 		this.setState({
 			attributes: newAttributes
@@ -84,14 +88,20 @@ var AttributesSelector = React.createClass({
 					{attribute.referenceType === null ? <td className="spacer"><span>{attribute.type}</span></td> : <td className="spacer">
 						<button onClick={this.showModal.bind(this, attribute, index)} id={"compositeAttr_"+index}>view more</button></td>}
 					<td className="check-box-cont spacer">
-						<input type="checkbox" id={"updatable_"+(this.props.parentIndex+1)+"_"+index}
-							   onChange={this.updateAndOptional} ref="updatable" checked={attribute.updatable}/>
-						<label htmlFor={"updatable_"+(this.props.parentIndex+1)+"_"+index}>Is Updatable</label>
+						<button 
+							className={attribute.updatable ? 'btn btn-sm btn-success no-outline' : 'btn btn-sm btn-not-selected no-outline'}
+							id={"updatable_"+(this.props.parentIndex)+"_"+index}
+							onClick={this.updateAndOptional}>
+							isUpdatable
+						</button>
 					</td>
 					<td className="check-box-cont spacer">
-						<input type="checkbox" id={"optional_"+(this.props.parentIndex+1)+"_"+index}
-							   onChange={this.updateAndOptional} ref="optional" checked={attribute.optional}/>
-						<label htmlFor={"optional_"+(this.props.parentIndex+1)+"_"+index}>Is Optional</label>
+						<button 
+							className={attribute.optional ? 'btn btn-sm btn-success no-outline' : 'btn btn-sm btn-not-selected no-outline'}
+							id={"optional_"+(this.props.parentIndex)+"_"+index}
+							onClick={this.updateAndOptional}>
+							isOptional
+						</button>
 					</td>
 				</tr>
 			)
@@ -125,4 +135,3 @@ var AttributesSelector = React.createClass({
 	}
 });
 export default AttributesSelector;
-	

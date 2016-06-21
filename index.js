@@ -37,6 +37,26 @@ var Entity =  React.createClass({
        		selectedEntities: newState
        	});
 	},
+	saveEntity: function() {
+		console.log('save: ', this.state.selectedEntities);
+		fetch('url', {
+			method: 'POST',
+			headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				this.state.selectedEntities
+			})
+		    .then(json)  
+			.then(function (data) {  
+			console.log('Request succeeded with JSON response', data);  
+			})  
+			.catch(function (error) {  
+			console.log('Request failed', error);  
+			});
+		});
+	},
 	processRender: function(){
 		console.log('initial state: ',this.state.selectedEntities);
 		var html = this.state.selectedEntities.map(function(entity, index){
@@ -50,8 +70,10 @@ var Entity =  React.createClass({
 		var html = this.processRender();
 		return (
 			<div className="app-ctr">
+				{!(_.isEmpty(this.state.selectedEntities)) ? <button className="btn btn-sm btn-primary pull-right" onClick={this.saveEntity}>Save Entity</button> : ""}
 				{html}
 				<EntitySelector addEntity={this.addEntity}/>
+				{!(_.isEmpty(this.state.selectedEntities)) ? <button className="btn btn-sm btn-primary pull-right" onClick={this.saveEntity}>Save Entity</button> : ""}
 			</div>
 		)
 	}
