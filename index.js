@@ -1,3 +1,5 @@
+import "./css/main.css";
+import './node_modules/react-selectize/themes/index.css';
 import EntitySelector from "./components/entitySelector/entitySelector";
 import EntityGenerator from "./components/entityGenerator/entityGenerator";
 import _ from "lodash"

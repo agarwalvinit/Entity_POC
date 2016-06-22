@@ -43,7 +43,7 @@ var EntityGenerator = React.createClass({
 	getObject: function(theObject) {
 	    var self = this;
 	    var result = {
-	        "key": theObject.name,
+	        "key": theObject.displayName,
 	        "type": theObject.type,
 	        "updatable": false,
 	        "optional": false
@@ -58,8 +58,12 @@ var EntityGenerator = React.createClass({
 	    var newAttributes = [];
 	    _(attributes).forEach(function(attribute){
 	        var obj = {
-	            "key": attribute.name,
+	            "key": attribute.displayName,
 	            "type": attribute.type,
+	            "minLength": 0,
+	            "maxLength": attribute.maxLength,
+	            "format": null,
+	            "multiplicityType": attribute.multiplicityType,
 	            "optional": false,
 	            "updatable": false
 	        }

@@ -163,9 +163,9 @@ var AttributesSelector = React.createClass({
 		}
 		var attributesHtml = this.getAttributesList();
 		return (
-			<div className={"attribute-cont "+this.props.isAttributeVisible}>
+			<div>
 				{referenceHTML}
-				<table className="table table-sm table-hover">
+				<table className="table table-sm table-hover attribute-cont">
 					<thead>
 					<tr>
 						<th>Attribute Name</th>

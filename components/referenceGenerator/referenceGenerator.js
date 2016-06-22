@@ -1,9 +1,9 @@
 import "./referenceGenerator.scss"
 import AttributesSelector from "../attributesSelector/attributesSelector";
-var _ = require('lodash');
-var React = require("react");
-var ReactDOM = require("react-dom");
-var Modal = require("react-modal");
+import _ from "lodash";
+import React from "react";
+import ReactDOM from "react-dom";
+import Modal from "react-modal";
 var customStyles = { };
 var ReferenceGenerator = React.createClass({
   getInitialState: function() {

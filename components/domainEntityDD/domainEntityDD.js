@@ -1,6 +1,6 @@
-require("./domainEntityDD.scss")
-import React from "react"
-import	ReactSelectize from "react-selectize"
+import "./domainEntityDD.scss";
+import React from "react";
+import	ReactSelectize from "react-selectize";
 var	SimpleSelect = ReactSelectize.SimpleSelect, 
 	DomainEntityDD;
 
@@ -27,7 +27,7 @@ DomainEntityDD = React.createClass({
     render: function(){
 			var self = this, 
             	options = this.state.domainEntity.map(function(entity){
-                	return {label: entity.name, value: entity.type, type: entity.type, attributes: entity.attributes}
+                	return {label: entity.displayName, value: entity.type, type: entity.type, attributes: entity.attributes}
             });
         return <div className="spacer entityDD">
         			<SimpleSelect 
