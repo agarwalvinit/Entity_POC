@@ -39,22 +39,20 @@ var Entity =  React.createClass({
 	},
 	saveEntity: function() {
 		console.log('save: ', this.state.selectedEntities);
-		fetch('url', {
-			method: 'POST',
-			headers: {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				this.state.selectedEntities
-			})
-		    .then(json)  
-			.then(function (data) {  
-			console.log('Request succeeded with JSON response', data);  
-			})  
-			.catch(function (error) {  
-			console.log('Request failed', error);  
-			});
+		var dataEntity = JSON.stringify(this.state.selectedEntities);
+		fetch(url, {  
+		    method: 'post',  
+		    headers: {  
+		      "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"  
+		    },  
+		    body: dataEntity
+		  })
+		  .then(json)  
+		  .then(function (data) {  
+		    console.log('Request succeeded with JSON response', data);  
+		  })  
+		  .catch(function (error) {  
+		    console.log('Request failed', error);  
 		});
 	},
 	processRender: function(){

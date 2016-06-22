@@ -66,7 +66,7 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _reactAddonsUpdate = __webpack_require__(226);
+	var _reactAddonsUpdate = __webpack_require__(201);
 	
 	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
 	
@@ -106,16 +106,17 @@
 		},
 		saveEntity: function saveEntity() {
 			console.log('save: ', this.state.selectedEntities);
-			var dataEntity = _lodash2.default.cloneDeep(this.state.selectedEntities);
-			fetch('url', {
-				method: 'POST',
+			var dataEntity = JSON.stringify(this.state.selectedEntities);
+			fetch(url, {
+				method: 'post',
 				headers: {
-					'Accept': 'application/json',
-					'Content-Type': 'application/json'
+					"Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
 				},
-				body: JSON.stringify({
-					dataEntity: dataEntity
-				})
+				body: dataEntity
+			}).then(json).then(function (data) {
+				console.log('Request succeeded with JSON response', data);
+			}).catch(function (error) {
+				console.log('Request failed', error);
 			});
 		},
 		processRender: function processRender() {
@@ -191,7 +192,7 @@
 		getObject: function getObject(theObject) {
 			var self = this;
 			var result = {
-				"key": theObject.displayName,
+				"key": theObject.name,
 				"type": theObject.type,
 				"updatable": false,
 				"optional": false
@@ -208,10 +209,6 @@
 				var obj = {
 					"key": attribute.name,
 					"type": attribute.type,
-					"minLength": 0,
-					"maxLength": attribute.maxLength,
-					"format": null,
-					"multiplicityType": attribute.multiplicityType,
 					"optional": false,
 					"updatable": false
 				};
@@ -364,7 +361,7 @@
 		render: function render() {
 			var self = this,
 			    options = this.state.domainEntity.map(function (entity) {
-				return { label: entity.displayName, value: entity.type, type: entity.type, attributes: entity.attributes };
+				return { label: entity.name, value: entity.type, type: entity.type, attributes: entity.attributes };
 			});
 			return _react2.default.createElement(
 				"div",
@@ -41425,14 +41422,31 @@
 				optional: _reactDom2.default.findDOMNode(this.refs.optional).checked
 			});
 		},
-		updateAttributes: function updateAttributes(attributes, index, attrs) {
+		updateAttributes: function updateAttributes(stateObj) {
 			var labelObj = new Object(),
 			    attributesObj = new Object(),
 			    typeObj = new Object(),
 			    objArray = [];
-			if (attrs) {
-				attributes[index].referenceType.attributes = attrs;
-			}
+			var attributes = stateObj.attributes;
+			labelObj.key = "label";
+			labelObj.value = this.state.label;
+			labelObj.index = this.props.index;
+			attributesObj.key = "attributes";
+			attributesObj.value = attributes ? attributes : this.state.attributes;
+			attributesObj.index = this.props.index;
+			typeObj.key = "type";
+			typeObj.value = this.state.type;
+			typeObj.index = this.props.index;
+			objArray = objArray.concat(labelObj, attributesObj, typeObj);
+			this.props.updateEntity(objArray);
+		},
+		updateAttributesClose: function updateAttributesClose(stateObj, index, attrs) {
+			var labelObj = new Object(),
+			    attributesObj = new Object(),
+			    typeObj = new Object(),
+			    objArray = [];
+			var attributes = stateObj.attributes;
+			attributes[index].referenceType = attrs;
 			labelObj.key = "label";
 			labelObj.value = this.state.label;
 			labelObj.index = this.props.index;
@@ -41489,7 +41503,7 @@
 				),
 				_react2.default.createElement(_attributesSelector2.default, { isAttributeVisible: this.state.isAttributeVisible,
 					attributes: this.state.attributes, updateAttributes: this.updateAttributes,
-					parentIndex: this.props.index })
+					updateAttributesClose: this.updateAttributesClose, parentIndex: this.props.index })
 			);
 		}
 	});
@@ -41506,9 +41520,9 @@
 		value: true
 	});
 	
-	__webpack_require__(201);
+	__webpack_require__(203);
 	
-	var _referenceGenerator = __webpack_require__(203);
+	var _referenceGenerator = __webpack_require__(205);
 	
 	var _referenceGenerator2 = _interopRequireDefault(_referenceGenerator);
 	
@@ -41524,7 +41538,7 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _reactAddonsUpdate = __webpack_require__(226);
+	var _reactAddonsUpdate = __webpack_require__(201);
 	
 	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
 	
@@ -41541,18 +41555,30 @@
 					modalIsOpen: false
 				}
 			};
+			if (this.props.keys) {
+				obj["key"] = this.props.keys;
+				obj["type"] = this.props.type;
+				obj["updatable"] = this.props.updatable;
+				obj["optional"] = this.props.optional;
+			}
 			return obj;
 		},
 		componentWillReceiveProps: function componentWillReceiveProps(props) {
 			var obj = {
 				attributes: props.attributes
 			};
+			if (props.keys) {
+				obj["key"] = props.keys;
+				obj["type"] = props.type;
+				obj["updatable"] = props.updatable;
+				obj["optional"] = props.optional;
+			}
 			this.setState(obj);
 		},
 		componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
 			if (!_lodash2.default.isEqual(prevState, this.state)) {
 				console.log("Updated");
-				this.props.updateAttributes(this.state.attributes, this.props.parentIndex);
+				this.props.updateAttributes(_lodash2.default.cloneDeep(this.state));
 			}
 		},
 		componentDidMount: function componentDidMount() {
@@ -41574,25 +41600,21 @@
 				attributes: newAttributes
 			});
 		},
-		setAttributes: function setAttributes(attrs, index) {
-			var theObject = _lodash2.default.cloneDeep(this.state.attributes);
-			console.log("my index", index, theObject);
-			theObject[index].referenceType.attributes = attrs;
-			return theObject;
+		refUpdatableAndOptional: function refUpdatableAndOptional(evt) {
+			console.log('update and optional', this.state);
+			var thisState = _lodash2.default.cloneDeep(this.state);
+			thisState[evt.target.id] = thisState[evt.target.id] ? false : true;
+			this.setState(thisState);
 		},
 		showModal: function showModal(attr, index) {
 			refComponent = true;
-			var attrKey = attr.key;
-			var processedAttr = [];
-			var newObj = _lodash2.default.cloneDeep(this.state.attributes[index]);
-			processedAttr = newObj.referenceType.attributes;
-	
-			var updatedAttr = this.setAttributes(processedAttr, index);
-			console.log('processedAttr: ', processedAttr);
 			this.setState({
-				attributes: updatedAttr,
 				modalAttributes: {
-					attributes: _lodash2.default.cloneDeep(processedAttr),
+					attributes: _lodash2.default.cloneDeep(attr.referenceType.attributes),
+					key: attr.referenceType.key,
+					type: attr.referenceType.type,
+					optional: attr.referenceType.optional,
+					updatable: attr.referenceType.updatable,
 					index: index,
 					modalIsOpen: true
 				}
@@ -41604,7 +41626,18 @@
 					modalIsOpen: false
 				}
 			});
-			this.props.updateAttributes(this.state.attributes, this.state.modalAttributes.index, attrs);
+			delete attrs.modalIsOpen;
+			console.log(attrs);
+			if (!this.props.updateAttributesClose) {
+				var attr = _lodash2.default.cloneDeep(this.state.attributes);
+				var index = this.state.modalAttributes.index;
+				attr[index].referenceType = attrs;
+				this.setState({
+					attributes: attr
+				});
+			} else {
+				this.props.updateAttributesClose(_lodash2.default.cloneDeep(this.state), this.state.modalAttributes.index, attrs);
+			}
 		},
 		getAttributesList: function getAttributesList() {
 			var html = this.state.attributes.map(function (attribute, index) {
@@ -41617,7 +41650,7 @@
 						_react2.default.createElement(
 							"span",
 							null,
-							attribute.key || attribute.name
+							attribute.key
 						)
 					),
 					attribute.referenceType === null ? _react2.default.createElement(
@@ -41665,11 +41698,65 @@
 			}.bind(this));
 			return html;
 		},
+		getReferenceHTML: function getReferenceHTML() {
+			console.log('getReferenceHTML: ', this.state);
+			return _react2.default.createElement(
+				"div",
+				null,
+				_react2.default.createElement(
+					"span",
+					{ className: "spacer" },
+					_react2.default.createElement(
+						"span",
+						null,
+						this.state.key
+					)
+				),
+				_react2.default.createElement(
+					"span",
+					{ className: "spacer" },
+					_react2.default.createElement(
+						"span",
+						null,
+						"REF"
+					)
+				),
+				_react2.default.createElement(
+					"span",
+					{ className: "check-box-cont spacer" },
+					_react2.default.createElement(
+						"button",
+						{
+							className: this.state.updatable ? 'btn btn-sm btn-success' : 'btn btn-sm btn-not-selected',
+							id: "updatable",
+							onClick: this.refUpdatableAndOptional },
+						"isUpdatable"
+					)
+				),
+				_react2.default.createElement(
+					"span",
+					{ className: "check-box-cont spacer" },
+					_react2.default.createElement(
+						"button",
+						{
+							className: this.state.optional ? 'btn btn-sm btn-success' : 'btn btn-sm btn-not-selected',
+							id: "optional",
+							onClick: this.refUpdatableAndOptional },
+						"isOptional"
+					)
+				)
+			);
+		},
 		render: function render() {
+			var referenceHTML = null;
+			if (this.props.keys) {
+				referenceHTML = this.getReferenceHTML();
+			}
 			var attributesHtml = this.getAttributesList();
 			return _react2.default.createElement(
 				"div",
 				{ className: "attribute-cont " + this.props.isAttributeVisible },
+				referenceHTML,
 				_react2.default.createElement(
 					"table",
 					{ className: "table table-sm table-hover" },
@@ -41711,7 +41798,11 @@
 					parentIndex: this.state.modalAttributes.index,
 					closeModal: this.closeModal,
 					isOpen: this.state.modalAttributes.modalIsOpen,
-					attributes: this.state.modalAttributes.attributes }) : _react2.default.createElement("br", null)
+					keys: this.state.modalAttributes.key,
+					type: this.state.modalAttributes.type,
+					optional: this.state.modalAttributes.optional,
+					updatable: this.state.modalAttributes.updatable,
+					attributes: this.state.modalAttributes.attributes }) : null
 			);
 		}
 	});
@@ -41721,10 +41812,129 @@
 /* 201 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = __webpack_require__(202);
+
+/***/ },
+/* 202 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2013-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule update
+	 */
+	
+	/* global hasOwnProperty:true */
+	
+	'use strict';
+	
+	var assign = __webpack_require__(41);
+	var keyOf = __webpack_require__(81);
+	var invariant = __webpack_require__(15);
+	var hasOwnProperty = ({}).hasOwnProperty;
+	
+	function shallowCopy(x) {
+	  if (Array.isArray(x)) {
+	    return x.concat();
+	  } else if (x && typeof x === 'object') {
+	    return assign(new x.constructor(), x);
+	  } else {
+	    return x;
+	  }
+	}
+	
+	var COMMAND_PUSH = keyOf({ $push: null });
+	var COMMAND_UNSHIFT = keyOf({ $unshift: null });
+	var COMMAND_SPLICE = keyOf({ $splice: null });
+	var COMMAND_SET = keyOf({ $set: null });
+	var COMMAND_MERGE = keyOf({ $merge: null });
+	var COMMAND_APPLY = keyOf({ $apply: null });
+	
+	var ALL_COMMANDS_LIST = [COMMAND_PUSH, COMMAND_UNSHIFT, COMMAND_SPLICE, COMMAND_SET, COMMAND_MERGE, COMMAND_APPLY];
+	
+	var ALL_COMMANDS_SET = {};
+	
+	ALL_COMMANDS_LIST.forEach(function (command) {
+	  ALL_COMMANDS_SET[command] = true;
+	});
+	
+	function invariantArrayCase(value, spec, command) {
+	  !Array.isArray(value) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected target of %s to be an array; got %s.', command, value) : invariant(false) : undefined;
+	  var specValue = spec[command];
+	  !Array.isArray(specValue) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be an array; got %s. ' + 'Did you forget to wrap your parameter in an array?', command, specValue) : invariant(false) : undefined;
+	}
+	
+	function update(value, spec) {
+	  !(typeof spec === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): You provided a key path to update() that did not contain one ' + 'of %s. Did you forget to include {%s: ...}?', ALL_COMMANDS_LIST.join(', '), COMMAND_SET) : invariant(false) : undefined;
+	
+	  if (hasOwnProperty.call(spec, COMMAND_SET)) {
+	    !(Object.keys(spec).length === 1) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Cannot have more than one key in an object with %s', COMMAND_SET) : invariant(false) : undefined;
+	
+	    return spec[COMMAND_SET];
+	  }
+	
+	  var nextValue = shallowCopy(value);
+	
+	  if (hasOwnProperty.call(spec, COMMAND_MERGE)) {
+	    var mergeObj = spec[COMMAND_MERGE];
+	    !(mergeObj && typeof mergeObj === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): %s expects a spec of type \'object\'; got %s', COMMAND_MERGE, mergeObj) : invariant(false) : undefined;
+	    !(nextValue && typeof nextValue === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): %s expects a target of type \'object\'; got %s', COMMAND_MERGE, nextValue) : invariant(false) : undefined;
+	    assign(nextValue, spec[COMMAND_MERGE]);
+	  }
+	
+	  if (hasOwnProperty.call(spec, COMMAND_PUSH)) {
+	    invariantArrayCase(value, spec, COMMAND_PUSH);
+	    spec[COMMAND_PUSH].forEach(function (item) {
+	      nextValue.push(item);
+	    });
+	  }
+	
+	  if (hasOwnProperty.call(spec, COMMAND_UNSHIFT)) {
+	    invariantArrayCase(value, spec, COMMAND_UNSHIFT);
+	    spec[COMMAND_UNSHIFT].forEach(function (item) {
+	      nextValue.unshift(item);
+	    });
+	  }
+	
+	  if (hasOwnProperty.call(spec, COMMAND_SPLICE)) {
+	    !Array.isArray(value) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Expected %s target to be an array; got %s', COMMAND_SPLICE, value) : invariant(false) : undefined;
+	    !Array.isArray(spec[COMMAND_SPLICE]) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be an array of arrays; got %s. ' + 'Did you forget to wrap your parameters in an array?', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : invariant(false) : undefined;
+	    spec[COMMAND_SPLICE].forEach(function (args) {
+	      !Array.isArray(args) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be an array of arrays; got %s. ' + 'Did you forget to wrap your parameters in an array?', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : invariant(false) : undefined;
+	      nextValue.splice.apply(nextValue, args);
+	    });
+	  }
+	
+	  if (hasOwnProperty.call(spec, COMMAND_APPLY)) {
+	    !(typeof spec[COMMAND_APPLY] === 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be a function; got %s.', COMMAND_APPLY, spec[COMMAND_APPLY]) : invariant(false) : undefined;
+	    nextValue = spec[COMMAND_APPLY](nextValue);
+	  }
+	
+	  for (var k in spec) {
+	    if (!(ALL_COMMANDS_SET.hasOwnProperty(k) && ALL_COMMANDS_SET[k])) {
+	      nextValue[k] = update(value[k], spec[k]);
+	    }
+	  }
+	
+	  return nextValue;
+	}
+	
+	module.exports = update;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
+
+/***/ },
+/* 203 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(202);
+	var content = __webpack_require__(204);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(196)(content, {});
@@ -41744,7 +41954,7 @@
 	}
 
 /***/ },
-/* 202 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(195)();
@@ -41758,7 +41968,7 @@
 
 
 /***/ },
-/* 203 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -41767,7 +41977,7 @@
 	  value: true
 	});
 	
-	__webpack_require__(204);
+	__webpack_require__(206);
 	
 	var _attributesSelector = __webpack_require__(200);
 	
@@ -41778,7 +41988,7 @@
 	var _ = __webpack_require__(197);
 	var React = __webpack_require__(3);
 	var ReactDOM = __webpack_require__(171);
-	var Modal = __webpack_require__(206);
+	var Modal = __webpack_require__(208);
 	var customStyles = {};
 	var ReferenceGenerator = React.createClass({
 	  displayName: "ReferenceGenerator",
@@ -41786,30 +41996,35 @@
 	  getInitialState: function getInitialState() {
 	    return {
 	      attributes: _.cloneDeep(this.props.attributes),
+	      key: this.props.keys,
+	      type: this.props.type,
+	      optional: this.props.optional,
+	      updatable: this.props.updatable,
 	      modalIsOpen: false
 	    };
 	  },
 	  componentWillReceiveProps: function componentWillReceiveProps(props) {
 	    this.setState({
 	      attributes: props.attributes,
+	      key: props.keys,
+	      type: props.type,
+	      optional: props.optional,
+	      updatable: props.updatable,
 	      modalIsOpen: props.isOpen
 	    });
 	  },
 	  closeModal: function closeModal() {
-	    var attr = _.cloneDeep(this.state.attributes);
+	    var attr = _.cloneDeep(this.state);
 	    this.props.closeModal(attr);
 	  },
-	  updateAttributes: function updateAttributes(attributes, index, attrs) {
-	    if (!attrs) {
-	      this.setState({
-	        attributes: attributes
-	      });
-	    } else {
-	      var newAttributes = attributes[index].referenceType.attributes = attrs;
-	      this.setState({
-	        attributes: newAttributes
-	      });
-	    }
+	  updateAttributes: function updateAttributes(stateObj) {
+	    this.setState({
+	      attributes: stateObj.attributes,
+	      key: stateObj.key,
+	      type: stateObj.type,
+	      optional: stateObj.optional,
+	      updatable: stateObj.updatable
+	    });
 	  },
 	  render: function render() {
 	    return React.createElement(
@@ -41828,6 +42043,10 @@
 	        ),
 	        React.createElement(_attributesSelector2.default, {
 	          parentIndex: this.props.parentIndex,
+	          keys: this.state.key,
+	          type: this.state.type,
+	          optional: this.state.optional,
+	          updatable: this.state.updatable,
 	          attributes: this.state.attributes,
 	          updateAttributes: this.updateAttributes })
 	      )
@@ -41838,13 +42057,13 @@
 	exports.default = ReferenceGenerator;
 
 /***/ },
-/* 204 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(205);
+	var content = __webpack_require__(207);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(196)(content, {});
@@ -41864,7 +42083,7 @@
 	}
 
 /***/ },
-/* 205 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(195)();
@@ -41878,25 +42097,25 @@
 
 
 /***/ },
-/* 206 */
+/* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(207);
+	module.exports = __webpack_require__(209);
 	
 
 
 /***/ },
-/* 207 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {var React = __webpack_require__(3);
 	var ReactDOM = __webpack_require__(171);
-	var ExecutionEnvironment = __webpack_require__(208);
-	var ModalPortal = React.createFactory(__webpack_require__(209));
-	var ariaAppHider = __webpack_require__(224);
-	var elementClass = __webpack_require__(225);
+	var ExecutionEnvironment = __webpack_require__(210);
+	var ModalPortal = React.createFactory(__webpack_require__(211));
+	var ariaAppHider = __webpack_require__(226);
+	var elementClass = __webpack_require__(227);
 	var renderSubtreeIntoContainer = __webpack_require__(171).unstable_renderSubtreeIntoContainer;
-	var Assign = __webpack_require__(213);
+	var Assign = __webpack_require__(215);
 	
 	var SafeHTMLElement = ExecutionEnvironment.canUseDOM ? window.HTMLElement : {};
 	var AppElement = ExecutionEnvironment.canUseDOM ? document.body : {appendChild: function() {}};
@@ -42004,7 +42223,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ },
-/* 208 */
+/* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -42049,14 +42268,14 @@
 
 
 /***/ },
-/* 209 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(3);
 	var div = React.DOM.div;
-	var focusManager = __webpack_require__(210);
-	var scopeTab = __webpack_require__(212);
-	var Assign = __webpack_require__(213);
+	var focusManager = __webpack_require__(212);
+	var scopeTab = __webpack_require__(214);
+	var Assign = __webpack_require__(215);
 	
 	// so that our CSS is statically analyzable
 	var CLASS_NAMES = {
@@ -42241,10 +42460,10 @@
 
 
 /***/ },
-/* 210 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var findTabbable = __webpack_require__(211);
+	var findTabbable = __webpack_require__(213);
 	var modalElement = null;
 	var focusLaterElement = null;
 	var needToFocus = false;
@@ -42315,7 +42534,7 @@
 
 
 /***/ },
-/* 211 */
+/* 213 */
 /***/ function(module, exports) {
 
 	/*!
@@ -42371,10 +42590,10 @@
 
 
 /***/ },
-/* 212 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var findTabbable = __webpack_require__(211);
+	var findTabbable = __webpack_require__(213);
 	
 	module.exports = function(node, event) {
 	  var tabbable = findTabbable(node);
@@ -42396,7 +42615,7 @@
 
 
 /***/ },
-/* 213 */
+/* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -42407,9 +42626,9 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseAssign = __webpack_require__(214),
-	    createAssigner = __webpack_require__(220),
-	    keys = __webpack_require__(216);
+	var baseAssign = __webpack_require__(216),
+	    createAssigner = __webpack_require__(222),
+	    keys = __webpack_require__(218);
 	
 	/**
 	 * A specialized version of `_.assign` for customizing assigned values without
@@ -42482,7 +42701,7 @@
 
 
 /***/ },
-/* 214 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -42493,8 +42712,8 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseCopy = __webpack_require__(215),
-	    keys = __webpack_require__(216);
+	var baseCopy = __webpack_require__(217),
+	    keys = __webpack_require__(218);
 	
 	/**
 	 * The base implementation of `_.assign` without support for argument juggling,
@@ -42515,7 +42734,7 @@
 
 
 /***/ },
-/* 215 */
+/* 217 */
 /***/ function(module, exports) {
 
 	/**
@@ -42553,7 +42772,7 @@
 
 
 /***/ },
-/* 216 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -42564,9 +42783,9 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var getNative = __webpack_require__(217),
-	    isArguments = __webpack_require__(218),
-	    isArray = __webpack_require__(219);
+	var getNative = __webpack_require__(219),
+	    isArguments = __webpack_require__(220),
+	    isArray = __webpack_require__(221);
 	
 	/** Used to detect unsigned integer values. */
 	var reIsUint = /^\d+$/;
@@ -42795,7 +43014,7 @@
 
 
 /***/ },
-/* 217 */
+/* 219 */
 /***/ function(module, exports) {
 
 	/**
@@ -42938,7 +43157,7 @@
 
 
 /***/ },
-/* 218 */
+/* 220 */
 /***/ function(module, exports) {
 
 	/**
@@ -43187,7 +43406,7 @@
 
 
 /***/ },
-/* 219 */
+/* 221 */
 /***/ function(module, exports) {
 
 	/**
@@ -43373,7 +43592,7 @@
 
 
 /***/ },
-/* 220 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -43384,9 +43603,9 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var bindCallback = __webpack_require__(221),
-	    isIterateeCall = __webpack_require__(222),
-	    restParam = __webpack_require__(223);
+	var bindCallback = __webpack_require__(223),
+	    isIterateeCall = __webpack_require__(224),
+	    restParam = __webpack_require__(225);
 	
 	/**
 	 * Creates a function that assigns properties of source object(s) to a given
@@ -43431,7 +43650,7 @@
 
 
 /***/ },
-/* 221 */
+/* 223 */
 /***/ function(module, exports) {
 
 	/**
@@ -43502,7 +43721,7 @@
 
 
 /***/ },
-/* 222 */
+/* 224 */
 /***/ function(module, exports) {
 
 	/**
@@ -43640,7 +43859,7 @@
 
 
 /***/ },
-/* 223 */
+/* 225 */
 /***/ function(module, exports) {
 
 	/**
@@ -43713,7 +43932,7 @@
 
 
 /***/ },
-/* 224 */
+/* 226 */
 /***/ function(module, exports) {
 
 	var _element = typeof document !== 'undefined' ? document.body : null;
@@ -43761,7 +43980,7 @@
 
 
 /***/ },
-/* 225 */
+/* 227 */
 /***/ function(module, exports) {
 
 	module.exports = function(opts) {
@@ -43824,125 +44043,6 @@
 	  else this.add(className)
 	}
 
-
-/***/ },
-/* 226 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(227);
-
-/***/ },
-/* 227 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright 2013-2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule update
-	 */
-	
-	/* global hasOwnProperty:true */
-	
-	'use strict';
-	
-	var assign = __webpack_require__(41);
-	var keyOf = __webpack_require__(81);
-	var invariant = __webpack_require__(15);
-	var hasOwnProperty = ({}).hasOwnProperty;
-	
-	function shallowCopy(x) {
-	  if (Array.isArray(x)) {
-	    return x.concat();
-	  } else if (x && typeof x === 'object') {
-	    return assign(new x.constructor(), x);
-	  } else {
-	    return x;
-	  }
-	}
-	
-	var COMMAND_PUSH = keyOf({ $push: null });
-	var COMMAND_UNSHIFT = keyOf({ $unshift: null });
-	var COMMAND_SPLICE = keyOf({ $splice: null });
-	var COMMAND_SET = keyOf({ $set: null });
-	var COMMAND_MERGE = keyOf({ $merge: null });
-	var COMMAND_APPLY = keyOf({ $apply: null });
-	
-	var ALL_COMMANDS_LIST = [COMMAND_PUSH, COMMAND_UNSHIFT, COMMAND_SPLICE, COMMAND_SET, COMMAND_MERGE, COMMAND_APPLY];
-	
-	var ALL_COMMANDS_SET = {};
-	
-	ALL_COMMANDS_LIST.forEach(function (command) {
-	  ALL_COMMANDS_SET[command] = true;
-	});
-	
-	function invariantArrayCase(value, spec, command) {
-	  !Array.isArray(value) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected target of %s to be an array; got %s.', command, value) : invariant(false) : undefined;
-	  var specValue = spec[command];
-	  !Array.isArray(specValue) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be an array; got %s. ' + 'Did you forget to wrap your parameter in an array?', command, specValue) : invariant(false) : undefined;
-	}
-	
-	function update(value, spec) {
-	  !(typeof spec === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): You provided a key path to update() that did not contain one ' + 'of %s. Did you forget to include {%s: ...}?', ALL_COMMANDS_LIST.join(', '), COMMAND_SET) : invariant(false) : undefined;
-	
-	  if (hasOwnProperty.call(spec, COMMAND_SET)) {
-	    !(Object.keys(spec).length === 1) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Cannot have more than one key in an object with %s', COMMAND_SET) : invariant(false) : undefined;
-	
-	    return spec[COMMAND_SET];
-	  }
-	
-	  var nextValue = shallowCopy(value);
-	
-	  if (hasOwnProperty.call(spec, COMMAND_MERGE)) {
-	    var mergeObj = spec[COMMAND_MERGE];
-	    !(mergeObj && typeof mergeObj === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): %s expects a spec of type \'object\'; got %s', COMMAND_MERGE, mergeObj) : invariant(false) : undefined;
-	    !(nextValue && typeof nextValue === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): %s expects a target of type \'object\'; got %s', COMMAND_MERGE, nextValue) : invariant(false) : undefined;
-	    assign(nextValue, spec[COMMAND_MERGE]);
-	  }
-	
-	  if (hasOwnProperty.call(spec, COMMAND_PUSH)) {
-	    invariantArrayCase(value, spec, COMMAND_PUSH);
-	    spec[COMMAND_PUSH].forEach(function (item) {
-	      nextValue.push(item);
-	    });
-	  }
-	
-	  if (hasOwnProperty.call(spec, COMMAND_UNSHIFT)) {
-	    invariantArrayCase(value, spec, COMMAND_UNSHIFT);
-	    spec[COMMAND_UNSHIFT].forEach(function (item) {
-	      nextValue.unshift(item);
-	    });
-	  }
-	
-	  if (hasOwnProperty.call(spec, COMMAND_SPLICE)) {
-	    !Array.isArray(value) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Expected %s target to be an array; got %s', COMMAND_SPLICE, value) : invariant(false) : undefined;
-	    !Array.isArray(spec[COMMAND_SPLICE]) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be an array of arrays; got %s. ' + 'Did you forget to wrap your parameters in an array?', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : invariant(false) : undefined;
-	    spec[COMMAND_SPLICE].forEach(function (args) {
-	      !Array.isArray(args) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be an array of arrays; got %s. ' + 'Did you forget to wrap your parameters in an array?', COMMAND_SPLICE, spec[COMMAND_SPLICE]) : invariant(false) : undefined;
-	      nextValue.splice.apply(nextValue, args);
-	    });
-	  }
-	
-	  if (hasOwnProperty.call(spec, COMMAND_APPLY)) {
-	    !(typeof spec[COMMAND_APPLY] === 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'update(): expected spec of %s to be a function; got %s.', COMMAND_APPLY, spec[COMMAND_APPLY]) : invariant(false) : undefined;
-	    nextValue = spec[COMMAND_APPLY](nextValue);
-	  }
-	
-	  for (var k in spec) {
-	    if (!(ALL_COMMANDS_SET.hasOwnProperty(k) && ALL_COMMANDS_SET[k])) {
-	      nextValue[k] = update(value[k], spec[k]);
-	    }
-	  }
-	
-	  return nextValue;
-	}
-	
-	module.exports = update;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }
 /******/ ]);

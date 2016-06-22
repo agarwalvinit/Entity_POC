@@ -16,7 +16,7 @@ var EntitySelector = React.createClass({
 	getObject: function(theObject) {
 	    var self = this;
 	    var result = {
-	        "key": theObject.displayName,
+	        "key": theObject.name,
 	        "type": theObject.type,
 	        "updatable": false,
 	        "optional": false
@@ -33,10 +33,6 @@ var EntitySelector = React.createClass({
 	        var obj = {
 	            "key": attribute.name,
 	            "type": attribute.type,
-	            "minLength": 0,
-	            "maxLength": attribute.maxLength,
-	            "format": null,
-	            "multiplicityType": attribute.multiplicityType,
 	            "optional": false,
 	            "updatable": false
 	        }
@@ -63,7 +59,7 @@ var EntitySelector = React.createClass({
 		this.setState({
 			key: ReactDOM.findDOMNode(this.refs.key).value
 		});
-	},
+	},	
 	setUpdatable: function(){
 		this.setState({
 			updatable: ReactDOM.findDOMNode(this.refs.updatable).checked
@@ -103,7 +99,7 @@ var EntitySelector = React.createClass({
 			<div>
 				<span className="spacer">
 					<input onChange={this.setValidateName} ref="key" type="text" placeholder="Enter key" value={this.state.key}/>
-				</span>
+				</span>				
 				<DomainEntityDD onSelect={this.setTypeAndAttr} />
 				<span className="check-box-cont spacer">
 					<input type="checkbox" id="isUpdatable" onChange={this.setUpdatable} ref="updatable"/>
