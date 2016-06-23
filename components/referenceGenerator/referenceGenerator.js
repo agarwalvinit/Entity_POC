@@ -9,20 +9,12 @@ var ReferenceGenerator = React.createClass({
   getInitialState: function() {
     return { 
       attributes: _.cloneDeep(this.props.attributes),
-      key: this.props.keys,
-      type: this.props.type,
-      optional: this.props.optional,
-      updatable: this.props.updatable,
       modalIsOpen: false
     };
   },
   componentWillReceiveProps: function(props){
     this.setState({
-      attributes: props.attributes,   
-      key: props.keys,
-      type: props.type,
-      optional: props.optional,
-      updatable: props.updatable,         
+      attributes: props.attributes,        
       modalIsOpen: props.isOpen
     });
   },
@@ -30,13 +22,9 @@ var ReferenceGenerator = React.createClass({
     let attr = _.cloneDeep(this.state);
     this.props.closeModal(attr);
   },
-  updateAttributes: function(stateObj){
+  updateRefAttributes: function(attr){
         this.setState({
-          attributes: stateObj.attributes,
-          key: stateObj.key,
-          type: stateObj.type,
-          optional: stateObj.optional,
-          updatable: stateObj.updatable
+          attributes: attr
         })
     },
   render: function() {
@@ -48,13 +36,9 @@ var ReferenceGenerator = React.createClass({
           style={customStyles} >
           <button onClick={this.closeModal}>close</button>
           <AttributesSelector 
-            parentIndex={this.props.parentIndex} 
-            keys={this.state.key} 
-            type={this.state.type} 
-            optional={this.state.optional} 
-            updatable={this.state.updatable} 
+            parentIndex={this.props.parentIndex}
             attributes={this.state.attributes} 
-            updateAttributes={this.updateAttributes} />
+            updateRefAttributes={this.updateRefAttributes} />
         </Modal>
       </div>
     );

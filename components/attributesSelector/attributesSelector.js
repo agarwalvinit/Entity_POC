@@ -13,30 +13,23 @@ var AttributesSelector = React.createClass({
 				modalIsOpen: false
 			}
 		};
-		if(this.props.keys) {
-			obj["key"] = this.props.keys;
-			obj["type"] = this.props.type;
-			obj["updatable"] = this.props.updatable;
-			obj["optional"] = this.props.optional;
-		}
 		return obj
 	},
 	componentWillReceiveProps: function(props){
 		let obj = {
 			attributes: props.attributes
 		};
-		if(props.keys) {
-			obj["key"] = props.keys;
-			obj["type"] = props.type;
-			obj["updatable"] = props.updatable;
-			obj["optional"] = props.optional;
-		}
 		this.setState(obj);
 	},
 	componentDidUpdate: function(prevProps,prevState){
 		if(!(_.isEqual(prevState, this.state))){
 			console.log("Updated")
-			this.props.updateAttributes(_.cloneDeep(this.state));
+			if(this.props.updateAttributes) {
+				this.props.updateAttributes(_.cloneDeep(this.state));
+			} else {
+				this.props.updateRefAttributes(_.cloneDeep(this.state.attributes));
+			}
+			
 		}
 	},
 	componentDidMount: function() {
@@ -58,21 +51,11 @@ var AttributesSelector = React.createClass({
 			attributes: newAttributes
 		});
 	},
-	refUpdatableAndOptional: function(evt){
-		console.log('update and optional', this.state);
-		var thisState = _.cloneDeep(this.state);
-		thisState[evt.target.id] = thisState[evt.target.id] ? false : true;
-		this.setState(thisState);
-	},	
 	showModal: function(attr,index){
 		refComponent = true;
 		this.setState({
 			modalAttributes: {
 				attributes: _.cloneDeep(attr.referenceType.attributes),
-				key: attr.referenceType.key,
-				type: attr.referenceType.type,
-				optional: attr.referenceType.optional,
-				updatable: attr.referenceType.updatable,
 				index: index,
 				modalIsOpen: true
 			}
@@ -127,44 +110,10 @@ var AttributesSelector = React.createClass({
 		}.bind(this));
 		return html;
 	},
-	getReferenceHTML: function() {
-		console.log('getReferenceHTML: ',this.state);
-		return (
-			<div>
-				<span className="spacer">
-					<span>{this.state.key}</span>
-				</span>
-				<span className="spacer">
-					<span>REF</span>
-				</span>
-				<span className="check-box-cont spacer">
-					<button 
-						className={this.state.updatable ? 'btn btn-sm btn-success' : 'btn btn-sm btn-not-selected'}
-						id={"updatable"}
-						onClick={this.refUpdatableAndOptional}>
-						isUpdatable
-					</button>
-				</span>
-				<span className="check-box-cont spacer">
-					<button 
-						className={this.state.optional ? 'btn btn-sm btn-success' : 'btn btn-sm btn-not-selected'}
-						id={"optional"}
-						onClick={this.refUpdatableAndOptional}>
-						isOptional
-					</button>
-				</span>
-			</div>
-		)
-	},
 	render: function(){
-		var referenceHTML = null;
-		if(this.props.keys) {
-			referenceHTML = this.getReferenceHTML();
-		}
 		var attributesHtml = this.getAttributesList();
 		return (
 			<div>
-				{referenceHTML}
 				<table className="table table-sm table-hover attribute-cont">
 					<thead>
 					<tr>
@@ -181,11 +130,7 @@ var AttributesSelector = React.createClass({
 				{refComponent === true ?  <ReferenceGenerator 
 					parentIndex={this.state.modalAttributes.index} 
 				 	closeModal={this.closeModal} 
-				 	isOpen={this.state.modalAttributes.modalIsOpen} 
-				 	keys={this.state.modalAttributes.key} 
-				 	type={this.state.modalAttributes.type} 
-				 	optional={this.state.modalAttributes.optional} 
-				 	updatable={this.state.modalAttributes.updatable} 
+				 	isOpen={this.state.modalAttributes.modalIsOpen}
 					attributes={this.state.modalAttributes.attributes} /> : null}
 			</div>
 		)
