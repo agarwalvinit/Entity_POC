@@ -2,7 +2,6 @@ import "./referenceGenerator.scss"
 import AttributesSelector from "../attributesSelector/attributesSelector";
 import _ from "lodash";
 import React from "react";
-import ReactDOM from "react-dom";
 import Modal from "react-modal";
 const customStyles = {
   overlay: {
@@ -11,8 +10,8 @@ const customStyles = {
   content : {
     'left': '10%',
     'right': '10%',
-    'bottom': 'auto',
-    'paddingTop': '55px'
+    'bottom': '100px',
+    'paddingTop': '65px'
   }
 };
 var ReferenceGenerator = React.createClass({
@@ -29,7 +28,7 @@ var ReferenceGenerator = React.createClass({
     });
   },
   closeModal: function() {
-    let attr = _.cloneDeep(this.state);
+    let attr = _.cloneDeep(this.state.attributes);
     this.props.closeModal(attr);
   },
   updateRefAttributes: function(attr){

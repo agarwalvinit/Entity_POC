@@ -225,7 +225,7 @@
 	
 	
 	// module
-	exports.push([module.id, "label {\n  color: #F5F5F5;\n}\n.app-ctr{\n    padding-top: 25px;\n}\ninput[type=\"checkbox\"] {\n  display: none;\n}\ninput[type=\"checkbox\"] + label {\n\tbackground-color: #414141;\n    cursor: pointer;\n    height: 30px;\n    display: inline-block;\n    line-height: 30px;\n    width: 100px;\n    text-align: center;\n    border-radius: 4px;\n}\ninput[type=\"checkbox\"]:checked + label {\n  background-color: #159818;\n}\n.spacer{\n\tmargin-right: 10px;\n}\n.space-bottom {\n    margin-bottom: 15px;\n}\n.test-select{\n\tdisplay: inline-block;\n}\ninput[type=\"text\"]{\n\tbackground-color: transparent;\n    border: none;\n    border-bottom: 1px solid #9e9e9e;\n    border-radius: 0;\n    outline: none;\n    height: 30px;\n    font-size: 16px;\n    margin: 0 0 15px 0;\n    padding: 0;\n    box-shadow: none;\n    box-sizing: content-box;\n    transition: all .3s;\n}\ninput[type=\"text\"]:focus{\n\tborder-bottom: 1px solid #26a69a;\n    box-shadow: 0 1px 0 0 #26a69a;\n}\n.show-attribute{\n\ttext-decoration: underline;\n\tcolor: #0000CD;\n}\n.no-display{\n\tdisplay: none;\n}\n.closeModal {\n    position: absolute;\n    right: 5px;\n    top: 5px;\n    width: 15px;\n    height: 15px;\n    background: transparent;\n    border: none;\n    opacity: 0.3;\n    border-radius: 50%;\n}\n.closeModal:hover {\n  opacity: 1;\n}\n.closeModal:before, .closeModal:after {\n  position: absolute;\n  left: 5px;\n  top: 0;\n  content: ' ';\n  height: 15px;\n  width: 2px;\n  background-color: #333;\n}\n.closeModal:before {\n  transform: rotate(45deg);\n}\n.closeModal:after {\n  transform: rotate(-45deg);\n}\n\n", ""]);
+	exports.push([module.id, "label {\n  color: #F5F5F5;\n}\n.app-ctr{\n    padding-top: 25px;\n}\ninput[type=\"checkbox\"] {\n  display: none;\n}\ninput[type=\"checkbox\"] + label {\n\tbackground-color: #414141;\n    cursor: pointer;\n    height: 30px;\n    display: inline-block;\n    line-height: 30px;\n    width: 100px;\n    text-align: center;\n    border-radius: 4px;\n}\ninput[type=\"checkbox\"]:checked + label {\n  background-color: #159818;\n}\n.spacer{\n\tmargin-right: 10px;\n}\n.space-bottom {\n    margin-bottom: 15px;\n}\n.test-select{\n\tdisplay: inline-block;\n}\ninput[type=\"text\"]{\n\tbackground-color: transparent;\n    border: none;\n    border-bottom: 1px solid #9e9e9e;\n    border-radius: 0;\n    outline: none;\n    height: 30px;\n    font-size: 16px;\n    margin: 0 0 15px 0;\n    padding: 0;\n    box-shadow: none;\n    box-sizing: content-box;\n    transition: all .3s;\n}\ninput[type=\"text\"]:focus{\n\tborder-bottom: 1px solid #26a69a;\n    box-shadow: 0 1px 0 0 #26a69a;\n}\n.show-attribute{\n\ttext-decoration: underline;\n\tcolor: #0000CD;\n}\n.no-display{\n\tdisplay: none;\n}\n.closeModal {\n    position: absolute;\n    right: 15px;\n    top: 15px;\n    width: 15px;\n    height: 15px;\n    background: transparent;\n    border: none;\n    opacity: 0.3;\n    border-radius: 50%;\n}\n.closeModal:hover {\n  opacity: 1;\n}\n.closeModal:before, .closeModal:after {\n  position: absolute;\n  left: 5px;\n  top: 0;\n  content: ' ';\n  height: 15px;\n  width: 2px;\n  background-color: #333;\n}\n.closeModal:before {\n  transform: rotate(45deg);\n}\n.closeModal:after {\n  transform: rotate(-45deg);\n}\n\n", ""]);
 	
 	// exports
 
@@ -41663,16 +41663,6 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _reactDom = __webpack_require__(180);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	var _reactAddonsUpdate = __webpack_require__(231);
-	
-	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
-	
-	var _reactSelectize = __webpack_require__(169);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var refComponent = false;
@@ -41743,22 +41733,15 @@
 			});
 		},
 		closeModal: function closeModal(attrs) {
+			var attr = _lodash2.default.cloneDeep(this.state.attributes);
+			var index = this.state.modalAttributes.index;
+			attr[index].referenceType.attributes = attrs;
 			this.setState({
 				modalAttributes: {
 					modalIsOpen: false
-				}
+				},
+				attributes: attr
 			});
-			delete attrs.modalIsOpen;
-			if (!this.props.updateAttributesClose) {
-				var attr = _lodash2.default.cloneDeep(this.state.attributes);
-				var index = this.state.modalAttributes.index;
-				attr[index].referenceType = attrs;
-				this.setState({
-					attributes: attr
-				});
-			} else {
-				this.props.updateAttributes(_lodash2.default.cloneDeep(this.state.attributes), this.state.modalAttributes.index, attrs);
-			}
 		},
 		getAttributesList: function getAttributesList() {
 			var self = this;
@@ -41968,10 +41951,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(180);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
 	var _reactModal = __webpack_require__(211);
 	
 	var _reactModal2 = _interopRequireDefault(_reactModal);
@@ -41985,8 +41964,8 @@
 	  content: {
 	    'left': '10%',
 	    'right': '10%',
-	    'bottom': 'auto',
-	    'paddingTop': '55px'
+	    'bottom': '100px',
+	    'paddingTop': '65px'
 	  }
 	};
 	var ReferenceGenerator = _react2.default.createClass({
@@ -42005,7 +41984,7 @@
 	    });
 	  },
 	  closeModal: function closeModal() {
-	    var attr = _lodash2.default.cloneDeep(this.state);
+	    var attr = _lodash2.default.cloneDeep(this.state.attributes);
 	    this.props.closeModal(attr);
 	  },
 	  updateRefAttributes: function updateRefAttributes(attr) {

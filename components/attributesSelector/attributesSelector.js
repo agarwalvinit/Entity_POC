@@ -3,9 +3,6 @@ import "./attributesSelector.scss";
 import ReferenceGenerator from "../referenceGenerator/referenceGenerator";
 import React from "react";
 import _ from 'lodash';
-import ReactDOM from "react-dom";
-import update from "react-addons-update";
-import	{ SimpleSelect } from "react-selectize";
 var refComponent = false;
 var AttributesSelector = React.createClass({
 	getInitialState: function(){
@@ -72,22 +69,15 @@ var AttributesSelector = React.createClass({
 		});
 	},
 	closeModal: function (attrs){
+		let attr = _.cloneDeep(this.state.attributes);
+		let index = this.state.modalAttributes.index;
+		attr[index].referenceType.attributes = attrs;
 		this.setState({
 			modalAttributes: {
 				modalIsOpen: false
-			}
-		});
-		delete attrs.modalIsOpen;
-		if(!this.props.updateAttributesClose) {
-			let attr = _.cloneDeep(this.state.attributes);
-			let index = this.state.modalAttributes.index;
-			attr[index].referenceType = attrs;
-			this.setState({
-				attributes: attr
-			})
-		} else {
-			this.props.updateAttributes(_.cloneDeep(this.state.attributes), this.state.modalAttributes.index, attrs);
-		}
+			},
+			attributes: attr
+		})
 	},
 	getAttributesList: function(){
 		var self = this;
