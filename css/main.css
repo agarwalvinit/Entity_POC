@@ -23,6 +23,9 @@ input[type="checkbox"]:checked + label {
 .spacer{
 	margin-right: 10px;
 }
+.space-bottom {
+    margin-bottom: 15px;
+}
 .test-select{
 	display: inline-block;
 }
@@ -51,3 +54,33 @@ input[type="text"]:focus{
 .no-display{
 	display: none;
 }
+.closeModal {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 15px;
+    height: 15px;
+    background: transparent;
+    border: none;
+    opacity: 0.3;
+    border-radius: 50%;
+}
+.closeModal:hover {
+  opacity: 1;
+}
+.closeModal:before, .closeModal:after {
+  position: absolute;
+  left: 5px;
+  top: 0;
+  content: ' ';
+  height: 15px;
+  width: 2px;
+  background-color: #333;
+}
+.closeModal:before {
+  transform: rotate(45deg);
+}
+.closeModal:after {
+  transform: rotate(-45deg);
+}
+

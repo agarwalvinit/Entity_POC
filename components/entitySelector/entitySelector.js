@@ -31,7 +31,7 @@ var EntitySelector = React.createClass({
 	    var newAttributes = [];
 	    _(attributes).forEach(function(attribute){
 	        var obj = {
-	            "key": attribute.displayName,
+	            "key": attribute.name,
 	            "type": attribute.type,
 	            "minLength": 0,
 	            "maxLength": attribute.maxLength,

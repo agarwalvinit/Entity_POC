@@ -4,7 +4,17 @@ import _ from "lodash";
 import React from "react";
 import ReactDOM from "react-dom";
 import Modal from "react-modal";
-var customStyles = { };
+const customStyles = {
+  overlay: {
+    backgroundColor   : 'rgba(0, 0, 0, 0.5)'
+  },
+  content : {
+    'left': '10%',
+    'right': '10%',
+    'bottom': 'auto',
+    'paddingTop': '55px'
+  }
+};
 var ReferenceGenerator = React.createClass({
   getInitialState: function() {
     return { 
@@ -34,7 +44,7 @@ var ReferenceGenerator = React.createClass({
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
           style={customStyles} >
-          <button onClick={this.closeModal}>close</button>
+          <button className="closeModal" onClick={this.closeModal}></button>
           <AttributesSelector 
             parentIndex={this.props.parentIndex}
             attributes={this.state.attributes} 

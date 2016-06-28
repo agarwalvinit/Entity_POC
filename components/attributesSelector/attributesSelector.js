@@ -1,9 +1,11 @@
-import "./attributesSelector.scss"
-import ReferenceGenerator from "../referenceGenerator/referenceGenerator"
-import React from "react"
-import _ from 'lodash'
-import ReactDOM from "react-dom"
-import update from "react-addons-update"
+import "../../css/dropDown.css";
+import "./attributesSelector.scss";
+import ReferenceGenerator from "../referenceGenerator/referenceGenerator";
+import React from "react";
+import _ from 'lodash';
+import ReactDOM from "react-dom";
+import update from "react-addons-update";
+import	{ SimpleSelect } from "react-selectize";
 var refComponent = false;
 var AttributesSelector = React.createClass({
 	getInitialState: function(){
@@ -25,7 +27,7 @@ var AttributesSelector = React.createClass({
 		if(!(_.isEqual(prevState, this.state))){
 			console.log("Updated")
 			if(this.props.updateAttributes) {
-				this.props.updateAttributes(_.cloneDeep(this.state));
+				this.props.updateAttributes(_.cloneDeep(this.state.attributes));
 			} else {
 				this.props.updateRefAttributes(_.cloneDeep(this.state.attributes));
 			}
@@ -38,12 +40,10 @@ var AttributesSelector = React.createClass({
     	})
 	},
 	updateAndOptional: function(evt){
-		console.log('update and optional', this.state);
 		var obj = {},
 			newAttributes;
 		obj.key = evt.target.id.split("_")[0];
 		obj.index = evt.target.id.split("_")[2];
-
 		newAttributes = _.cloneDeep(this.state.attributes);
 		newAttributes[obj.index][obj.key] = newAttributes[obj.index][obj.key] ? false : true;
 
@@ -51,6 +51,16 @@ var AttributesSelector = React.createClass({
 			attributes: newAttributes
 		});
 	},
+	onSelect: function(evt) {
+		var obj = {}, newAttributes;
+		obj.key = evt.target.id.split("_")[0];
+		obj.index = evt.target.id.split("_")[2];
+		newAttributes = _.cloneDeep(this.state.attributes);
+		newAttributes[obj.index][obj.key] = evt.target.value;
+		this.setState({
+			attributes: newAttributes
+		});
+	},	
 	showModal: function(attr,index){
 		refComponent = true;
 		this.setState({
@@ -68,7 +78,6 @@ var AttributesSelector = React.createClass({
 			}
 		});
 		delete attrs.modalIsOpen;
-		console.log(attrs);
 		if(!this.props.updateAttributesClose) {
 			let attr = _.cloneDeep(this.state.attributes);
 			let index = this.state.modalAttributes.index;
@@ -77,10 +86,14 @@ var AttributesSelector = React.createClass({
 				attributes: attr
 			})
 		} else {
-			this.props.updateAttributesClose(_.cloneDeep(this.state), this.state.modalAttributes.index, attrs);
+			this.props.updateAttributes(_.cloneDeep(this.state.attributes), this.state.modalAttributes.index, attrs);
 		}
 	},
 	getAttributesList: function(){
+		var self = this;
+		let options = ["MANY", "ONE"].map(function(type){
+					        return {label: type, value: type};
+					    });
 		let html = this.state.attributes.map(function(attribute, index){
 			return (
 				<tr className="attribute-list" key={index}>
@@ -105,6 +118,16 @@ var AttributesSelector = React.createClass({
 							isOptional
 						</button>
 					</td>
+					<td>
+						<div>
+						<select value={attribute.multiplicityType} 
+							id={"multiplicityType_"+(this.props.parentIndex)+"_"+index} 
+							onChange={self.onSelect}>
+						    <option value="ONE">ONE</option>
+						    <option value="MANY">MANY</option>
+						</select>
+						</div>
+					</td>
 				</tr>
 			)
 		}.bind(this));
@@ -121,6 +144,7 @@ var AttributesSelector = React.createClass({
 						<th>Attribute Type</th>
 						<th>Is Updatable</th>
 						<th>Is Optional</th>
+						<th>Multiplicity Type</th>
 					</tr>
 					</thead>
 					<tbody>

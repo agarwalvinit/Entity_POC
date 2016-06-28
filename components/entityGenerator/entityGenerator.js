@@ -58,7 +58,7 @@ var EntityGenerator = React.createClass({
 	    var newAttributes = [];
 	    _(attributes).forEach(function(attribute){
 	        var obj = {
-	            "key": attribute.displayName,
+	            "key": attribute.name,
 	            "type": attribute.type,
 	            "minLength": 0,
 	            "maxLength": attribute.maxLength,
@@ -101,31 +101,14 @@ var EntityGenerator = React.createClass({
 			optional: ReactDOM.findDOMNode(this.refs.optional).checked
 		});
 	},
-	updateAttributes: function(stateObj){
+	updateAttributes: function(attributes, index, attrs){
 		var labelObj = new Object(),
 			attributesObj = new Object(),
 			typeObj = new Object(),
 			objArray = [];
-		var attributes = stateObj.attributes;
-		labelObj.key = "label";
-		labelObj.value = this.state.label;
-		labelObj.index = this.props.index;
-		attributesObj.key = "attributes";
-		attributesObj.value = attributes ? attributes : this.state.attributes;
-		attributesObj.index = this.props.index;
-		typeObj.key = "type";
-		typeObj.value = this.state.type;
-		typeObj.index = this.props.index;
-		objArray = objArray.concat(labelObj,attributesObj,typeObj);
-		this.props.updateEntity(objArray);
-	},
-	updateAttributesClose: function(stateObj, index, attrs){
-		var labelObj = new Object(),
-			attributesObj = new Object(),
-			typeObj = new Object(),
-			objArray = [];
-		var attributes = stateObj.attributes;
-		attributes[index].referenceType = attrs;
+		if(attrs) {
+			attributes[index].referenceType = attrs;
+		}
 		labelObj.key = "label";
 		labelObj.value = this.state.label;
 		labelObj.index = this.props.index;
@@ -162,8 +145,7 @@ var EntityGenerator = React.createClass({
 				</span>
 				<button onClick={this.deleteEntity} className="btn btn-sm btn-danger">Delete Entity</button>
 				<AttributesSelector isAttributeVisible={this.state.isAttributeVisible} 
-				attributes={this.state.attributes} updateAttributes={this.updateAttributes} 
-				updateAttributesClose={this.updateAttributesClose} parentIndex={this.props.index}/>
+				attributes={this.state.attributes} updateAttributes={this.updateAttributes} parentIndex={this.props.index}/>
 			</div>
 		)
 	}

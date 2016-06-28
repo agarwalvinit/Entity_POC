@@ -1,10 +1,12 @@
-import "./domainEntityDD.scss";
+import "../../css/dropDown.css";
+import { sdBackend } from "../../ui-config"
 import React from "react";
 import	ReactSelectize from "react-selectize";
 var	SimpleSelect = ReactSelectize.SimpleSelect, 
 	DomainEntityDD;
 
 DomainEntityDD = React.createClass({
+	namespaceEntityUrl: sdBackend+'/sd/namespaces/SAL',
 	getInitialState: function(){
 		return {
 			domainEntity : []
@@ -12,8 +14,8 @@ DomainEntityDD = React.createClass({
 	},
 	componentDidMount: function(){
 		var that = this;
-		fetch('data/entities.json',{
-			method: 'get'
+		fetch( that.namespaceEntityUrl ,{
+			method: 'GET'
 		}).then(function(response) {
 			response.json().then(function(data) {
 				that.setState({
